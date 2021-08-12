@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/llMainLayout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/_35sdp"
+    android:orientation="horizontal"
+    android:gravity="center">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvDate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/date"
+            android:textSize="@dimen/text_size"
+            android:textColor="@color/colorText"
+            android:gravity="center"
+            android:singleLine="true"
+            android:maxLines="1"
+            android:fontFamily="@font/lato"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvDay"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/day"
+            android:textSize="@dimen/text_size"
+            android:textColor="@color/colorText"
+            android:gravity="center"
+            android:singleLine="true"
+            android:maxLines="1"
+            android:fontFamily="@font/lato"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvAttendance"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/attendance"
+            android:textSize="@dimen/text_size"
+            android:textColor="@color/colorText"
+            android:gravity="center"
+            android:singleLine="true"
+            android:maxLines="1"
+            android:fontFamily="@font/lato"/>
+
+        <RelativeLayout
+            android:id="@+id/tvRemark"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+                <ImageView
+                    android:id="@+id/ivRemark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_remark"
+                    android:layout_centerInParent="true"
+                    android:padding="@dimen/_9sdp"/>
+        </RelativeLayout>
+
+</LinearLayout>

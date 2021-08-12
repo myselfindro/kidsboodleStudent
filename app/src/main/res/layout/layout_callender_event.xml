@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/_6sdp">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_size_sml"
+        android:textColor="@color/colorTextDark"
+        android:fontFamily="@font/lato"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvEventName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_size_sml"
+        android:layout_toRightOf="@+id/tvDate"
+        android:layout_toLeftOf="@+id/tvView"
+        android:layout_marginLeft="@dimen/_9sdp"
+        android:layout_marginRight="@dimen/_9sdp"
+        android:textColor="@color/colorTextRed"
+        android:fontFamily="@font/lato"
+        android:layout_centerVertical="true"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_size_sml"
+        android:textColor="@color/white"
+        android:fontFamily="@font/lato"
+        android:text="View"
+        android:background="@drawable/rounded_corner_blue"
+        android:paddingLeft="@dimen/_19sdp"
+        android:paddingRight="@dimen/_19sdp"
+        android:paddingTop="@dimen/_4sdp"
+        android:paddingBottom="@dimen/_4sdp"
+        android:gravity="center"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"/>
+
+</RelativeLayout>

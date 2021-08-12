@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#FFE667</color>
+    <color name="colorPrimaryDark">#3D419B</color>
+    <color name="colorAccent">#FF7A2D</color>
+    <color name="colorTextDark">#1F1F1F</color>
+    <color name="colorTextLite">#292929</color>
+    <color name="black">#000000</color>
+    <color name="white">#ffffff</color>
+    <color name="transparent">#00FFFFFF</color>
+    <color name="transparent_black">#46070707</color>
+
+    <color name="colorStatusBar">#FFE667</color>
+    <color name="colorAppHeader">#75C4ED</color>
+    <color name="colorButton">#F25112</color>
+    <color name="colorHeaderText">#323131 </color>
+    <color name="colorText">#323131 </color>
+    <color name="colorTextRed">#FF1717</color>
+    <color name="colorLiteRed">#F69191</color>
+    <color name="colorTextHint">#858484</color>
+    <color name="colorBlue">#4A5ED1</color>
+    <color name="colorDarkoffsetBlue">#313853</color>
+    <color name="colorBlueLite">#E1E2FF</color>
+    <color name="colorGrey">#A9AAAA</color>
+    <color name="colorLiteGrey">#A8CFCFCF</color>
+    <color name="colorDarkGrey">#6C6C6C</color>
+    <color name="colorGreen">#0FD817</color>
+    <color name="colorFadeLiteGreen">#E7F6FF</color>
+    <color name="colorFadeLiteRed">#F5F5F5</color>
+
+    <color name="colorSuccess">#13A519</color>
+    <color name="colorError">#F63939</color>
+    <color name="colorWarning">#EFB913</color>
+
+    <color name="dashboardItemColorSet1">#EBF5FA </color>
+    <color name="dashboardItemColorSet2">#FDE4E4</color>
+</resources>

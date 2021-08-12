@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@+id/llClassDetails"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="@dimen/_9sdp">
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvSubject"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Math"
+            android:fontFamily="@font/lato_bold"
+            android:textColor="@color/colorText"
+            android:textSize="@dimen/text_size"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvTeacher"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Teacher Name"
+            android:layout_marginTop="@dimen/_6sdp"
+            android:fontFamily="@font/lato"
+            android:textColor="@color/colorTextRed"
+            android:textSize="@dimen/text_size"/>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_160sdp"
+        android:layout_below="@+id/llClassDetails">
+        <com.mkc.school.utils.customview.RoundRectCornerImageView
+            android:id="@+id/ivClassImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"/>
+        <com.mkc.school.utils.customview.RoundRectCornerImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/transparent_black"
+            android:scaleType="fitXY" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="live"
+            android:paddingTop="@dimen/_3sdp"
+            android:paddingBottom="@dimen/_3sdp"
+            android:paddingRight="@dimen/_13sdp"
+            android:paddingLeft="@dimen/_13sdp"
+            android:drawableRight="@drawable/ic_eye_icon_white"
+            android:drawablePadding="@dimen/_6sdp"
+            android:textColor="@color/white"
+            android:fontFamily="@font/lato"
+            android:textSize="@dimen/text_size_sml"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_margin="@dimen/_11sdp"
+            android:gravity="center"
+            android:textAllCaps="true"
+            android:background="@drawable/rounded_corner_red"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/join_live_class"
+            android:paddingTop="@dimen/_6sdp"
+            android:paddingBottom="@dimen/_6sdp"
+            android:paddingRight="@dimen/_29sdp"
+            android:paddingLeft="@dimen/_29sdp"
+            android:drawableLeft="@drawable/ic_videocam"
+            android:drawablePadding="@dimen/_6sdp"
+            android:textColor="@color/colorText"
+            android:fontFamily="@font/lato"
+            android:textSize="@dimen/text_size"
+            android:layout_centerInParent="true"
+            android:layout_margin="@dimen/_11sdp"
+            android:gravity="center"
+            android:background="@drawable/rounded_corner_yellow"/>
+    </RelativeLayout>
+
+
+</RelativeLayout>

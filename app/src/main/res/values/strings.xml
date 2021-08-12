@@ -1,0 +1,44 @@
+<resources>
+    <string name="app_name">MkcSchool</string>
+
+    <!--/////////////////Local Server ///////////////-->
+    <string name="api_base" translatable="false">http://148.66.128.232:8002/</string>
+
+
+    <string name="nav_open">Open</string>
+    <string name="nav_close">Close</string>
+    <string name="student_user_id">Student User id</string>
+    <string name="password">Password</string>
+    <string name="save_password">Save Password</string>
+    <string name="login">Login</string>
+    <string name="fotgot_password">Fotgot Password ?</string>
+    <string name="home">Home</string>
+    <string name="timetable">Timetable</string>
+    <string name="attendance">Attendance</string>
+    <string name="liveclass">Live Class</string>
+    <string name="account">Account</string>
+    <string name="teacher">Teacher</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="date">Date</string>
+    <string name="day">Day</string>
+    <string name="remarks">Remarks</string>
+    <string name="live_class">Live Class</string>
+    <string name="starttime">StartTime :</string>
+    <string name="endtime">EndTime :</string>
+    <string name="select_month">Select Month</string>
+    <string name="select_year">Select Year</string>
+    <string name="grade">Grade</string>
+    <string name="subject">Subject</string>
+    <string name="score">Score</string>
+    <string name="download_grade_card">Download Grade Card</string>
+    <string name="announcement">Announcement</string>
+    <string name="join_live_class">Join Live Class</string>
+    <string name="error_userid">Please Enter User Id!</string>
+    <string name="error_password">Please Enter Password !</string>
+    <string name="you_have_successfully_login">You have Successfully Logged In!</string>
+    <string name="attendance_of_this_season">Attendance for current session</string>
+    <string name="student_overall_performance">Student Overall Performance</string>
+
+
+</resources>
