@@ -45,7 +45,6 @@
 
         </RelativeLayout>
 
-
         <LinearLayout
             android:visibility="visible"
             android:layout_width="match_parent"
@@ -61,6 +60,9 @@
             android:text="@string/subject"
             android:textSize="@dimen/text_size"
             android:fontFamily="@font/lato"
+            android:gravity="center_vertical"
+            android:drawableLeft="@drawable/ic_sub_tech"
+            android:drawablePadding="@dimen/_6sdp"
             android:textColor="@color/colorText"/>
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -71,6 +73,9 @@
             android:layout_marginLeft="@dimen/_9sdp"
             android:text="@string/email_id"
             android:textSize="@dimen/text_size"
+            android:gravity="center_vertical"
+            android:drawableLeft="@drawable/ic_email"
+            android:drawablePadding="@dimen/_6sdp"
             android:fontFamily="@font/lato"
             android:textColor="@color/colorText"/>
 
@@ -83,6 +88,9 @@
                 android:layout_marginBottom="@dimen/_9sdp"
                 android:text="@string/contact_info"
                 android:textSize="@dimen/text_size"
+                android:gravity="center_vertical"
+                android:drawableLeft="@drawable/ic_contact"
+                android:drawablePadding="@dimen/_6sdp"
                 android:fontFamily="@font/lato"
                 android:textColor="@color/colorText"/>
         </LinearLayout>

@@ -2,6 +2,7 @@ package com.mkc.school.data.datasource.api
 
 
 import com.mkc.school.data.pojomodel.api.request.LoginRequest
+import com.mkc.school.data.pojomodel.api.response.home.HomeResponse
 import com.mkc.school.data.pojomodel.api.response.login.LoginResponse
 import io.reactivex.Single
 import okhttp3.MultipartBody
@@ -17,5 +18,8 @@ interface ApiService {
 
     @POST("login/")
     fun apiLogin(@Body loginRequest: LoginRequest): Single<LoginResponse>
+
+    @GET("student_dashboard_details/")
+    fun getDashboardDetails(): Single<HomeResponse>
 
 }

@@ -43,6 +43,7 @@ class  DashboardActivity : BaseActivity<ActivityDashboardBinding, DashboardViewM
     public var ivBack: ImageView? = null
     public var latitude : String ?= null
     public var longitude : String ?= null
+    var weatherTempareture : String ? =""
 
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var locationRequest: LocationRequest

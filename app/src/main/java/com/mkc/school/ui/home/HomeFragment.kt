@@ -1,5 +1,6 @@
 package com.mkc.school.ui.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
@@ -15,6 +16,8 @@ import com.kwabenaberko.openweathermaplib.implementation.callback.CurrentWeather
 import com.kwabenaberko.openweathermaplib.model.currentweather.CurrentWeather
 import com.mkc.school.BR
 import com.mkc.school.R
+import com.mkc.school.data.pojomodel.api.response.home.HomeResponse
+import com.mkc.school.data.pojomodel.api.response.home.HomeResponseData
 import com.mkc.school.data.pojomodel.model.HorizontalOptionsModel
 import com.mkc.school.databinding.FragmentHomeBinding
 import com.mkc.school.ui.announcement.AnnouncementFragment
@@ -27,8 +30,12 @@ import com.mkc.school.ui.home.adapter.CallenderEventAdapter
 import com.mkc.school.ui.home.adapter.HorizontalOptionsAdapter
 import com.mkc.school.ui.home.adapter.NoticeAdapter
 import com.mkc.school.ui.liveclass.LiveclassFragment
+import com.mkc.school.ui.successscreen.SuccessScreenActivity
 import com.mkc.school.ui.teacher.TeachersFragment
 import com.mkc.school.ui.timetable.TimetableFragment
+import com.mkc.school.utils.CommonUtils
+import com.mkc.school.utils.CommonUtils.showErrorSnackbar
+import com.mkc.school.utils.CommonUtils.showSuccessSnackbar
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
@@ -59,7 +66,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(), HomeNav
     private var dateWiseCalEventList: ArrayList<String> = ArrayList<String>()
     private var horizontalOptionsList: ArrayList<HorizontalOptionsModel> = ArrayList<HorizontalOptionsModel>()
 
-    var weatherTempareture : String ? =""
+
     var AppId = "2e65127e909e178d0af311a81f39948c"
 
 
@@ -85,7 +92,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(), HomeNav
         setupRecyclerView()
         setupCalender()
 
-        if (weatherTempareture.equals("")){
+        if ((activity as DashboardActivity?)?.weatherTempareture.equals("")){
             Handler().postDelayed(Runnable { //This method will be executed once the timer is over
                 val lat = (activity as DashboardActivity?)?.latitude?.toDouble()
                 val long = (activity as DashboardActivity?)?.longitude?.toDouble()
@@ -96,6 +103,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(), HomeNav
                 }
 
             }, 2000)
+            println("CALL__WEATHER :"+"YES")
+        }
+        else{
+            println("CALL__WEATHER :"+"NO")
+            binding?.tvWeather?.setText((activity as DashboardActivity?)?.weatherTempareture)
         }
 
 
@@ -106,6 +118,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(), HomeNav
 
         binding?.tvDayTime?.setText(fullDayName.format(Date()) + ", " + timeFormat.format(cal.time))
 
+
+        viewModel.getDashboardDetails()
 
     }
 
@@ -128,6 +142,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(), HomeNav
 
                 println("TEMP : "+currentWeather.main.tempMax.roundToInt())
                 val temp : String = currentWeather.main.tempMax.roundToInt().toString()
+                (activity as DashboardActivity?)?.weatherTempareture = temp+" °C"
                 binding?.tvWeather?.setText(temp+" °C")
             }
 
@@ -136,7 +151,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(), HomeNav
             }
         })
     }
-
 
     private fun setupCalender() {
         val today = Calendar.getInstance()
@@ -336,4 +350,26 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(), HomeNav
         }
     }
 
+    override fun successHomeResponse(homeResponse: HomeResponse?) {
+        if (homeResponse?.request_status == 1) {
+            showSuccessSnackbar(requireActivity(), binding?.mainLayout!!, homeResponse.msg!!)
+            setupUI(homeResponse.result)
+
+        } else {
+            showErrorSnackbar(requireActivity(), binding?.mainLayout!!, homeResponse?.msg!!)
+        }
+    }
+
+    private fun setupUI(result: HomeResponseData?) {
+        binding?.tvSchoolName?.setText(result?.school_details?.get(0)?.school_name)
+        binding?.tvStudentName?.setText("Hey "+result?.student_details?.get(0)?.student_fname)
+        binding?.tvClassName?.setText(result?.class_name+result?.section_name)
+    }
+
+    override fun errorHomeResponse(throwable: Throwable?) {
+        if (throwable?.message != null) {
+            showErrorSnackbar(requireActivity(), binding?.mainLayout!!, "Something went wrong")
+            //Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show()
+        }
+    }
 }

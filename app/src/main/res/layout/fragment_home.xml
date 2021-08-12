@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <RelativeLayout
+        android:id="@+id/mainLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/background"
@@ -32,29 +33,32 @@
                         android:orientation="vertical">
 
                         <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvSchoolName"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/lato"
-                            android:text="South Calcutta School"
+                            tools:text="South Calcutta School"
                             android:textColor="@color/colorTextDark"
                             android:textSize="@dimen/text_size" />
 
                         <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvStudentName"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_6sdp"
                             android:fontFamily="@font/lato_bold"
-                            android:text="Hey, Avik"
+                            tools:text="Hey, Avik"
                             android:textColor="@color/colorTextDark"
                             android:textSize="@dimen/text_size_med"
                             app:layout_scrollFlags="scroll|snap|exitUntilCollapsed" />
 
                         <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvClassName"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_6sdp"
                             android:fontFamily="@font/lato"
-                            android:text="Class - VI-A"
+                            tools:text="Class - VI-A"
                             android:textColor="@color/colorTextDark"
                             android:textSize="@dimen/text_size" />
                     </LinearLayout>
@@ -73,6 +77,9 @@
                             android:layout_height="wrap_content"
                             android:textSize="@dimen/text_size_big"
                             android:text=""
+                            android:gravity="center_vertical"
+                            android:drawablePadding="@dimen/_6sdp"
+                            android:drawableRight="@drawable/ic_weather"
                             android:textColor="@color/colorText"
                             android:fontFamily="@font/lato"/>
 

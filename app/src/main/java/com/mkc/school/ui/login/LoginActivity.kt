@@ -38,6 +38,13 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(), Logi
         super.onCreate(savedInstanceState)
         loginViewModel!!.navigator = this
         binding = viewDataBinding
+        viewModel?.appSharedPref?.accessToken = null
+
+        if (viewModel?.appSharedPref?.isEmailPasswordSave==1){
+            binding?.etUserId?.setText(viewModel?.appSharedPref?.loginId)
+            binding?.etPassword?.setText(viewModel?.appSharedPref?.loginPassword)
+            binding?.cbSavePassword?.isChecked = true
+        }
 
         binding?.btnLogin?.setOnClickListener {
             if (checkValidation()) {
@@ -49,13 +56,18 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(), Logi
                 loginRequest.username = binding?.etUserId?.text.toString().trim()
                 loginRequest.password = binding?.etPassword?.text.toString().trim()
                 viewModel.getCallLogin(loginRequest)
-            }
 
-//            var loginRequest = LoginRequest()
-//            loginRequest.auth_provider = "student"
-//            loginRequest.username = "testtest1995"
-//            loginRequest.password = "testtest1995"
-//            viewModel.getCallLogin(loginRequest)
+                if (binding?.cbSavePassword?.isChecked==true){
+                    viewModel?.appSharedPref?.isEmailPasswordSave=1
+                    viewModel?.appSharedPref?.loginId=binding?.etUserId?.text.toString().trim()
+                    viewModel?.appSharedPref?.loginPassword=binding?.etPassword?.text.toString().trim()
+                }
+                else{
+                    viewModel?.appSharedPref?.isEmailPasswordSave=0
+                    viewModel?.appSharedPref?.loginId= ""
+                    viewModel?.appSharedPref?.loginPassword= ""
+                }
+            }
 
         }
     }
@@ -88,6 +100,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(), Logi
     override fun successLoginResponse(loginResponse: LoginResponse?) {
         if (loginResponse?.request_status == 1) {
             //showSuccessSnackbar(this, binding?.mainLayout!!, loginResponse.msg!!)
+            viewModel?.appSharedPref?.accessToken= loginResponse.result?.token
             val i = Intent(this, SuccessScreenActivity::class.java)
             startActivity(i)
             finish()

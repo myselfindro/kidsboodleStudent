@@ -43,6 +43,12 @@ object ApiClient {
 
             //Header Interceptor
             httpClient.addInterceptor(LoggingInterceptor())
+//            httpClient.addInterceptor { chain ->
+//                val newRequest = chain.request().newBuilder()
+//                    .addHeader("Token", ApplicationClass.instance!!.appSharedPref!!.accessToken!!)
+//                    .build()
+//                chain.proceed(newRequest)
+//            }
 
             // Authentication Interceptor
             /*credential = Credentials.basic("admin", "12345")
@@ -82,7 +88,7 @@ object ApiClient {
             val request: Request = if (ApplicationClass.instance!!.appSharedPref!!.accessToken!=null &&
                     !TextUtils.isEmpty(ApplicationClass.instance!!.appSharedPref!!.accessToken)){
                 original.newBuilder()
-                        .header(ApiConfig.API_KEY, "Bearer ${ApplicationClass.instance!!.appSharedPref!!.accessToken!!}")
+                        .header(ApiConfig.API_KEY, "Token ${ApplicationClass.instance!!.appSharedPref!!.accessToken!!}")
 //                        .addHeader("Content-Type", "application/json")
 //                        .addHeader("Accept", "application/json")
                        // .header(ApiConfig.API_KEY, ApplicationClass.instance!!.appSharedPref!!.accessToken!!)
