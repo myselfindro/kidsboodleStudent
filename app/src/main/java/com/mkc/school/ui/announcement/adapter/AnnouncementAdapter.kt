@@ -8,14 +8,16 @@ import android.widget.TextView
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.mkc.school.R
+import com.mkc.school.data.pojomodel.api.response.announcement.AnnouncementDataResponse
 import com.mkc.school.data.pojomodel.model.AnnouncementModel
 import com.mkc.school.ui.announcement.AnnouncementFragment
 import com.mkc.school.ui.home.adapter.NoticeAdapter
+import com.mkc.school.utils.CommonUtils.getFormatedDate
 import java.util.ArrayList
 
 class AnnouncementAdapter(
     var activity: FragmentActivity?,
-    var announcementList: ArrayList<AnnouncementModel>,
+    var announcementList: ArrayList<AnnouncementDataResponse>,
     var itemClickListener: OnAnnouncementItemClick
 ) : RecyclerView.Adapter<AnnouncementAdapter.MyViewHolder>() {
 
@@ -30,8 +32,9 @@ class AnnouncementAdapter(
 
     override fun onBindViewHolder(holder: AnnouncementAdapter.MyViewHolder, position: Int) {
 
-        holder.tvDate.setText(announcementList.get(position).announcementDate)
-        holder.tvMessage.setText(announcementList.get(position).announcementMessage)
+//        holder.tvDate.setText(getFormatedDate(announcementList.get(position).date!!))
+        holder.tvDate.setText(announcementList.get(position).date)
+        holder.tvMessage.setText(announcementList.get(position).title)
 
         if(position%2 == 0){
             holder.llMainLayout.setBackgroundColor(activity!!.resources.getColor(R.color.colorBlueLite))

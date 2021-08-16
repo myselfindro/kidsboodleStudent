@@ -1,9 +1,7 @@
 package com.mkc.school.utils
 
 
-import android.R.attr.textColor
 import android.annotation.SuppressLint
-import android.app.Dialog
 import android.content.Context
 import android.provider.Settings
 import android.util.Patterns
@@ -12,6 +10,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.mkc.school.R
 import java.io.IOException
 import java.nio.charset.Charset
+import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -55,7 +54,7 @@ object CommonUtils {
 //        return progressDialog
 //    }
 
-    fun showSuccessSnackbar(context: Context, view: View, message : String){
+    fun showSuccessSnackbar(context: Context, view: View, message: String){
         val snackbar: Snackbar
         snackbar = Snackbar.make(view, message, Snackbar.LENGTH_SHORT)
         val snackBarView: View = snackbar.view
@@ -63,7 +62,7 @@ object CommonUtils {
         snackbar.show()
     }
 
-    fun showErrorSnackbar(context: Context, view: View, message : String){
+    fun showErrorSnackbar(context: Context, view: View, message: String){
         val snackbar: Snackbar
         snackbar = Snackbar.make(view, message, Snackbar.LENGTH_SHORT)
         val snackBarView: View = snackbar.view
@@ -71,11 +70,22 @@ object CommonUtils {
         snackbar.show()
     }
 
-    fun showWarningSnackbar(context: Context, view: View, message : String){
+    fun showWarningSnackbar(context: Context, view: View, message: String){
         val snackbar: Snackbar
         snackbar = Snackbar.make(view, message, Snackbar.LENGTH_SHORT)
         val snackBarView: View = snackbar.view
         snackBarView.setBackgroundColor(context.resources.getColor(R.color.colorWarning))
         snackbar.show()
     }
-}// This utility class is not publicly instantiable
+
+    fun getFormatedDate(dateString: String): String {
+        var formatedDate : String =""
+        val formatter: DateFormat = SimpleDateFormat("dd-mm-yyyy")
+        val date: Date = formatter.parse(dateString)
+        val sm = SimpleDateFormat("mm-dd-yyyy")
+
+        val strDate = sm.format(date)
+
+        return strDate
+    }
+}
