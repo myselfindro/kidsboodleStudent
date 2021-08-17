@@ -8,12 +8,15 @@ import android.widget.TextView
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.mkc.school.R
+import com.mkc.school.data.pojomodel.api.response.timetable.TimetableListResponse
 import com.mkc.school.data.pojomodel.model.TimetableModel
+import com.mkc.school.utils.CommonUtils.formateServerDateFromstring
+import com.mkc.school.utils.CommonUtils.formateServerDateToTime
 import java.util.ArrayList
 
 class TimetableAdapter(
     var activity: FragmentActivity?,
-    var dayWiseClassList: ArrayList<TimetableModel>,
+    var dayWiseClassList: ArrayList<TimetableListResponse>,
     var itemClickListener: OnTimetableItemClick
 ) : RecyclerView.Adapter<TimetableAdapter.MyViewHolder>() {
 
@@ -26,16 +29,16 @@ class TimetableAdapter(
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.tvSubject.setText(dayWiseClassList.get(position).subject)
-        holder.tvTeacher.setText(dayWiseClassList.get(position).teacherName)
-        holder.tvStartTime.setText("StartTime: "+dayWiseClassList.get(position).startTime)
-        holder.tvEndTime.setText("EndTime: "+dayWiseClassList.get(position).endTime)
+        holder.tvTeacher.setText(dayWiseClassList.get(position).teacher)
+        holder.tvStartTime.setText("StartTime: "+formateServerDateToTime(dayWiseClassList.get(position).start_time))
+        holder.tvEndTime.setText("EndTime: "+formateServerDateToTime(dayWiseClassList.get(position).end_time))
 
-        if (dayWiseClassList.get(position).isLiveClass==1){
-            holder.tvJoinLiveClass.visibility = View.VISIBLE
-        }
-        else{
-            holder.tvJoinLiveClass.visibility = View.INVISIBLE
-        }
+//        if (dayWiseClassList.get(position).isLiveClass==1){
+//            holder.tvJoinLiveClass.visibility = View.VISIBLE
+//        }
+//        else{
+//            holder.tvJoinLiveClass.visibility = View.INVISIBLE
+//        }
 
         if(position%2 == 0){
             holder.llMainLayout.setBackgroundColor(activity!!.resources.getColor(R.color.colorBlueLite))

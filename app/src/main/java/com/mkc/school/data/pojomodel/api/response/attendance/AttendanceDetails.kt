@@ -30,9 +30,14 @@ data class AttendanceDetails(
     @field:SerializedName("end_time")
     val end_time: String? = null,
 
+    @field:JsonProperty("day_name")
+    @field:SerializedName("day_name")
+    val day_name: String? = null,
+
     @field:JsonProperty("present_status")
     @field:SerializedName("present_status")
     val present_status: String? = null,
+
 
     @field:JsonProperty("teacher_remarks")
     @field:SerializedName("teacher_remarks")

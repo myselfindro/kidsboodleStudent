@@ -1,10 +1,10 @@
 package com.mkc.school.ui.timetable
 
+import com.mkc.school.data.pojomodel.api.response.timetable.TimetableResponse
+
 
 interface TimetableNavigator {
 
-    fun onClick()
-
-//    fun successContactusResponse(commonApiResponse: CommonApiResponse?)
-//    fun errorContactUsResponse(throwable: Throwable?)
+    fun successTimetableResponse(timetableResponse: TimetableResponse?)
+    fun errorTimetableResponse(throwable: Throwable?)
 }

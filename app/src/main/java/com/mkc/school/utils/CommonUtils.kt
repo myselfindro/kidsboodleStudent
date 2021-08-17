@@ -11,6 +11,7 @@ import com.mkc.school.R
 import java.io.IOException
 import java.nio.charset.Charset
 import java.text.DateFormat
+import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -78,14 +79,100 @@ object CommonUtils {
         snackbar.show()
     }
 
+
+   fun getMonthName(selectedMonth: Int): String {
+        var monthName : String= ""
+        when (selectedMonth) {
+            1 -> {
+                monthName="January"
+            }
+            2 -> {
+                monthName="February"
+            }
+            3 -> {
+                monthName="March"
+            }
+            4 -> {
+                monthName="April"
+            }
+            5 -> {
+                monthName="May"
+            }
+            6 -> {
+                monthName="June"
+            }
+            7 -> {
+                monthName="July"
+            }
+            8 -> {
+                monthName="August"
+            }
+            9 -> {
+                monthName="Septembar"
+            }
+            10 -> {
+                monthName="Octobar"
+            }
+            11 -> {
+                monthName="Novembar"
+            }
+            12 -> {
+                monthName="Decembar"
+            }
+        }
+
+        return monthName
+    }
+
     fun getFormatedDate(dateString: String): String {
-        var formatedDate : String =""
-        val formatter: DateFormat = SimpleDateFormat("dd-mm-yyyy")
-        val date: Date = formatter.parse(dateString)
-        val sm = SimpleDateFormat("mm-dd-yyyy")
 
-        val strDate = sm.format(date)
+        var parsed: Date? = null
+        var outputDate = ""
+        var inputFormat = "mm-dd-yyyy"
+        var outputFormat = "dd-MM-yyyy"
+        val df_input =
+            SimpleDateFormat(inputFormat)
+        val df_output =
+            SimpleDateFormat(outputFormat)
+        try {
+            parsed = df_input.parse(dateString)
+            outputDate = df_output.format(parsed)
+        } catch (e: ParseException) {
+        }
+        return outputDate
+    }
 
-        return strDate
+    fun formateServerDateFromstring(inputDate: String?): String? {
+        var parsed: Date? = null
+        var outputDate = ""
+        var inputFormat = "yyyy-MM-dd'T'HH:mm:ss"
+        var outputFormat = "dd-MM-yyyy"
+        val df_input =
+            SimpleDateFormat(inputFormat, Locale.getDefault())
+        val df_output =
+            SimpleDateFormat(outputFormat, Locale.getDefault())
+        try {
+            parsed = df_input.parse(inputDate)
+            outputDate = df_output.format(parsed)
+        } catch (e: ParseException) {
+        }
+        return outputDate
+    }
+
+    fun formateServerDateToTime(inputDate: String?): String? {
+        var parsed: Date? = null
+        var outputDate = ""
+        var inputFormat = "yyyy-MM-dd'T'HH:mm:ss"
+        var outputFormat = "HH:mm aa"
+        val df_input =
+            SimpleDateFormat(inputFormat, Locale.getDefault())
+        val df_output =
+            SimpleDateFormat(outputFormat, Locale.getDefault())
+        try {
+            parsed = df_input.parse(inputDate)
+            outputDate = df_output.format(parsed)
+        } catch (e: ParseException) {
+        }
+        return outputDate
     }
 }

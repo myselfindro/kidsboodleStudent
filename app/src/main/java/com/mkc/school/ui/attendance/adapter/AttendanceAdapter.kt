@@ -10,6 +10,8 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.mkc.school.R
+import com.mkc.school.data.pojomodel.api.response.attendance.AttendanceDetails
+import com.mkc.school.data.pojomodel.api.response.attendance.AttendanceListResponse
 import com.mkc.school.data.pojomodel.model.AttendanceModel
 import com.mkc.school.ui.attendance.AttendanceFragment
 import com.mkc.school.ui.home.adapter.NoticeAdapter
@@ -17,7 +19,7 @@ import java.util.ArrayList
 
 class AttendanceAdapter(
     var activity: FragmentActivity?,
-    var attendanceList: ArrayList<AttendanceModel>,
+    var attendanceList: ArrayList<AttendanceDetails>,
     var itemClickListener: OnAttendanceItemClick
 ) : RecyclerView.Adapter<AttendanceAdapter.MyViewHolder>(){
 
@@ -29,9 +31,9 @@ class AttendanceAdapter(
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.tvDate.setText(attendanceList.get(position).attendaceDate)
-        holder.tvDay.setText(attendanceList.get(position).attendaceDay)
-        if (attendanceList.get(position).attendaceStatus==1){
+        holder.tvDate.setText(attendanceList.get(position).date)
+        holder.tvDay.setText(attendanceList.get(position).day_name)
+        if (attendanceList.get(position).present_status.equals("present")){
              holder.tvAttendance.setText("Present")
             holder.tvAttendance.setTextColor(activity?.resources?.getColor(R.color.colorGreen)!!)
         }
@@ -42,7 +44,7 @@ class AttendanceAdapter(
 
         holder.ivRemark.setOnClickListener {
 
-            itemClickListener.onAttendanceItemClick(position,holder.ivRemark, "REMARK")
+            itemClickListener.onAttendanceItemClick(position,holder.ivRemark, attendanceList.get(position).teacher_remarks!!,"REMARK")
         }
 
         if(position%2 == 0){
@@ -67,6 +69,6 @@ class AttendanceAdapter(
 
 
     interface OnAttendanceItemClick {
-        fun onAttendanceItemClick(position: Int, view: View, action: String?)
+        fun onAttendanceItemClick(position: Int, view: View, remarks: String, action: String?)
     }
 }

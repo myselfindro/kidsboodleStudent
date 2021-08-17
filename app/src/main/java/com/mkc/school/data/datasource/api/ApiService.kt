@@ -7,6 +7,7 @@ import com.mkc.school.data.pojomodel.api.response.attendance.AttendanceResponse
 import com.mkc.school.data.pojomodel.api.response.home.HomeResponse
 import com.mkc.school.data.pojomodel.api.response.login.LoginResponse
 import com.mkc.school.data.pojomodel.api.response.profile.AccountProfileResponse
+import com.mkc.school.data.pojomodel.api.response.timetable.TimetableResponse
 import io.reactivex.Single
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -36,5 +37,9 @@ interface ApiService {
                       @Query("date") date: String,
                       @Query("month") month: String,
                       @Query("year") year: String,): Single<AttendanceResponse>
+
+    @GET("student_class_routine_details/")
+    fun getTimetable(@Query("page_size") pagesize: String,
+                      @Query("day_name") dayname: String): Single<TimetableResponse>
 
 }

@@ -10,12 +10,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.mkc.school.ui.base.ViewModelFactory
 import com.mkc.school.BR
 import com.mkc.school.R
+import com.mkc.school.data.pojomodel.api.response.attendance.AttendanceDetails
+import com.mkc.school.data.pojomodel.api.response.attendance.AttendanceListResponse
 import com.mkc.school.data.pojomodel.api.response.attendance.AttendanceResponse
 import com.mkc.school.data.pojomodel.model.AttendanceModel
 import com.mkc.school.databinding.FragmentAttendanceBinding
 import com.mkc.school.ui.attendance.adapter.AttendanceAdapter
 import com.mkc.school.ui.base.BaseFragment
 import com.mkc.school.utils.CommonUtils
+import com.mkc.school.utils.CommonUtils.getMonthName
 import com.mkc.school.utils.CommonUtils.showErrorSnackbar
 import com.mkc.school.utils.CommonUtils.showSuccessSnackbar
 import com.skydoves.balloon.Balloon
@@ -41,11 +44,12 @@ class AttendanceFragment : BaseFragment<FragmentAttendanceBinding, AttendanceVie
     private var binding: FragmentAttendanceBinding? = null
     private var layoutManager: LinearLayoutManager? = null
     private var attendanceAdapter: AttendanceAdapter? = null
-    private var attendanceList: ArrayList<AttendanceModel> = ArrayList<AttendanceModel>()
+    private var attendanceList: ArrayList<AttendanceDetails> = ArrayList<AttendanceDetails>()
     private var balloon: Balloon? = null
     private var closeTooltip: ImageView? = null
     private var tvRemark: TextView? = null
     private var currentYear: Int ?= 2021
+    private var curMon: Int ?= null
     private var currentMonth: Int ?= null
     private var pageSize: String? = "0"
 
@@ -69,21 +73,20 @@ class AttendanceFragment : BaseFragment<FragmentAttendanceBinding, AttendanceVie
         attendanceViewModel!!.navigator = this
         binding = viewDataBinding
 
-        loadDummyData()
         initview()
 
         viewModel.getAttendance(pageSize!!,"",currentMonth.toString(),currentYear.toString())
 
     }
 
-    private fun loadDummyData() {
+/*    private fun loadDummyData() {
         attendanceList.add(AttendanceModel("02.08.2021", "Monday", 1, "Remarks"))
         attendanceList.add(AttendanceModel("03.08.2021", "Thusday", 0, "Remarks"))
         attendanceList.add(AttendanceModel("04.08.2021", "Wednesday", 1, "Remarks"))
         attendanceList.add(AttendanceModel("05.08.2021", "Thrusday", 1, "Remarks"))
         attendanceList.add(AttendanceModel("06.08.2021", "Friday", 0, "Remarks"))
 
-    }
+    }*/
 
     private fun initview() {
 
@@ -98,8 +101,9 @@ class AttendanceFragment : BaseFragment<FragmentAttendanceBinding, AttendanceVie
         binding?.selectYear?.setOnClickListener(this)
 
         val d = Date()
-        currentMonth = d.month
-        currentMonth = currentMonth!! +1
+        curMon = d.month
+        currentMonth = curMon!! +1
+        binding?.selectMonth?.setText(getMonthName(currentMonth!!))
 
         balloon = Balloon.Builder(requireActivity())
             .setLayout(R.layout.layout_custom_tooltip)
@@ -122,9 +126,9 @@ class AttendanceFragment : BaseFragment<FragmentAttendanceBinding, AttendanceVie
         }
     }
 
-    override fun onAttendanceItemClick(position: Int, view: View, action: String?) {
+    override fun onAttendanceItemClick(position: Int, view: View, remarks: String, action: String?) {
         if (action.equals("REMARK")) {
-            tvRemark?.setText("ajdhajkhnwhjhkjhoihihkhkhs")
+            tvRemark?.setText(remarks)
             balloon?.showAlignBottom(view)
         }
     }
@@ -138,7 +142,9 @@ class AttendanceFragment : BaseFragment<FragmentAttendanceBinding, AttendanceVie
                         println("selected__MONTH : " + selectedMonth)
                         currentMonth = selectedMonth+1
                         binding?.selectMonth?.setText(getMonthName(selectedMonth+1))
-                    }, 3, 5
+
+                        viewModel.getAttendance(pageSize!!,"",currentMonth.toString(),currentYear.toString())
+                    }, 3, curMon!!
                 )
 
                 builder.showMonthOnly()
@@ -163,61 +169,18 @@ class AttendanceFragment : BaseFragment<FragmentAttendanceBinding, AttendanceVie
         }
     }
 
-    private fun getMonthName(selectedMonth: Int): String {
-        var monthName : String= ""
-        when (selectedMonth) {
-            1 -> {
-                monthName="January"
-            }
-            2 -> {
-                monthName="February"
-            }
-            3 -> {
-                monthName="March"
-            }
-            4 -> {
-                monthName="April"
-            }
-            5 -> {
-                monthName="May"
-            }
-            6 -> {
-                monthName="June"
-            }
-            7 -> {
-                monthName="July"
-            }
-            8 -> {
-                monthName="August"
-            }
-            9 -> {
-                monthName="Septembar"
-            }
-            10 -> {
-                monthName="Octobar"
-            }
-            11 -> {
-                monthName="Novembar"
-            }
-            12 -> {
-                monthName="Decembar"
-            }
-        }
-
-        return monthName
-    }
 
     override fun successAttendanceResponse(attendanceResponse: AttendanceResponse?) {
         if (attendanceResponse?.request_status == 1) {
             showSuccessSnackbar(requireActivity(), binding?.mainLayout!!, attendanceResponse.msg!!)
 
-            if (attendanceResponse.result?.size!! >0){
-
+            if (attendanceResponse.result?.get(0)?.attendence_details?.size!! >0){
+                attendanceList.addAll(attendanceResponse.result?.get(0).attendence_details!!)
+                attendanceAdapter?.notifyDataSetChanged()
             }else{
                 showErrorSnackbar(requireActivity(), binding?.mainLayout!!, attendanceResponse.msg!!)
             }
-//            announcementList.addAll(announcementListResponse.result!!)
-//            announcementAdapter?.notifyDataSetChanged()
+
 
         } else {showErrorSnackbar(
                 requireActivity(),
