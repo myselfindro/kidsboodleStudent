@@ -10,10 +10,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.mkc.school.ui.base.ViewModelFactory
 import com.mkc.school.BR
 import com.mkc.school.R
+import com.mkc.school.data.pojomodel.api.response.attendance.AttendanceResponse
 import com.mkc.school.data.pojomodel.model.AttendanceModel
 import com.mkc.school.databinding.FragmentAttendanceBinding
 import com.mkc.school.ui.attendance.adapter.AttendanceAdapter
 import com.mkc.school.ui.base.BaseFragment
+import com.mkc.school.utils.CommonUtils
+import com.mkc.school.utils.CommonUtils.showErrorSnackbar
+import com.mkc.school.utils.CommonUtils.showSuccessSnackbar
 import com.skydoves.balloon.Balloon
 import com.skydoves.balloon.BalloonAnimation
 import com.whiteelephant.monthpicker.MonthPickerDialog
@@ -42,6 +46,8 @@ class AttendanceFragment : BaseFragment<FragmentAttendanceBinding, AttendanceVie
     private var closeTooltip: ImageView? = null
     private var tvRemark: TextView? = null
     private var currentYear: Int ?= 2021
+    private var currentMonth: Int ?= null
+    private var pageSize: String? = "0"
 
     override val bindingVariable: Int
         get() = BR.viewModel
@@ -66,6 +72,8 @@ class AttendanceFragment : BaseFragment<FragmentAttendanceBinding, AttendanceVie
         loadDummyData()
         initview()
 
+        viewModel.getAttendance(pageSize!!,"",currentMonth.toString(),currentYear.toString())
+
     }
 
     private fun loadDummyData() {
@@ -89,8 +97,9 @@ class AttendanceFragment : BaseFragment<FragmentAttendanceBinding, AttendanceVie
         binding?.selectMonth?.setOnClickListener(this)
         binding?.selectYear?.setOnClickListener(this)
 
-//        val d = Date()
-//        currentYear = d.year
+        val d = Date()
+        currentMonth = d.month
+        currentMonth = currentMonth!! +1
 
         balloon = Balloon.Builder(requireActivity())
             .setLayout(R.layout.layout_custom_tooltip)
@@ -113,8 +122,6 @@ class AttendanceFragment : BaseFragment<FragmentAttendanceBinding, AttendanceVie
         }
     }
 
-    override fun onClick() {}
-
     override fun onAttendanceItemClick(position: Int, view: View, action: String?) {
         if (action.equals("REMARK")) {
             tvRemark?.setText("ajdhajkhnwhjhkjhoihihkhkhs")
@@ -129,6 +136,7 @@ class AttendanceFragment : BaseFragment<FragmentAttendanceBinding, AttendanceVie
                     activity,
                     { selectedMonth, selectedYear ->
                         println("selected__MONTH : " + selectedMonth)
+                        currentMonth = selectedMonth+1
                         binding?.selectMonth?.setText(getMonthName(selectedMonth+1))
                     }, 3, 5
                 )
@@ -197,6 +205,36 @@ class AttendanceFragment : BaseFragment<FragmentAttendanceBinding, AttendanceVie
         }
 
         return monthName
+    }
+
+    override fun successAttendanceResponse(attendanceResponse: AttendanceResponse?) {
+        if (attendanceResponse?.request_status == 1) {
+            showSuccessSnackbar(requireActivity(), binding?.mainLayout!!, attendanceResponse.msg!!)
+
+            if (attendanceResponse.result?.size!! >0){
+
+            }else{
+                showErrorSnackbar(requireActivity(), binding?.mainLayout!!, attendanceResponse.msg!!)
+            }
+//            announcementList.addAll(announcementListResponse.result!!)
+//            announcementAdapter?.notifyDataSetChanged()
+
+        } else {showErrorSnackbar(
+                requireActivity(),
+                binding?.mainLayout!!,
+                attendanceResponse?.msg!!
+            )
+        }
+    }
+
+    override fun errorAttendanceResponse(throwable: Throwable?) {
+        if (throwable?.message != null) {
+            CommonUtils.showErrorSnackbar(
+                requireActivity(),
+                binding?.mainLayout!!,
+                "Something went wrong"
+            )
+        }
     }
 
 }

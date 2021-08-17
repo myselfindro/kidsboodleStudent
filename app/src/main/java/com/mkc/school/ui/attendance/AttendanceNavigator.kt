@@ -1,10 +1,9 @@
 package com.mkc.school.ui.attendance
 
+import com.mkc.school.data.pojomodel.api.response.attendance.AttendanceResponse
+
 
 interface AttendanceNavigator {
-
-    fun onClick()
-
-//    fun successContactusResponse(commonApiResponse: CommonApiResponse?)
-//    fun errorContactUsResponse(throwable: Throwable?)
+    fun successAttendanceResponse(attendanceResponse: AttendanceResponse?)
+    fun errorAttendanceResponse(throwable: Throwable?)
 }
