@@ -103,7 +103,7 @@ class AttendanceFragment : BaseFragment<FragmentAttendanceBinding, AttendanceVie
         val d = Date()
         curMon = d.month
         currentMonth = curMon!! +1
-        binding?.selectMonth?.setText(getMonthName(currentMonth!!))
+        binding?.selectMonth?.setText("Month : "+getMonthName(currentMonth!!))
 
         balloon = Balloon.Builder(requireActivity())
             .setLayout(R.layout.layout_custom_tooltip)
@@ -141,7 +141,7 @@ class AttendanceFragment : BaseFragment<FragmentAttendanceBinding, AttendanceVie
                     { selectedMonth, selectedYear ->
                         println("selected__MONTH : " + selectedMonth)
                         currentMonth = selectedMonth+1
-                        binding?.selectMonth?.setText(getMonthName(selectedMonth+1))
+                        binding?.selectMonth?.setText("Month : "+getMonthName(selectedMonth+1))
 
                         viewModel.getAttendance(pageSize!!,"",currentMonth.toString(),currentYear.toString())
                     }, 3, curMon!!

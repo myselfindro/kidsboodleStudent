@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/_9sdp"
             android:backgroundTint="@color/white"
-            android:spinnerMode="dropdown"
+            android:spinnerMode="dialog"
             android:visibility="gone"/>
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="match_parent"
@@ -128,8 +128,8 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/_35sdp"
         android:text="@string/download_grade_card"
-        android:fontFamily="@font/lato"
-        android:textSize="@dimen/text_size"
+        android:fontFamily="@font/lato_bold"
+        android:textSize="@dimen/text_size_med"
         android:gravity="center"
         android:layout_alignParentBottom="true"
         android:layout_margin="@dimen/_23sdp"
