@@ -120,6 +120,8 @@ class  DashboardActivity : BaseActivity<ActivityDashboardBinding, DashboardViewM
                 ft!!.commit()
 
                 isHomeFragmentVisible = true
+                ivBack?.visibility = View.GONE
+                ivNav?.visibility = View.VISIBLE
                 true
             }
             R.id.bottom_navigation_timetable -> {
@@ -129,6 +131,8 @@ class  DashboardActivity : BaseActivity<ActivityDashboardBinding, DashboardViewM
                 ft!!.commit()
 
                 isHomeFragmentVisible = false
+                ivBack?.visibility = View.GONE
+                ivNav?.visibility = View.VISIBLE
                 true
             }
             R.id.bottom_navigation_attendance -> {
@@ -138,6 +142,8 @@ class  DashboardActivity : BaseActivity<ActivityDashboardBinding, DashboardViewM
                 ft!!.commit()
 
                 isHomeFragmentVisible = false
+                ivBack?.visibility = View.GONE
+                ivNav?.visibility = View.VISIBLE
                 true
             }
             R.id.bottom_navigation_liveclass -> {
@@ -147,6 +153,8 @@ class  DashboardActivity : BaseActivity<ActivityDashboardBinding, DashboardViewM
                 ft!!.commit()
 
                 isHomeFragmentVisible = false
+                ivBack?.visibility = View.GONE
+                ivNav?.visibility = View.VISIBLE
                 true
             }
             R.id.bottom_navigation_account -> {
@@ -156,6 +164,8 @@ class  DashboardActivity : BaseActivity<ActivityDashboardBinding, DashboardViewM
                 ft!!.commit()
 
                 isHomeFragmentVisible = false
+                ivBack?.visibility = View.GONE
+                ivNav?.visibility = View.VISIBLE
                 true
             }
             else -> false

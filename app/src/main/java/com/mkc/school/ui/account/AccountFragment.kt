@@ -55,6 +55,7 @@ class AccountFragment : BaseFragment<FragmentAccountBinding, AccountViewModel>()
         accountViewModel!!.navigator = this
         binding = viewDataBinding
 
+        binding?.llStudentDetailsLayout?.visibility = View.INVISIBLE
         initview()
 
     }
@@ -67,7 +68,7 @@ class AccountFragment : BaseFragment<FragmentAccountBinding, AccountViewModel>()
     override fun successAccountProfileResponse(accountProfileResponse: AccountProfileResponse?) {
 
         if (accountProfileResponse?.request_status == 1) {
-            CommonUtils.showSuccessSnackbar(requireActivity(), binding?.mainLayout!!, accountProfileResponse.msg!!)
+           // CommonUtils.showSuccessSnackbar(requireActivity(), binding?.mainLayout!!, accountProfileResponse.msg!!)
 
             setupUI(accountProfileResponse.result)
 
@@ -106,20 +107,32 @@ class AccountFragment : BaseFragment<FragmentAccountBinding, AccountViewModel>()
 
         with(binding){
             this?.tvName?.setText("Name - "+result?.student_fname+" "+result?.student_lname)
-            this?.tvClass?.setText("Class - "+result?.class_name)
-            this?.tvGender?.setText(result?.gender)
+            this?.tvClass?.setText("Class - "+result?.class_name+"-"+result?.section)
+
+            if (result?.gender.equals("M")){
+                this?.tvGender?.setText("Male")
+            }
+            else if (result?.gender.equals("F")){
+                this?.tvGender?.setText("Female")
+            }
+            else{
+                this?.tvGender?.setText("Other")
+            }
+
             this?.tvDob?.setText(result?.dob)
             this?.tvFatherName?.setText(result?.father_name)
             this?.tvMotherName?.setText(result?.mother_name)
             this?.tvEmailId?.setText(result?.parent_email)
-            this?.tvContactNo?.setText(result?.local_guardian_phone)
+            this?.tvContactNo?.setText("+"+result?.dial_code+"-"+result?.local_guardian_phone)
             this?.tvPermanentAddress?.setText(result?.address1)
             this?.tvSeconderyAddress?.setText(result?.address2)
             this?.tvSchoolName?.setText(result?.school?.get(0)?.school_name)
             this?.tvDateOfJoining?.setText(result?.school?.get(0)?.school_name)
+            this?.tvAttendancePercentage?.setText(result?.attendence.toString()+"%")
+            this?.pbAttendance?.setProgress(result?.attendence!!)
             //this?.tvDateOfJoining?.setText(result?.school?.get(0)?.school_name)
         }
-
+        binding?.llStudentDetailsLayout?.visibility = View.VISIBLE
     }
 
 

@@ -96,7 +96,7 @@ class TimetableFragment : BaseFragment<FragmentTimetableBinding, TimetableViewMo
 
         binding?.tabLayoutDays?.addOnTabSelectedListener(object : OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
-                Toast.makeText(activity,tab.text,Toast.LENGTH_SHORT).show()
+                //Toast.makeText(activity,tab.text,Toast.LENGTH_SHORT).show()
                 viewModel.getTimetable(pageSize!!,tab.text.toString())
             }
 
@@ -109,16 +109,19 @@ class TimetableFragment : BaseFragment<FragmentTimetableBinding, TimetableViewMo
 
     override fun successTimetableResponse(timetableResponse: TimetableResponse?) {
         if (timetableResponse?.request_status == 1) {
-            CommonUtils.showSuccessSnackbar(requireActivity(),binding?.mainLayout!!,timetableResponse.msg!!)
+            //CommonUtils.showSuccessSnackbar(requireActivity(),binding?.mainLayout!!,timetableResponse.msg!!)
 
             if (timetableResponse.result?.size!! >0){
                 dayWiseClassList.clear()
                 dayWiseClassList.addAll(timetableResponse.result!!)
                 timetableAdapter?.notifyDataSetChanged()
+                binding?.ivNoDataFound?.visibility= View.GONE
+                binding?.rvTimetable?.visibility= View.VISIBLE
             }else{
-                CommonUtils.showErrorSnackbar(requireActivity(), binding?.mainLayout!!, timetableResponse.msg!!)
+                binding?.rvTimetable?.visibility= View.GONE
+                binding?.ivNoDataFound?.visibility= View.VISIBLE
+                //CommonUtils.showErrorSnackbar(requireActivity(), binding?.mainLayout!!, timetableResponse.msg!!)
             }
-
 
         } else {
             CommonUtils.showErrorSnackbar(requireActivity(), binding?.mainLayout!!, timetableResponse?.msg!!)

@@ -16,6 +16,7 @@ import com.kwabenaberko.openweathermaplib.implementation.callback.CurrentWeather
 import com.kwabenaberko.openweathermaplib.model.currentweather.CurrentWeather
 import com.mkc.school.BR
 import com.mkc.school.R
+import com.mkc.school.data.pojomodel.api.response.home.AnnouncementList
 import com.mkc.school.data.pojomodel.api.response.home.HomeResponse
 import com.mkc.school.data.pojomodel.api.response.home.HomeResponseData
 import com.mkc.school.data.pojomodel.model.HorizontalOptionsModel
@@ -62,7 +63,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(), HomeNav
     private var noticeAdapter: NoticeAdapter? = null
     private var horizontalOptionsAdapter: HorizontalOptionsAdapter? = null
     private var callenderEventAdapter: CallenderEventAdapter? = null
-    private var myNoticeList: ArrayList<String> = ArrayList<String>()
+    private var myNoticeList: ArrayList<AnnouncementList> = ArrayList<AnnouncementList>()
     private var dateWiseCalEventList: ArrayList<String> = ArrayList<String>()
     private var horizontalOptionsList: ArrayList<HorizontalOptionsModel> = ArrayList<HorizontalOptionsModel>()
 
@@ -174,11 +175,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(), HomeNav
 
     private fun dummyDataLoad() {
 
-        myNoticeList.add("Planning to resume our weekly Innovation Meet “SFT INNO-MEET”")
-        myNoticeList.add(" meeting is intended to be an open discussion on Trending Technologies")
-        myNoticeList.add("All deviations and non applied attendance will be treated as company policy.")
-        myNoticeList.add("The show features iconic Indian brands that are powering the Make in India initiative.")
-        myNoticeList.add("We need to complete below work today")
+//        myNoticeList.add("Planning to resume our weekly Innovation Meet “SFT INNO-MEET”")
+//        myNoticeList.add(" meeting is intended to be an open discussion on Trending Technologies")
+//        myNoticeList.add("All deviations and non applied attendance will be treated as company policy.")
+//        myNoticeList.add("The show features iconic Indian brands that are powering the Make in India initiative.")
+//        myNoticeList.add("We need to complete below work today")
 
         dateWiseCalEventList.add("School annual function")
         dateWiseCalEventList.add("Parent metting")
@@ -352,7 +353,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(), HomeNav
 
     override fun successHomeResponse(homeResponse: HomeResponse?) {
         if (homeResponse?.request_status == 1) {
-            showSuccessSnackbar(requireActivity(), binding?.mainLayout!!, homeResponse.msg!!)
+            //showSuccessSnackbar(requireActivity(), binding?.mainLayout!!, homeResponse.msg!!)
             setupUI(homeResponse.result)
 
         } else {
@@ -364,6 +365,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(), HomeNav
         binding?.tvSchoolName?.setText(result?.school_details?.get(0)?.school_name)
         binding?.tvStudentName?.setText("Hey "+result?.student_details?.get(0)?.student_fname)
         binding?.tvClassName?.setText(result?.class_name+result?.section_name)
+        binding?.tvAttendancePercentage?.setText(result?.present_percentage.toString()+"%")
+        binding?.pbAttendance?.setProgress(result?.present_percentage!!)
+        myNoticeList.clear()
+        myNoticeList.addAll(result?.announcement_list!!)
+        noticeAdapter?.notifyDataSetChanged()
     }
 
     override fun errorHomeResponse(throwable: Throwable?) {

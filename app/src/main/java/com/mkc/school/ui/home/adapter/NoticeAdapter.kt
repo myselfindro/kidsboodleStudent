@@ -7,12 +7,13 @@ import android.widget.TextView
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.mkc.school.R
+import com.mkc.school.data.pojomodel.api.response.home.AnnouncementList
 import com.mkc.school.ui.home.HomeFragment
 import java.util.ArrayList
 
 class NoticeAdapter(
     var activity: FragmentActivity?,
-    var myNoticeList: ArrayList<String>,
+    var myNoticeList: ArrayList<AnnouncementList>,
     var itemClickListener: OnNoticeItemClick
 ) : RecyclerView.Adapter<NoticeAdapter.MyViewHolder>(){
 
@@ -24,7 +25,7 @@ class NoticeAdapter(
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
 
-        holder.tvNotice.setText(myNoticeList.get(position))
+        holder.tvNotice.setText(myNoticeList.get(position).title)
     }
 
     override fun getItemCount(): Int {

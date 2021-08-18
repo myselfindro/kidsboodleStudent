@@ -172,14 +172,28 @@ class AttendanceFragment : BaseFragment<FragmentAttendanceBinding, AttendanceVie
 
     override fun successAttendanceResponse(attendanceResponse: AttendanceResponse?) {
         if (attendanceResponse?.request_status == 1) {
-            showSuccessSnackbar(requireActivity(), binding?.mainLayout!!, attendanceResponse.msg!!)
+            //showSuccessSnackbar(requireActivity(), binding?.mainLayout!!, attendanceResponse.msg!!)
 
-            if (attendanceResponse.result?.get(0)?.attendence_details?.size!! >0){
-                attendanceList.addAll(attendanceResponse.result?.get(0).attendence_details!!)
-                attendanceAdapter?.notifyDataSetChanged()
-            }else{
-                showErrorSnackbar(requireActivity(), binding?.mainLayout!!, attendanceResponse.msg!!)
+            if (attendanceResponse.result?.size!! >0){
+                if (attendanceResponse.result?.get(0)?.attendence_details?.size!! >0){
+                    attendanceList.clear()
+                    attendanceList.addAll(attendanceResponse.result?.get(0).attendence_details!!)
+                    attendanceAdapter?.notifyDataSetChanged()
+
+                    binding?.ivNoDataFound?.visibility= View.GONE
+                    binding?.cvAttendacneCard?.visibility= View.VISIBLE
+                }
+                else{
+                    binding?.ivNoDataFound?.visibility= View.VISIBLE
+                    binding?.cvAttendacneCard?.visibility= View.GONE
+                    //showErrorSnackbar(requireActivity(), binding?.mainLayout!!, attendanceResponse.msg!!)
+                }
             }
+            else{
+                binding?.ivNoDataFound?.visibility= View.VISIBLE
+                binding?.cvAttendacneCard?.visibility= View.GONE
+            }
+
 
 
         } else {showErrorSnackbar(

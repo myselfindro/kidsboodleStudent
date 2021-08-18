@@ -10,95 +10,95 @@
         android:background="@drawable/background"
         tools:context=".ui.home.HomeFragment">
 
+        <LinearLayout
+            android:id="@+id/llStudentPannel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bottom_rounded_corner_background"
+            android:orientation="horizontal"
+            android:padding="@dimen/_13sdp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginLeft="@dimen/_9sdp"
+                android:orientation="vertical">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvSchoolName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato"
+                    tools:text="South Calcutta School"
+                    android:textColor="@color/colorTextDark"
+                    android:textSize="@dimen/text_size" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvStudentName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_6sdp"
+                    android:fontFamily="@font/lato_bold"
+                    tools:text="Hey, Avik"
+                    android:textColor="@color/colorTextDark"
+                    android:textSize="@dimen/text_size_med"
+                    app:layout_scrollFlags="scroll|snap|exitUntilCollapsed" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvClassName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_6sdp"
+                    android:fontFamily="@font/lato"
+                    tools:text="Class - VI-A"
+                    android:textColor="@color/colorTextDark"
+                    android:textSize="@dimen/text_size" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:orientation="vertical"
+                android:layout_marginRight="@dimen/_9sdp"
+                android:gravity="center_vertical|right">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvWeather"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_size_big"
+                    android:text=""
+                    android:gravity="center_vertical"
+                    android:drawablePadding="@dimen/_6sdp"
+                    android:drawableRight="@drawable/ic_weather"
+                    android:textColor="@color/colorText"
+                    android:fontFamily="@font/lato"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvDayTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_size"
+                    android:textColor="@color/colorText"
+                    android:layout_marginTop="@dimen/_11sdp"
+                    android:fontFamily="@font/lato"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_below="@+id/llStudentPannel">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/bottom_rounded_corner_background"
-                    android:orientation="horizontal"
-                    android:padding="@dimen/_23sdp">
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/tvSchoolName"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/lato"
-                            tools:text="South Calcutta School"
-                            android:textColor="@color/colorTextDark"
-                            android:textSize="@dimen/text_size" />
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/tvStudentName"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_6sdp"
-                            android:fontFamily="@font/lato_bold"
-                            tools:text="Hey, Avik"
-                            android:textColor="@color/colorTextDark"
-                            android:textSize="@dimen/text_size_med"
-                            app:layout_scrollFlags="scroll|snap|exitUntilCollapsed" />
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/tvClassName"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_6sdp"
-                            android:fontFamily="@font/lato"
-                            tools:text="Class - VI-A"
-                            android:textColor="@color/colorTextDark"
-                            android:textSize="@dimen/text_size" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:layout_gravity="center"
-                        android:orientation="vertical"
-                        android:gravity="center_vertical|right">
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/tvWeather"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="@dimen/text_size_big"
-                            android:text=""
-                            android:gravity="center_vertical"
-                            android:drawablePadding="@dimen/_6sdp"
-                            android:drawableRight="@drawable/ic_weather"
-                            android:textColor="@color/colorText"
-                            android:fontFamily="@font/lato"/>
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/tvDayTime"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="@dimen/text_size"
-                            android:textColor="@color/colorText"
-                            android:layout_marginTop="@dimen/_11sdp"
-                            android:fontFamily="@font/lato"/>
-
-                    </LinearLayout>
-
-
-
-
-
-                </LinearLayout>
 
                 <!--////////////////////Student Details///////////////////-->
                 <LinearLayout
@@ -167,6 +167,7 @@
                             android:progress="50" />
 
                         <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvAttendancePercentage"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/lato"
