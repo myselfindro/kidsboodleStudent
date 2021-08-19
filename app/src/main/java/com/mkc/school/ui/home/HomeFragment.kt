@@ -115,9 +115,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(), HomeNav
 
         val timeFormat: DateFormat = SimpleDateFormat("hh:mm aa")
         val fullDayName: DateFormat = SimpleDateFormat("EEEE")
+        val currentDate: DateFormat = SimpleDateFormat("dd-MM-yyyy")
         val cal = Calendar.getInstance()
 
-        binding?.tvDayTime?.setText(fullDayName.format(Date()) + ", " + timeFormat.format(cal.time))
+        binding?.tvDateDay?.setText(currentDate.format(Date())+", "+fullDayName.format(Date()))
+        binding?.tvTime?.setText(timeFormat.format(cal.time))
 
 
         viewModel.getDashboardDetails()
@@ -362,8 +364,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(), HomeNav
     }
 
     private fun setupUI(result: HomeResponseData?) {
+        (activity as DashboardActivity?)?.tvHeaderSchoolName?.setText(result?.school_details?.get(0)?.school_name)
         binding?.tvSchoolName?.setText(result?.school_details?.get(0)?.school_name)
-        binding?.tvStudentName?.setText("Hey "+result?.student_details?.get(0)?.student_fname)
+        binding?.tvStudentName?.setText("Hey, "+result?.student_details?.get(0)?.student_fname)
         binding?.tvClassName?.setText(result?.class_name+result?.section_name)
         binding?.tvAttendancePercentage?.setText(result?.present_percentage.toString()+"%")
         binding?.pbAttendance?.setProgress(result?.present_percentage!!)

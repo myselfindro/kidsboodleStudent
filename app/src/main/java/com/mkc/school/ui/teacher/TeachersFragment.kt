@@ -7,10 +7,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.mkc.school.ui.base.ViewModelFactory
 import com.mkc.school.BR
 import com.mkc.school.R
+import com.mkc.school.data.pojomodel.api.response.teachers.TeachersListResponse
+import com.mkc.school.data.pojomodel.api.response.teachers.TeachersResponse
 import com.mkc.school.data.pojomodel.model.TeachersModel
 import com.mkc.school.databinding.FragmentTeachersBinding
 import com.mkc.school.ui.base.BaseFragment
 import com.mkc.school.ui.teacher.adapter.TeachersAdapter
+import com.mkc.school.utils.CommonUtils
+import com.mkc.school.utils.CommonUtils.showSuccessSnackbar
 import java.util.ArrayList
 
 
@@ -32,7 +36,9 @@ class TeachersFragment : BaseFragment<FragmentTeachersBinding, TeachersViewModel
     private var binding: FragmentTeachersBinding? = null
     private var layoutManager: LinearLayoutManager? = null
     private var teachersAdapter: TeachersAdapter? = null
-    private var teachersList: ArrayList<TeachersModel> = ArrayList<TeachersModel>()
+    private var teachersList: ArrayList<TeachersListResponse> = ArrayList<TeachersListResponse>()
+    private var pageSize: String? = "0"
+
 
     override val bindingVariable: Int
         get() = BR.viewModel
@@ -57,6 +63,7 @@ class TeachersFragment : BaseFragment<FragmentTeachersBinding, TeachersViewModel
 
 //        loaddummyData()
         initview()
+        viewModel.getTeachersList(pageSize!!)
 
     }
 
@@ -72,7 +79,32 @@ class TeachersFragment : BaseFragment<FragmentTeachersBinding, TeachersViewModel
 
     }
 
-    override fun onClick() {}
     override fun onTeachersItemClick(position: Int, action: String?) {}
+    override fun successTeachersResponse(teachersResponse: TeachersResponse?) {
+        if (teachersResponse?.request_status == 1) {
+            showSuccessSnackbar(requireActivity(), binding?.mainLayout!!, teachersResponse.msg!!)
+            if (teachersResponse.result?.size!! >0){
+                teachersList.clear()
+                teachersList.addAll(teachersResponse.result)
+                teachersAdapter?.notifyDataSetChanged()
+            }
+        } else {
+            CommonUtils.showErrorSnackbar(
+                requireActivity(),
+                binding?.mainLayout!!,
+                teachersResponse?.msg!!
+            )
+        }
+    }
+
+    override fun errorTeachersResponse(throwable: Throwable?) {
+        if (throwable?.message != null) {
+            CommonUtils.showErrorSnackbar(
+                requireActivity(),
+                binding?.mainLayout!!,
+                "Something went wrong"
+            )
+        }
+    }
 
 }

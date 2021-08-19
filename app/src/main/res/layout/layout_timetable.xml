@@ -25,7 +25,7 @@
         android:text="Math"
         android:fontFamily="@font/lato_bold"
         android:textColor="@color/colorText"
-        android:textSize="@dimen/text_size"/>
+        android:textSize="@dimen/text_size_plus"/>
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvTeacher"
@@ -48,20 +48,33 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvStartTime"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/starttime"
+            android:gravity="center"
+            android:textAllCaps="true"
+            android:fontFamily="@font/lato"
+            android:textColor="@color/colorText"
+            android:textSize="@dimen/text_size"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="to"
+            android:gravity="center"
+            android:layout_margin="@dimen/_6sdp"
             android:fontFamily="@font/lato"
             android:textColor="@color/colorText"
             android:textSize="@dimen/text_size"/>
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvEndTime"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/endtime"
+            android:gravity="center"
+            android:textAllCaps="true"
             android:fontFamily="@font/lato"
-            android:layout_marginTop="@dimen/_6sdp"
             android:textColor="@color/colorText"
             android:textSize="@dimen/text_size"/>
     </LinearLayout>

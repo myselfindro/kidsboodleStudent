@@ -8,6 +8,7 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.app.ActivityCompat
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.FragmentTransaction
@@ -41,6 +42,7 @@ class  DashboardActivity : BaseActivity<ActivityDashboardBinding, DashboardViewM
     public var bottomNavigationView: BottomNavigationView? = null
     public var ivNav: ImageView? = null
     public var ivBack: ImageView? = null
+    public var tvHeaderSchoolName: AppCompatTextView? = null
     public var latitude : String ?= null
     public var longitude : String ?= null
     var weatherTempareture : String ? =""
@@ -71,6 +73,7 @@ class  DashboardActivity : BaseActivity<ActivityDashboardBinding, DashboardViewM
 
         ivNav = binding?.ivNav
         ivBack = binding?.ivBack
+        tvHeaderSchoolName = binding?.tvHeaderSchoolName
         bottomNavigationView = binding?.bottomNavigation
 
         ft = supportFragmentManager.beginTransaction()

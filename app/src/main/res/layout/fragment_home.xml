@@ -22,10 +22,13 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:layout_gravity="center_vertical"
                 android:layout_marginLeft="@dimen/_9sdp"
                 android:orientation="vertical">
 
                 <androidx.appcompat.widget.AppCompatTextView
+                    android:visibility="gone"
                     android:id="@+id/tvSchoolName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -42,7 +45,7 @@
                     android:fontFamily="@font/lato_bold"
                     tools:text="Hey, Avik"
                     android:textColor="@color/colorTextDark"
-                    android:textSize="@dimen/text_size_med"
+                    android:textSize="@dimen/_23sdp"
                     app:layout_scrollFlags="scroll|snap|exitUntilCollapsed" />
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -78,13 +81,22 @@
                     android:fontFamily="@font/lato"/>
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tvDayTime"
+                    android:id="@+id/tvDateDay"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_size"
+                    android:textColor="@color/colorText"
+                    android:layout_marginTop="@dimen/_11sdp"
+                    android:fontFamily="@font/lato"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvTime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/text_size"
                     android:textAllCaps="true"
                     android:textColor="@color/colorText"
-                    android:layout_marginTop="@dimen/_11sdp"
+                    android:layout_marginTop="@dimen/_6sdp"
                     android:fontFamily="@font/lato"/>
 
             </LinearLayout>

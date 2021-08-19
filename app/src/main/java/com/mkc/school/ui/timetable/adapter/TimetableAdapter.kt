@@ -30,8 +30,8 @@ class TimetableAdapter(
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.tvSubject.setText(dayWiseClassList.get(position).subject)
         holder.tvTeacher.setText(dayWiseClassList.get(position).teacher)
-        holder.tvStartTime.setText("StartTime: "+formateServerDateToTime(dayWiseClassList.get(position).start_time))
-        holder.tvEndTime.setText("EndTime: "+formateServerDateToTime(dayWiseClassList.get(position).end_time))
+        holder.tvStartTime.setText(formateServerDateToTime(dayWiseClassList.get(position).start_time))
+        holder.tvEndTime.setText(formateServerDateToTime(dayWiseClassList.get(position).end_time))
 
 //        if (dayWiseClassList.get(position).isLiveClass==1){
 //            holder.tvJoinLiveClass.visibility = View.VISIBLE

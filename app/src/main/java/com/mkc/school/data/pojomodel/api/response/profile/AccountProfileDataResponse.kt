@@ -108,7 +108,15 @@ data class AccountProfileDataResponse(
     @field:SerializedName("created_at")
     val created_at: String? = null,
 
+    @field:JsonProperty("class_teacher")
+    @field:SerializedName("class_teacher")
+    val class_teacher: String? = null,
+
     @field:JsonProperty("school")
     @field:SerializedName("school")
-    val school: ArrayList<SchoolResponse>? = null
+    val school: ArrayList<SchoolResponse>? = null,
+
+    @field:JsonProperty("hobbies")
+    @field:SerializedName("hobbies")
+    val hobbies: ArrayList<HobbiesResponse>? = null
     )

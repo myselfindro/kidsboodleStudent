@@ -262,11 +262,12 @@
                    android:orientation="horizontal"
                    android:layout_marginLeft="@dimen/_13sdp"
                    android:layout_marginRight="@dimen/_9sdp"
-                   android:layout_marginTop="@dimen/_6sdp">
+                   android:layout_marginTop="@dimen/_6sdp"
+                   android:layout_marginBottom="@dimen/_13sdp">
                    <androidx.appcompat.widget.AppCompatTextView
                        android:layout_width="wrap_content"
                        android:layout_height="wrap_content"
-                       android:text="@string/permanent_address"
+                       android:text="@string/address"
                        android:textColor="@color/colorText"
                        android:fontFamily="@font/lato_bold"
                        android:textSize="@dimen/text_size"
@@ -286,6 +287,7 @@
                </LinearLayout>
 
                <LinearLayout
+                   android:visibility="gone"
                    android:layout_width="match_parent"
                    android:layout_height="wrap_content"
                    android:orientation="horizontal"
@@ -367,6 +369,35 @@
 
                    <androidx.appcompat.widget.AppCompatTextView
                        android:id="@+id/tvSchoolName"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       tools:text="@string/father_s_name"
+                       android:textColor="@color/colorTextGrey"
+                       android:fontFamily="@font/lato"
+                       android:layout_marginLeft="@dimen/_6sdp"
+                       android:textSize="@dimen/text_size"
+                       android:singleLine="true"/>
+
+               </LinearLayout>
+
+               <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:orientation="horizontal"
+                   android:layout_marginLeft="@dimen/_13sdp"
+                   android:layout_marginRight="@dimen/_9sdp"
+                   android:layout_marginTop="@dimen/_6sdp">
+                   <androidx.appcompat.widget.AppCompatTextView
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:text="Class Teacher - "
+                       android:textColor="@color/colorText"
+                       android:fontFamily="@font/lato_bold"
+                       android:textSize="@dimen/text_size"
+                       android:singleLine="true"/>
+
+                   <androidx.appcompat.widget.AppCompatTextView
+                       android:id="@+id/tvClassTeacher"
                        android:layout_width="wrap_content"
                        android:layout_height="wrap_content"
                        tools:text="@string/father_s_name"
@@ -575,10 +606,11 @@
            android:layout_marginRight="@dimen/_13sdp">
 
            <LinearLayout
+               android:id="@+id/llHobiesLayout"
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
                android:orientation="vertical"
-               android:layout_marginTop="@dimen/_11sdp"
+               android:layout_marginTop="@dimen/_29sdp"
                android:layout_marginBottom="@dimen/_33sdp"
                android:background="@drawable/rounded_corner_grey">
 
