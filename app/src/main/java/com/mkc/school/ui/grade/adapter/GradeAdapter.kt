@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.mkc.school.R
+import com.mkc.school.data.pojomodel.api.response.grade.GradeListResponse
 import com.mkc.school.data.pojomodel.model.GradeModel
 import com.mkc.school.ui.attendance.adapter.AttendanceAdapter
 import com.mkc.school.ui.grade.GradeFragment
@@ -16,7 +17,7 @@ import java.util.ArrayList
 
 class GradeAdapter(
     var activity: FragmentActivity?,
-    var gradeList: ArrayList<GradeModel>,
+    var gradeList: ArrayList<GradeListResponse>,
     var itemClickListener: OnGradeItemClick
 ) : RecyclerView.Adapter<GradeAdapter.MyViewHolder>(){
 
@@ -28,9 +29,9 @@ class GradeAdapter(
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
 
-        holder.tvSubject.setText(gradeList.get(position).subject)
-        holder.tvGrade.setText(gradeList.get(position).grade)
-        holder.tvScore.setText(gradeList.get(position).score.toString())
+        holder.tvSubject.setText(gradeList.get(position).exam_details?.get(0)?.subject__subject__subject)
+        holder.tvGrade.setText(gradeList.get(position).grade_details?.get(0)?.grade)
+        holder.tvScore.setText(gradeList.get(position).total_marks_obtained.toString())
 
         if(position%2 == 0){
             holder.llMainLayout.setBackgroundColor(activity!!.resources.getColor(R.color.colorBlueLite))

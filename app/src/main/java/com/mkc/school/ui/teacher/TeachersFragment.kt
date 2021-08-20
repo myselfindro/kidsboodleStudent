@@ -63,6 +63,7 @@ class TeachersFragment : BaseFragment<FragmentTeachersBinding, TeachersViewModel
 
 //        loaddummyData()
         initview()
+        showLoading()
         viewModel.getTeachersList(pageSize!!)
 
     }
@@ -82,6 +83,7 @@ class TeachersFragment : BaseFragment<FragmentTeachersBinding, TeachersViewModel
     override fun onTeachersItemClick(position: Int, action: String?) {}
     override fun successTeachersResponse(teachersResponse: TeachersResponse?) {
         if (teachersResponse?.request_status == 1) {
+            hideLoading()
             showSuccessSnackbar(requireActivity(), binding?.mainLayout!!, teachersResponse.msg!!)
             if (teachersResponse.result?.size!! >0){
                 teachersList.clear()
@@ -89,6 +91,7 @@ class TeachersFragment : BaseFragment<FragmentTeachersBinding, TeachersViewModel
                 teachersAdapter?.notifyDataSetChanged()
             }
         } else {
+            hideLoading()
             CommonUtils.showErrorSnackbar(
                 requireActivity(),
                 binding?.mainLayout!!,
@@ -98,6 +101,7 @@ class TeachersFragment : BaseFragment<FragmentTeachersBinding, TeachersViewModel
     }
 
     override fun errorTeachersResponse(throwable: Throwable?) {
+        hideLoading()
         if (throwable?.message != null) {
             CommonUtils.showErrorSnackbar(
                 requireActivity(),

@@ -11,6 +11,7 @@ import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import com.mkc.school.utils.CommonUtils
 
 
 abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel<*>> : AppCompatActivity(), BaseFragment.Callback<Any?> {
@@ -53,6 +54,18 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel<*>> : AppComp
             imm.hideSoftInputFromWindow(view.windowToken, 0)
         }
     }
+
+    fun showLoading() {
+        hideLoading()
+        mProgressDialog = CommonUtils.showLoadingDialog(this)
+    }
+
+    fun hideLoading() {
+        if (mProgressDialog != null && mProgressDialog!!.isShowing) {
+            mProgressDialog!!.cancel()
+        }
+    }
+
 
 
     @TargetApi(Build.VERSION_CODES.M)

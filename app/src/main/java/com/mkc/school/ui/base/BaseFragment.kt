@@ -11,6 +11,7 @@ import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import com.mkc.school.utils.CommonUtils
 
 abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel<*>> : Fragment() {
 
@@ -80,7 +81,10 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel<*>> : Fragmen
             baseActivity!!.hideKeyboard()
         }
     }
-
+    fun showLoading() {
+        hideLoading()
+        mProgressDialog = CommonUtils.showLoadingDialog(requireActivity())
+    }
     fun hideLoading() {
         if (mProgressDialog != null && mProgressDialog!!.isShowing) {
             mProgressDialog!!.cancel()

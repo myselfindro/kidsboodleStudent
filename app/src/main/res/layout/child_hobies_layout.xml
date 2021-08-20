@@ -8,6 +8,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:textSize="@dimen/text_size"
+    android:layout_marginLeft="@dimen/_11sdp"
     android:textColor="@color/colorText"
     android:fontFamily="@font/lato"
     android:padding="@dimen/_6sdp"/>

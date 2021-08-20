@@ -60,6 +60,7 @@ class AnnouncementFragment : BaseFragment<FragmentAnnouncementBinding, Announcem
         loadDummyData()
         initview()
 
+        showLoading()
         viewModel.getAnnouncementList(pageSize!!)
 
     }
@@ -87,12 +88,24 @@ class AnnouncementFragment : BaseFragment<FragmentAnnouncementBinding, Announcem
     override fun onClick() {}
     override fun successAnnouncementResponse(announcementListResponse: AnnouncementListResponse?) {
         if (announcementListResponse?.request_status == 1) {
-            CommonUtils.showSuccessSnackbar(requireActivity(), binding?.mainLayout!!, announcementListResponse.msg!!)
+           // CommonUtils.showSuccessSnackbar(requireActivity(), binding?.mainLayout!!, announcementListResponse.msg!!)
 
-            announcementList.addAll(announcementListResponse.result!!)
-            announcementAdapter?.notifyDataSetChanged()
+               hideLoading()
+               if (announcementListResponse.result!!.size>0){
+                   announcementList.clear()
+                   announcementList.addAll(announcementListResponse.result!!)
+                   announcementAdapter?.notifyDataSetChanged()
+
+                   binding?.ivNoDataFound?.visibility = View.GONE
+                   binding?.rvAnnouncement?.visibility = View.VISIBLE
+               }
+            else{
+                binding?.ivNoDataFound?.visibility = View.VISIBLE
+                binding?.rvAnnouncement?.visibility = View.GONE
+               }
 
         } else {
+            hideLoading()
             CommonUtils.showErrorSnackbar(
                 requireActivity(),
                 binding?.mainLayout!!,
@@ -102,6 +115,7 @@ class AnnouncementFragment : BaseFragment<FragmentAnnouncementBinding, Announcem
     }
 
     override fun errorAnnouncementResponse(throwable: Throwable?) {
+        hideLoading()
         if (throwable?.message != null) {
             CommonUtils.showErrorSnackbar(
                 requireActivity(),

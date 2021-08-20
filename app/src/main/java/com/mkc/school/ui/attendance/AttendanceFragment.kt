@@ -75,6 +75,7 @@ class AttendanceFragment : BaseFragment<FragmentAttendanceBinding, AttendanceVie
 
         initview()
 
+        showLoading()
         viewModel.getAttendance(pageSize!!,"",currentMonth.toString(),currentYear.toString())
 
     }
@@ -174,6 +175,7 @@ class AttendanceFragment : BaseFragment<FragmentAttendanceBinding, AttendanceVie
         if (attendanceResponse?.request_status == 1) {
             //showSuccessSnackbar(requireActivity(), binding?.mainLayout!!, attendanceResponse.msg!!)
 
+                hideLoading()
             if (attendanceResponse.result?.size!! >0){
                 if (attendanceResponse.result?.get(0)?.attendence_details?.size!! >0){
                     attendanceList.clear()
@@ -196,7 +198,9 @@ class AttendanceFragment : BaseFragment<FragmentAttendanceBinding, AttendanceVie
 
 
 
-        } else {showErrorSnackbar(
+        } else {
+            hideLoading()
+            showErrorSnackbar(
                 requireActivity(),
                 binding?.mainLayout!!,
                 attendanceResponse?.msg!!
@@ -205,6 +209,7 @@ class AttendanceFragment : BaseFragment<FragmentAttendanceBinding, AttendanceVie
     }
 
     override fun errorAttendanceResponse(throwable: Throwable?) {
+        hideLoading()
         if (throwable?.message != null) {
             CommonUtils.showErrorSnackbar(
                 requireActivity(),

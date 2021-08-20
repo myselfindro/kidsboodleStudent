@@ -33,7 +33,7 @@ class AnnouncementAdapter(
     override fun onBindViewHolder(holder: AnnouncementAdapter.MyViewHolder, position: Int) {
 
 //        holder.tvDate.setText(getFormatedDate(announcementList.get(position).date!!))
-        holder.tvDate.setText(announcementList.get(position).date)
+        holder.tvDate.setText(getFormatedDate(announcementList.get(position).date!!))
         holder.tvMessage.setText(announcementList.get(position).title)
 
         if(position%2 == 0){

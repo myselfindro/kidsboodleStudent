@@ -1,5 +1,6 @@
 package com.mkc.school.ui.account
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -17,6 +18,7 @@ import com.mkc.school.databinding.FragmentAccountBinding
 import com.mkc.school.ui.base.BaseFragment
 import com.mkc.school.ui.base.ViewModelFactory
 import com.mkc.school.utils.CommonUtils
+import com.mkc.school.utils.CommonUtils.getFormatedDate
 import java.util.*
 
 
@@ -64,7 +66,7 @@ class AccountFragment : BaseFragment<FragmentAccountBinding, AccountViewModel>()
     }
 
     private fun initview() {
-
+        showLoading()
         viewModel.getProfileDetails()
     }
 
@@ -86,6 +88,7 @@ class AccountFragment : BaseFragment<FragmentAccountBinding, AccountViewModel>()
     }
 
     override fun errorAccountProfileResponse(throwable: Throwable?) {
+        hideLoading()
         if (throwable?.message != null) {
             CommonUtils.showErrorSnackbar(
                 requireActivity(),
@@ -120,7 +123,7 @@ class AccountFragment : BaseFragment<FragmentAccountBinding, AccountViewModel>()
                 this?.tvGender?.setText("Other")
             }
 
-            this?.tvDob?.setText(result?.dob)
+            this?.tvDob?.setText(getFormatedDate(result?.dob!!))
             this?.tvFatherName?.setText(result?.father_name)
             this?.tvMotherName?.setText(result?.mother_name)
             this?.tvEmailId?.setText(result?.parent_email)
@@ -143,36 +146,23 @@ class AccountFragment : BaseFragment<FragmentAccountBinding, AccountViewModel>()
         println("hobiesList : " + hobiesList)
         setupHobies(hobiesList)
 
-
+        hideLoading()
         binding?.llStudentDetailsLayout?.visibility = View.VISIBLE
     }
 
     private fun setupHobies(hobiesList: ArrayList<String>) {
-        binding?.llHobiesLayout?.removeAllViews()
-
-        val layoutInflater: LayoutInflater = LayoutInflater.from(activity)
-        val view: View = layoutInflater.inflate(
-            R.layout.child_hobies_layout,
-            binding?.llHobiesLayout,
-            false
-        )
-
-        val tvHobies = view.findViewById<TextView>(R.id.tvHobies)
-        var hobiesString : String = ""
-
+        val inflater: LayoutInflater =
+            activity?.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        val viewGroup: ViewGroup = requireView().findViewById(R.id.llHobiesLayout)
+        viewGroup!!.removeAllViews()
         for (i in 0 until hobiesList.size) {
-            var pos: Int = i + 1
-            hobiesString = pos.toString() + ". " + hobiesList.get(i) + "\n"
+            val view: ViewGroup =
+                inflater.inflate(R.layout.child_hobies_layout, viewGroup, false) as ViewGroup
+            val tvHobies: TextView = view.findViewById(R.id.tvHobies)
 
+            tvHobies.text = (i + 1).toString() + ". " + hobiesList.get(i)
+            view.tag = i
+            viewGroup.addView(view, i)
         }
-
-        if (tvHobies.getParent() != null) {
-            (tvHobies.getParent() as ViewGroup).removeView(tvHobies)
-            tvHobies.setText(hobiesString)
-        }
-
-        binding?.llHobiesLayout?.addView(view, 0)
     }
-
-
 }

@@ -64,6 +64,7 @@ class TimetableFragment : BaseFragment<FragmentTimetableBinding, TimetableViewMo
 
         //loaddummyData()
         initview()
+        showLoading()
         viewModel.getTimetable(pageSize!!,"Mon")
     }
 
@@ -110,7 +111,7 @@ class TimetableFragment : BaseFragment<FragmentTimetableBinding, TimetableViewMo
     override fun successTimetableResponse(timetableResponse: TimetableResponse?) {
         if (timetableResponse?.request_status == 1) {
             //CommonUtils.showSuccessSnackbar(requireActivity(),binding?.mainLayout!!,timetableResponse.msg!!)
-
+            hideLoading()
             if (timetableResponse.result?.size!! >0){
                 dayWiseClassList.clear()
                 dayWiseClassList.addAll(timetableResponse.result!!)
@@ -124,11 +125,13 @@ class TimetableFragment : BaseFragment<FragmentTimetableBinding, TimetableViewMo
             }
 
         } else {
+            hideLoading()
             CommonUtils.showErrorSnackbar(requireActivity(), binding?.mainLayout!!, timetableResponse?.msg!!)
         }
     }
 
     override fun errorTimetableResponse(throwable: Throwable?) {
+        hideLoading()
         if (throwable?.message != null) {
             CommonUtils.showErrorSnackbar(
                 requireActivity(),

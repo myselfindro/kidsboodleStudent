@@ -2,7 +2,10 @@ package com.mkc.school.utils
 
 
 import android.annotation.SuppressLint
+import android.app.Dialog
 import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.provider.Settings
 import android.util.Patterns
 import android.view.View
@@ -10,7 +13,6 @@ import com.google.android.material.snackbar.Snackbar
 import com.mkc.school.R
 import java.io.IOException
 import java.nio.charset.Charset
-import java.text.DateFormat
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
@@ -79,45 +81,56 @@ object CommonUtils {
         snackbar.show()
     }
 
+    fun showLoadingDialog(context: Context): Dialog {
+        val progressDialog = Dialog(context)
+        progressDialog.show()
+        if (progressDialog.window != null) {
+            progressDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        }
+        progressDialog.setContentView(R.layout.progress_dialog)
+        progressDialog.setCancelable(false)
+        progressDialog.setCanceledOnTouchOutside(false)
+        return progressDialog
+    }
 
    fun getMonthName(selectedMonth: Int): String {
         var monthName : String= ""
         when (selectedMonth) {
             1 -> {
-                monthName="January"
+                monthName = "January"
             }
             2 -> {
-                monthName="February"
+                monthName = "February"
             }
             3 -> {
-                monthName="March"
+                monthName = "March"
             }
             4 -> {
-                monthName="April"
+                monthName = "April"
             }
             5 -> {
-                monthName="May"
+                monthName = "May"
             }
             6 -> {
-                monthName="June"
+                monthName = "June"
             }
             7 -> {
-                monthName="July"
+                monthName = "July"
             }
             8 -> {
-                monthName="August"
+                monthName = "August"
             }
             9 -> {
-                monthName="Septembar"
+                monthName = "Septembar"
             }
             10 -> {
-                monthName="Octobar"
+                monthName = "Octobar"
             }
             11 -> {
-                monthName="Novembar"
+                monthName = "Novembar"
             }
             12 -> {
-                monthName="Decembar"
+                monthName = "Decembar"
             }
         }
 
@@ -126,19 +139,25 @@ object CommonUtils {
 
     fun getFormatedDate(dateString: String): String {
 
-        var parsed: Date? = null
-        var outputDate = ""
-        var inputFormat = "mm-dd-yyyy"
-        var outputFormat = "dd-MM-yyyy"
-        val df_input =
-            SimpleDateFormat(inputFormat)
-        val df_output =
-            SimpleDateFormat(outputFormat)
-        try {
-            parsed = df_input.parse(dateString)
-            outputDate = df_output.format(parsed)
-        } catch (e: ParseException) {
-        }
+        var outputDate :String = ""
+        var dateValue : Date? = null
+
+        val input = SimpleDateFormat("yyyy-MM-dd")
+        val output = SimpleDateFormat("dd-MM-yyyy")
+        dateValue = input.parse(dateString)
+        outputDate = output.format(dateValue)
+        return outputDate
+    }
+
+    fun getFormatedDateWithDayName(dateString: String): String {
+
+        var outputDate :String = ""
+        var dateValue : Date? = null
+
+        val input = SimpleDateFormat("yyyy-MM-dd")
+        val output = SimpleDateFormat("EEE dd")
+        dateValue = input.parse(dateString)
+        outputDate = output.format(dateValue)
         return outputDate
     }
 

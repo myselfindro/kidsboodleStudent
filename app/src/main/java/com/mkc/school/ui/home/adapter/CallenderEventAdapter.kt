@@ -7,12 +7,15 @@ import android.widget.TextView
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.mkc.school.R
+import com.mkc.school.data.pojomodel.api.response.home.HolidayListResponse
 import com.mkc.school.ui.home.HomeFragment
+import com.mkc.school.utils.CommonUtils.getFormatedDate
+import com.mkc.school.utils.CommonUtils.getFormatedDateWithDayName
 import java.util.ArrayList
 
 class CallenderEventAdapter(
     var activity: FragmentActivity?,
-    var dateWiseCalEventList: ArrayList<String>,
+    var dateWiseCalEventList: ArrayList<HolidayListResponse>,
     var itemClickListener: OnCalEventItemClick
 ) : RecyclerView.Adapter<CallenderEventAdapter.MyViewHolder>(){
 
@@ -22,8 +25,8 @@ class CallenderEventAdapter(
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.tvDate.setText("Sat 13 : ")
-        holder.tvEventName.setText(dateWiseCalEventList.get(position))
+        holder.tvDate.setText(getFormatedDateWithDayName(dateWiseCalEventList.get(position).date!!)+" : ")
+        holder.tvEventName.setText(dateWiseCalEventList.get(position).leave_name)
     }
 
     override fun getItemCount(): Int {

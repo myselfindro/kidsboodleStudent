@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty
 import com.google.gson.annotations.SerializedName
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-data class HomeResponse(
+data class HolidayResponse(
     @field:JsonProperty("request_status")
     @field:SerializedName("request_status")
     val request_status: Int? = null,
@@ -16,5 +16,5 @@ data class HomeResponse(
 
     @field:JsonProperty("results")
     @field:SerializedName("results")
-    val result: HomeResponseData? = null
+    val result: ArrayList<HolidayListResponse>? = null
 )

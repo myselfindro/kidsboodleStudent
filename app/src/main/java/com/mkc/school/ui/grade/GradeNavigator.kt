@@ -1,10 +1,11 @@
 package com.mkc.school.ui.grade
 
+import com.mkc.school.data.pojomodel.api.response.exam.ExamResponse
+import com.mkc.school.data.pojomodel.api.response.grade.GradeResponse
+
 
 interface GradeNavigator {
-
-    fun onClick()
-
-//    fun successContactusResponse(commonApiResponse: CommonApiResponse?)
-//    fun errorContactUsResponse(throwable: Throwable?)
+    fun successGradeResponse(gradeResponse: GradeResponse?)
+    fun successExamResponse(examResponse: ExamResponse?)
+    fun errorGradeResponse(throwable: Throwable?)
 }

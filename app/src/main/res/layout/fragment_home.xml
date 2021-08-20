@@ -289,6 +289,19 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/_6sdp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:visibility="gone"
+                        android:id="@+id/tvNoEventFound"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/no_event_found_on_this_date"
+                        android:textSize="@dimen/text_size"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:textColor="@color/colorText"
+                        android:fontFamily="@font/lato"
+                        android:padding="@dimen/_13sdp"/>
                 </androidx.cardview.widget.CardView>
 
             </LinearLayout>

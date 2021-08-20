@@ -1,6 +1,5 @@
 package com.mkc.school.ui.home
 
-import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
@@ -16,9 +15,7 @@ import com.kwabenaberko.openweathermaplib.implementation.callback.CurrentWeather
 import com.kwabenaberko.openweathermaplib.model.currentweather.CurrentWeather
 import com.mkc.school.BR
 import com.mkc.school.R
-import com.mkc.school.data.pojomodel.api.response.home.AnnouncementList
-import com.mkc.school.data.pojomodel.api.response.home.HomeResponse
-import com.mkc.school.data.pojomodel.api.response.home.HomeResponseData
+import com.mkc.school.data.pojomodel.api.response.home.*
 import com.mkc.school.data.pojomodel.model.HorizontalOptionsModel
 import com.mkc.school.databinding.FragmentHomeBinding
 import com.mkc.school.ui.announcement.AnnouncementFragment
@@ -31,10 +28,9 @@ import com.mkc.school.ui.home.adapter.CallenderEventAdapter
 import com.mkc.school.ui.home.adapter.HorizontalOptionsAdapter
 import com.mkc.school.ui.home.adapter.NoticeAdapter
 import com.mkc.school.ui.liveclass.LiveclassFragment
-import com.mkc.school.ui.successscreen.SuccessScreenActivity
 import com.mkc.school.ui.teacher.TeachersFragment
 import com.mkc.school.ui.timetable.TimetableFragment
-import com.mkc.school.utils.CommonUtils
+import com.mkc.school.utils.CommonUtils.getFormatedDate
 import com.mkc.school.utils.CommonUtils.showErrorSnackbar
 import com.mkc.school.utils.CommonUtils.showSuccessSnackbar
 import java.text.DateFormat
@@ -64,10 +60,15 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(), HomeNav
     private var horizontalOptionsAdapter: HorizontalOptionsAdapter? = null
     private var callenderEventAdapter: CallenderEventAdapter? = null
     private var myNoticeList: ArrayList<AnnouncementList> = ArrayList<AnnouncementList>()
-    private var dateWiseCalEventList: ArrayList<String> = ArrayList<String>()
+    private var dateWiseCalEventList: ArrayList<HolidayListResponse> = ArrayList<HolidayListResponse>()
     private var horizontalOptionsList: ArrayList<HorizontalOptionsModel> = ArrayList<HorizontalOptionsModel>()
+    private var holidaysList: ArrayList<String> = ArrayList<String>()
 
-
+    private var pageSize: String? = "0"
+    private var currentSession: String? = ""
+    private var currentMonth: String? = ""
+    private var currentYear: String? = ""
+    private var selectedCalenderDate: String? = ""
     var AppId = "2e65127e909e178d0af311a81f39948c"
 
 
@@ -97,32 +98,44 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(), HomeNav
             Handler().postDelayed(Runnable { //This method will be executed once the timer is over
                 val lat = (activity as DashboardActivity?)?.latitude?.toDouble()
                 val long = (activity as DashboardActivity?)?.longitude?.toDouble()
-                println("loc : --- "+lat)
-                println("loc : --- "+long)
-                if (lat!=null && long !=null){
-                    getWeather(lat,long)
+                println("loc : --- " + lat)
+                println("loc : --- " + long)
+                if (lat != null && long != null) {
+                    getWeather(lat, long)
                 }
 
             }, 2000)
-            println("CALL__WEATHER :"+"YES")
+            println("CALL__WEATHER :" + "YES")
         }
         else{
-            println("CALL__WEATHER :"+"NO")
+            println("CALL__WEATHER :" + "NO")
             binding?.tvWeather?.setText((activity as DashboardActivity?)?.weatherTempareture)
         }
-
-
 
         val timeFormat: DateFormat = SimpleDateFormat("hh:mm aa")
         val fullDayName: DateFormat = SimpleDateFormat("EEEE")
         val currentDate: DateFormat = SimpleDateFormat("dd-MM-yyyy")
         val cal = Calendar.getInstance()
 
-        binding?.tvDateDay?.setText(currentDate.format(Date())+", "+fullDayName.format(Date()))
+        binding?.tvDateDay?.setText(currentDate.format(Date()) + ", " + fullDayName.format(Date()))
         binding?.tvTime?.setText(timeFormat.format(cal.time))
 
+        val d = Date()
+        var curMon = d.month
+        currentMonth = (curMon!! +1).toString()
+        currentYear = (d.year+1900).toString()
+        val paramDateFormat: DateFormat = SimpleDateFormat("yyyy-MM-dd")
+        selectedCalenderDate = paramDateFormat.format(Date())
 
+        println("view - : -currentMonth--" + currentMonth)
+        println("view - : -currentYear--" + currentYear)
+        println("view - : -selectedDate--" + selectedCalenderDate)
+
+        ///////////////// API CALL //////////////////////
+        //showLoading()
         viewModel.getDashboardDetails()
+        viewModel.getHolidaysList(pageSize!!, currentSession!!, currentMonth!!, currentYear!!)
+        viewModel.getDateWiseHolidaysList(pageSize!!, currentSession!!, selectedCalenderDate!!)
 
     }
 
@@ -143,10 +156,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(), HomeNav
      """.trimIndent()
                 )
 
-                println("TEMP : "+currentWeather.main.tempMax.roundToInt())
-                val temp : String = currentWeather.main.tempMax.roundToInt().toString()
-                (activity as DashboardActivity?)?.weatherTempareture = temp+" °C"
-                binding?.tvWeather?.setText(temp+" °C")
+                println("TEMP : " + currentWeather.main.tempMax.roundToInt())
+                val temp: String = currentWeather.main.tempMax.roundToInt().toString()
+                (activity as DashboardActivity?)?.weatherTempareture = temp + " °C"
+                binding?.tvWeather?.setText(temp + " °C")
             }
 
             override fun onFailure(throwable: Throwable) {
@@ -171,7 +184,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(), HomeNav
             ?.setCallback(this)
             ?.build()
 
-        calenderAddEvent("13-08-2021")
+        if (holidaysList.size>0){
+            for (i in 0 until holidaysList.size) {
+                calenderAddEvent(holidaysList.get(i))
+            }
+        }
+
+        //calenderAddEvent("13-08-2021")
 
     }
 
@@ -183,8 +202,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(), HomeNav
 //        myNoticeList.add("The show features iconic Indian brands that are powering the Make in India initiative.")
 //        myNoticeList.add("We need to complete below work today")
 
-        dateWiseCalEventList.add("School annual function")
-        dateWiseCalEventList.add("Parent metting")
+//        dateWiseCalEventList.add("School annual function")
+//        dateWiseCalEventList.add("Parent metting")
 
 
         horizontalOptionsList.add(
@@ -263,13 +282,18 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(), HomeNav
         binding?.eventsCalendar?.addEvent(cal)
     }
 
-    override fun onClick() {}
-
     override fun onDayLongPressed(selectedDate: Calendar?) {
     }
 
     override fun onDaySelected(selectedDate: Calendar?) {
-        Toast.makeText(activity, selectedDate.toString(), Toast.LENGTH_SHORT).show()
+        val date = selectedDate?.time
+        val day = SimpleDateFormat("dd").format(date) // always 2 digits
+        val month = SimpleDateFormat("MM").format(date) // always 2 digits
+        val year = SimpleDateFormat("yyyy").format(date) // 4 digit year
+
+        //Toast.makeText(activity, day+"-"+month+"-"+year, Toast.LENGTH_SHORT).show()
+        selectedCalenderDate = year+"-"+month+"-"+day
+        viewModel.getDateWiseHolidaysList(pageSize!!, currentSession!!, selectedCalenderDate!!)
     }
 
     override fun onMonthChanged(monthStartDate: Calendar?) {
@@ -354,6 +378,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(), HomeNav
     }
 
     override fun successHomeResponse(homeResponse: HomeResponse?) {
+        hideLoading()
         if (homeResponse?.request_status == 1) {
             //showSuccessSnackbar(requireActivity(), binding?.mainLayout!!, homeResponse.msg!!)
             setupUI(homeResponse.result)
@@ -363,19 +388,67 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(), HomeNav
         }
     }
 
+    override fun successHolidaysListResponse(holidayResponse: HolidayResponse?) {
+        hideLoading()
+        if (holidayResponse?.request_status == 1) {
+            if (holidayResponse.result?.size!!>0){
+                for (i in 0 until holidayResponse.result?.size) {
+                    var selectedDate : String = ""
+                    selectedDate = holidayResponse.result.get(i).date!!
+
+                    holidaysList.add(getFormatedDate(selectedDate))
+                    println("viewFormatedDate :--- " + getFormatedDate(selectedDate))
+                    println("holidaysList :--- " + holidaysList)
+                    setupCalender()
+                }
+
+            }
+
+        } else {
+            showErrorSnackbar(requireActivity(), binding?.mainLayout!!, holidayResponse?.msg!!)
+        }
+    }
+
+    override fun successDateWiseHolidaysListResponse(holidayResponse: HolidayResponse?) {
+        hideLoading()
+        if (holidayResponse?.request_status == 1) {
+            //showSuccessSnackbar(requireActivity(), binding?.mainLayout!!, holidayResponse.msg!!)
+            if (holidayResponse.result?.size!!>0){
+                dateWiseCalEventList.clear()
+                dateWiseCalEventList.addAll(holidayResponse.result!!)
+                callenderEventAdapter?.notifyDataSetChanged()
+
+                binding?.rvCalEvent?.visibility = View.VISIBLE
+                binding?.tvNoEventFound?.visibility = View.GONE
+            }
+            else{
+                dateWiseCalEventList.clear()
+                binding?.rvCalEvent?.visibility = View.GONE
+                binding?.tvNoEventFound?.visibility = View.VISIBLE
+            }
+
+
+        } else {
+            hideLoading()
+            showErrorSnackbar(requireActivity(), binding?.mainLayout!!, holidayResponse?.msg!!)
+        }
+    }
+
     private fun setupUI(result: HomeResponseData?) {
         (activity as DashboardActivity?)?.tvHeaderSchoolName?.setText(result?.school_details?.get(0)?.school_name)
         binding?.tvSchoolName?.setText(result?.school_details?.get(0)?.school_name)
-        binding?.tvStudentName?.setText("Hey, "+result?.student_details?.get(0)?.student_fname)
-        binding?.tvClassName?.setText(result?.class_name+result?.section_name)
-        binding?.tvAttendancePercentage?.setText(result?.present_percentage.toString()+"%")
+        binding?.tvStudentName?.setText("Hey, " + result?.student_details?.get(0)?.student_fname)
+        binding?.tvClassName?.setText("Class - " + result?.class_name + "-" + result?.section_name)
+        binding?.tvAttendancePercentage?.setText(result?.present_percentage.toString() + "%")
         binding?.pbAttendance?.setProgress(result?.present_percentage!!)
         myNoticeList.clear()
         myNoticeList.addAll(result?.announcement_list!!)
         noticeAdapter?.notifyDataSetChanged()
+        hideLoading()
     }
 
     override fun errorHomeResponse(throwable: Throwable?) {
+        hideLoading()
         if (throwable?.message != null) {
             showErrorSnackbar(requireActivity(), binding?.mainLayout!!, "Something went wrong")
             //Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show()

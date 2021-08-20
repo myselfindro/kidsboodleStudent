@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 import com.mkc.school.R;
+import com.mkc.school.data.pojomodel.api.response.exam.ExamListResponse;
 import com.mkc.school.data.pojomodel.model.ExamModel;
 
 import java.util.ArrayList;
@@ -19,13 +20,13 @@ public class ExamSpinnerAdapter extends BaseAdapter {
 
 
     Context context;
-    ArrayList<ExamModel> itemList;
+    ArrayList<ExamListResponse> itemList;
     LayoutInflater inflter;
 
     OnSpinnerItemSelectListener mCallback;
     private String selectedItemName, selectedItemId;
 
-    public ExamSpinnerAdapter(Context context, ArrayList<ExamModel> itemList, OnSpinnerItemSelectListener mCallback) {
+    public ExamSpinnerAdapter(Context context, ArrayList<ExamListResponse> itemList, OnSpinnerItemSelectListener mCallback) {
         this.context = context;
         this.itemList = itemList;
         this.mCallback = mCallback;
@@ -52,13 +53,13 @@ public class ExamSpinnerAdapter extends BaseAdapter {
         view = inflter.inflate(R.layout.custom_spinner_layout, null);
         TextView tvSpItemName = (TextView) view.findViewById(R.id.tvSpItemName);
 
-        tvSpItemName.setText(itemList.get(i).getItemName());
+        tvSpItemName.setText(itemList.get(i).getExam_type());
 
         tvSpItemName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                selectedItemName = itemList.get(i).getItemName();
-                selectedItemId = String.valueOf(itemList.get(i).getItemId());
+                selectedItemName = itemList.get(i).getExam_type();
+                selectedItemId = String.valueOf(itemList.get(i).getId());
                 mCallback.spinnerSelectedItem(selectedItemName, selectedItemId);
             }
         });

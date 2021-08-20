@@ -25,7 +25,7 @@ class NoticeAdapter(
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
 
-        holder.tvNotice.setText(myNoticeList.get(position).title)
+        holder.tvNotice.setText(" • "+myNoticeList.get(position).title)
     }
 
     override fun getItemCount(): Int {

@@ -9,6 +9,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.mkc.school.ui.base.ViewModelFactory
 import com.mkc.school.BR
 import com.mkc.school.R
+import com.mkc.school.data.pojomodel.api.response.exam.ExamListResponse
+import com.mkc.school.data.pojomodel.api.response.exam.ExamResponse
+import com.mkc.school.data.pojomodel.api.response.grade.GradeListResponse
+import com.mkc.school.data.pojomodel.api.response.grade.GradeResponse
 import com.mkc.school.data.pojomodel.model.AttendanceModel
 import com.mkc.school.data.pojomodel.model.ExamModel
 import com.mkc.school.data.pojomodel.model.GradeModel
@@ -16,6 +20,7 @@ import com.mkc.school.databinding.FragmentGradeBinding
 import com.mkc.school.ui.base.BaseFragment
 import com.mkc.school.ui.grade.adapter.ExamSpinnerAdapter
 import com.mkc.school.ui.grade.adapter.GradeAdapter
+import com.mkc.school.utils.CommonUtils
 import java.util.ArrayList
 
 
@@ -36,9 +41,10 @@ class GradeFragment : BaseFragment<FragmentGradeBinding, GradeViewModel>(),
     private var binding: FragmentGradeBinding? = null
     private var layoutManager: LinearLayoutManager? = null
     private var gradeAdapter: GradeAdapter? = null
-    private var gradeList: ArrayList<GradeModel> = ArrayList<GradeModel>()
-    private var examList: ArrayList<ExamModel> = ArrayList<ExamModel>()
+    private var gradeList: ArrayList<GradeListResponse> = ArrayList<GradeListResponse>()
+    private var examList: ArrayList<ExamListResponse> = ArrayList<ExamListResponse>()
     private var examSpAdapter: ExamSpinnerAdapter? = null
+    private var pageSize: String? = "0"
 
 
 
@@ -63,23 +69,24 @@ class GradeFragment : BaseFragment<FragmentGradeBinding, GradeViewModel>(),
         gradeViewModel!!.navigator = this
         binding = viewDataBinding
 
-        loaddummyData()
+        //loaddummyData()
         initview()
-
+        showLoading()
+        viewModel.getExamList()
     }
 
-    private fun loaddummyData() {
-
-        gradeList.add(GradeModel("Math", 90, "A+"))
-        gradeList.add(GradeModel("Eng", 70, "A+"))
-        gradeList.add(GradeModel("Hindi", 60, "B+"))
-
-        examList.add(ExamModel("Half yearly Exam 1", 1))
-        examList.add(ExamModel("Half yearly Exam 2", 2))
-        examList.add(ExamModel("Half yearly Exam 3", 3))
-        examList.add(ExamModel("Half yearly Exam 4", 4))
-
-    }
+//    private fun loaddummyData() {
+//
+//        gradeList.add(GradeModel("Math", 90, "A+"))
+//        gradeList.add(GradeModel("Eng", 70, "A+"))
+//        gradeList.add(GradeModel("Hindi", 60, "B+"))
+//
+//        examList.add(ExamModel("Half yearly Exam 1", 1))
+//        examList.add(ExamModel("Half yearly Exam 2", 2))
+//        examList.add(ExamModel("Half yearly Exam 3", 3))
+//        examList.add(ExamModel("Half yearly Exam 4", 4))
+//
+//    }
 
     private fun initview() {
 
@@ -100,11 +107,60 @@ class GradeFragment : BaseFragment<FragmentGradeBinding, GradeViewModel>(),
 
     }
 
-    override fun onClick() {}
     override fun onGradeItemClick(position: Int, action: String?) {}
+
     override fun spinnerSelectedItem(selectedItemName: String?, selectedItemId: String?) {
-        Toast.makeText(activity,selectedItemName,Toast.LENGTH_SHORT).show()
+        //Toast.makeText(activity,selectedItemName,Toast.LENGTH_SHORT).show()
+        binding?.tvSelectExam?.setText(selectedItemName)
         binding?.spExam?.onDetachedFromWindow()
+
+        viewModel.getGradeList(pageSize!!, selectedItemId.toString())
+    }
+
+    override fun successGradeResponse(gradeResponse: GradeResponse?) {
+        if (gradeResponse?.request_status == 1) {
+            //CommonUtils.showSuccessSnackbar(requireActivity(), binding?.mainLayout!!, gradeResponse.msg!!)
+                hideLoading()
+            if (gradeResponse.result?.size!! >0){
+                gradeList.clear()
+                gradeList.addAll(gradeResponse.result)
+                gradeAdapter?.notifyDataSetChanged()
+
+                binding?.cvGradeLayout?.visibility = View.VISIBLE
+                binding?.ivNoDataFound?.visibility = View.GONE
+            }
+            else{
+                binding?.cvGradeLayout?.visibility = View.GONE
+                binding?.ivNoDataFound?.visibility = View.VISIBLE
+            }
+        } else {
+            CommonUtils.showErrorSnackbar(requireActivity(), binding?.mainLayout!!, gradeResponse?.msg!!)
+        }
+    }
+
+    override fun successExamResponse(examResponse: ExamResponse?) {
+        if (examResponse?.request_status == 1) {
+            hideLoading()
+            //CommonUtils.showSuccessSnackbar(requireActivity(), binding?.mainLayout!!, examResponse.msg!!)
+            if (examResponse.result?.size!! >0){
+                examList.clear()
+                examList.addAll(examResponse.result)
+                examSpAdapter?.notifyDataSetChanged()
+            }
+        } else {
+            CommonUtils.showErrorSnackbar(requireActivity(), binding?.mainLayout!!, examResponse?.msg!!)
+        }
+    }
+
+    override fun errorGradeResponse(throwable: Throwable?) {
+        hideLoading()
+        if (throwable?.message != null) {
+            CommonUtils.showErrorSnackbar(
+                requireActivity(),
+                binding?.mainLayout!!,
+                "Something went wrong"
+            )
+        }
     }
 
 }

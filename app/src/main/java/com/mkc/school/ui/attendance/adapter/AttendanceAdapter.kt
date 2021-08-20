@@ -15,6 +15,7 @@ import com.mkc.school.data.pojomodel.api.response.attendance.AttendanceListRespo
 import com.mkc.school.data.pojomodel.model.AttendanceModel
 import com.mkc.school.ui.attendance.AttendanceFragment
 import com.mkc.school.ui.home.adapter.NoticeAdapter
+import com.mkc.school.utils.CommonUtils.getFormatedDate
 import java.util.ArrayList
 
 class AttendanceAdapter(
@@ -31,7 +32,7 @@ class AttendanceAdapter(
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.tvDate.setText(attendanceList.get(position).date)
+        holder.tvDate.setText(getFormatedDate(attendanceList.get(position).date!!))
         holder.tvDay.setText(attendanceList.get(position).day_name)
         if (attendanceList.get(position).present_status.equals("present")){
              holder.tvAttendance.setText("Present")

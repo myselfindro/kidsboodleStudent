@@ -4,6 +4,9 @@ package com.mkc.school.data.datasource.api
 import com.mkc.school.data.pojomodel.api.request.LoginRequest
 import com.mkc.school.data.pojomodel.api.response.announcement.AnnouncementListResponse
 import com.mkc.school.data.pojomodel.api.response.attendance.AttendanceResponse
+import com.mkc.school.data.pojomodel.api.response.exam.ExamResponse
+import com.mkc.school.data.pojomodel.api.response.grade.GradeResponse
+import com.mkc.school.data.pojomodel.api.response.home.HolidayResponse
 import com.mkc.school.data.pojomodel.api.response.home.HomeResponse
 import com.mkc.school.data.pojomodel.api.response.login.LoginResponse
 import com.mkc.school.data.pojomodel.api.response.profile.AccountProfileResponse
@@ -46,5 +49,24 @@ interface ApiService {
 
     @GET("student_class_teacher_list/")
     fun getTeachersList(@Query(value = "page_size") page_size: String): Single<TeachersResponse>
+
+
+    @GET("student_grade_detail/")
+    fun getGradeList(@Query(value = "page_size") page_size: String,
+                     @Query("exam_type") exam_type: String): Single<GradeResponse>
+
+    @GET("exam_type_list/")
+    fun getExamList(): Single<ExamResponse>
+
+    @GET("student_holiday_list/")
+    fun getHolidaysList(@Query(value = "page_size") page_size: String,
+                     @Query("session") session: String,
+                     @Query("month") month: String,
+                     @Query("year") year: String): Single<HolidayResponse>
+
+    @GET("student_holiday_list/")
+    fun getDateWiseHolidaysList(@Query(value = "page_size") page_size: String,
+                        @Query("session") session: String,
+                        @Query("date") date: String): Single<HolidayResponse>
 
 }
