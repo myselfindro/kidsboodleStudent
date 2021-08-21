@@ -55,6 +55,8 @@ class AccountFragment : BaseFragment<FragmentAccountBinding, AccountViewModel>()
             return accountViewModel as AccountViewModel
         }
 
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         accountViewModel!!.navigator = this
