@@ -31,7 +31,8 @@
        <RelativeLayout
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
-           android:layout_margin="@dimen/_13sdp">
+           android:padding="@dimen/_13sdp"
+           android:background="@drawable/account_header">
            <de.hdodenhof.circleimageview.CircleImageView
                android:id="@+id/ivProfileImage"
                android:layout_width="@dimen/_50sdp"
@@ -72,6 +73,7 @@
        <RelativeLayout
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
+           android:layout_marginTop="@dimen/_13sdp"
            android:layout_marginLeft="@dimen/_13sdp"
            android:layout_marginRight="@dimen/_13sdp">
 
