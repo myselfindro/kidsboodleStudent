@@ -13,6 +13,7 @@ import com.mkc.school.databinding.ActivityLoginBinding
 import com.mkc.school.ui.base.BaseActivity
 import com.mkc.school.ui.base.ViewModelFactory
 import com.mkc.school.ui.dashboard.DashboardActivity
+import com.mkc.school.ui.forgotpassword.ForgotPasswordActivity
 import com.mkc.school.ui.successscreen.SuccessScreenActivity
 import com.mkc.school.utils.CommonUtils.showErrorSnackbar
 import com.mkc.school.utils.CommonUtils.showSuccessSnackbar
@@ -69,6 +70,12 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(), Logi
                 }
             }
 
+        }
+
+        binding?.tvForgotPassword?.setOnClickListener {
+            val i = Intent(this, ForgotPasswordActivity::class.java)
+            startActivity(i)
+            finish()
         }
     }
 

@@ -6,7 +6,9 @@ import androidx.lifecycle.ViewModelProvider
 import com.mkc.school.ui.account.AccountViewModel
 import com.mkc.school.ui.announcement.AnnouncementViewModel
 import com.mkc.school.ui.attendance.AttendanceViewModel
+import com.mkc.school.ui.changepassword.ChangePasswordViewModel
 import com.mkc.school.ui.dashboard.DashboardViewModel
+import com.mkc.school.ui.forgotpassword.ForgotPasswordViewModel
 import com.mkc.school.ui.grade.GradeViewModel
 import com.mkc.school.ui.home.HomeViewModel
 import com.mkc.school.ui.liveclass.LiveclassViewModel
@@ -28,6 +30,14 @@ class ViewModelFactory(var context: Application) : ViewModelProvider.Factory {
 
             modelClass.isAssignableFrom(LoginViewModel::class.java) -> {
                 LoginViewModel(context) as T
+            }
+
+            modelClass.isAssignableFrom(ForgotPasswordViewModel::class.java) -> {
+                ForgotPasswordViewModel(context) as T
+            }
+
+            modelClass.isAssignableFrom(ChangePasswordViewModel::class.java) -> {
+                ChangePasswordViewModel(context) as T
             }
 
             modelClass.isAssignableFrom(SuccessScreenViewModel::class.java) -> {
