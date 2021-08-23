@@ -1,10 +1,13 @@
 package com.mkc.school.data.datasource.api
 
 
+import com.mkc.school.data.pojomodel.api.request.ForgotPasswordWithEmailRequest
+import com.mkc.school.data.pojomodel.api.request.ForgotPasswordWithPhoneRequest
 import com.mkc.school.data.pojomodel.api.request.LoginRequest
 import com.mkc.school.data.pojomodel.api.response.announcement.AnnouncementListResponse
 import com.mkc.school.data.pojomodel.api.response.attendance.AttendanceResponse
 import com.mkc.school.data.pojomodel.api.response.exam.ExamResponse
+import com.mkc.school.data.pojomodel.api.response.forgotpassword.ForgotPasswordResponse
 import com.mkc.school.data.pojomodel.api.response.grade.GradeResponse
 import com.mkc.school.data.pojomodel.api.response.home.HolidayResponse
 import com.mkc.school.data.pojomodel.api.response.home.HomeResponse
@@ -68,5 +71,13 @@ interface ApiService {
     fun getDateWiseHolidaysList(@Query(value = "page_size") page_size: String,
                         @Query("session") session: String,
                         @Query("date") date: String): Single<HolidayResponse>
+
+
+    @POST("forgot_password/")
+    fun callForgotPasswordWithEmail(@Body forgotPasswordWithEmailRequest: ForgotPasswordWithEmailRequest): Single<ForgotPasswordResponse>
+
+    @POST("forgot_password/")
+    fun callForgotPasswordWithPhone(@Body forgotPasswordWithPhoneRequest: ForgotPasswordWithPhoneRequest): Single<ForgotPasswordResponse>
+
 
 }

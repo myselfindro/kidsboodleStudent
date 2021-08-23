@@ -1,6 +1,7 @@
 package com.mkc.school.ui.dashboard
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.Handler
@@ -17,22 +18,29 @@ import com.google.android.gms.location.*
 import com.mkc.school.ui.base.ViewModelFactory
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationBarView
+import com.google.android.material.navigation.NavigationView
 import com.mkc.school.BR
 import com.mkc.school.R
 import com.mkc.school.databinding.ActivityDashboardBinding
 import com.mkc.school.ui.account.AccountFragment
 import com.mkc.school.ui.attendance.AttendanceFragment
 import com.mkc.school.ui.base.BaseActivity
+import com.mkc.school.ui.changepassword.ChangePasswordActivity
 import com.mkc.school.ui.home.HomeFragment
 import com.mkc.school.ui.liveclass.LiveclassFragment
+import com.mkc.school.ui.successscreen.SuccessScreenActivity
 import com.mkc.school.ui.timetable.TimetableFragment
+import com.mkc.school.utils.CommonUtils
+import com.mkc.school.utils.CommonUtils.showErrorSnackbar
+import com.mkc.school.utils.CommonUtils.showSuccessSnackbar
 import com.mkc.school.utils.CommonUtils.showWarningSnackbar
 import com.permissionx.guolindev.PermissionX
 
 
 class  DashboardActivity : BaseActivity<ActivityDashboardBinding, DashboardViewModel>(),
     DashboardNavigator,
-    View.OnClickListener, NavigationBarView.OnItemSelectedListener {
+    View.OnClickListener, NavigationBarView.OnItemSelectedListener,
+    NavigationView.OnNavigationItemSelectedListener {
 
     private var dashboardViewModel: DashboardViewModel? = null
     private var binding: ActivityDashboardBinding? = null
@@ -85,6 +93,7 @@ class  DashboardActivity : BaseActivity<ActivityDashboardBinding, DashboardViewM
         binding?.ivBack?.setOnClickListener(this)
 
         binding?.bottomNavigation?.setOnItemSelectedListener(this)
+        binding?.nvView?.setNavigationItemSelectedListener(this);
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
@@ -169,6 +178,15 @@ class  DashboardActivity : BaseActivity<ActivityDashboardBinding, DashboardViewM
                 isHomeFragmentVisible = false
                 ivBack?.visibility = View.GONE
                 ivNav?.visibility = View.VISIBLE
+                true
+            }
+
+            R.id.nav_change_password -> {
+                //showSuccessSnackbar(this, binding?.activityMain!!, "Success")
+                val i = Intent(this, ChangePasswordActivity::class.java)
+                i.putExtra("PAGE_FROM","SETTENGS_CHANGE_PASSWORD")
+                startActivity(i)
+                finish()
                 true
             }
             else -> false

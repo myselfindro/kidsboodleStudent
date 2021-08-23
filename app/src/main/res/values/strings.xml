@@ -60,6 +60,16 @@
     <string name="no_event_found_on_this_date">No event found on this date</string>
     <string name="enter_your_mobile_no">Enter Your Mobile No</string>
     <string name="enter_your_email_id">Enter Your Email id</string>
+    <string name="error_email_valid">Enter your valid Email id!</string>
+    <string name="error_phone_valid">Enter your valid Phone Number!</string>
+    <string name="change_password">Change Password</string>
+    <string name="enter_your_otp">Enter Your OTP</string>
+    <string name="enter_your_old_password">Enter Your Old Password</string>
+    <string name="error_old_password">Please Enter Your Old Password</string>
+    <string name="error_new_password">Enter Your New Password</string>
+    <string name="error_confirm_password">Enter Your Confirm Password</string>
+    <string name="error_password_match">Password does not match </string>
+    <string name="enter_your_new_password">Enter Your New Password</string>
 
 
 </resources>
