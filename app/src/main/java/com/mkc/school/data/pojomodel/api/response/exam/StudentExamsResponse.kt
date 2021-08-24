@@ -1,12 +1,12 @@
-package com.mkc.school.data.pojomodel.api.response.forgotpassword
+package com.mkc.school.data.pojomodel.api.response.exam
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.google.gson.annotations.SerializedName
-import com.mkc.school.data.pojomodel.api.response.announcement.AnnouncementDataResponse
+import com.mkc.school.data.pojomodel.api.response.attendance.AttendanceListResponse
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-data class ForgotPasswordResponse(
+data class StudentExamsResponse(
     @field:JsonProperty("request_status")
     @field:SerializedName("request_status")
     val request_status: Int? = null,
@@ -15,8 +15,7 @@ data class ForgotPasswordResponse(
     @field:SerializedName("msg")
     val msg: String? = null,
 
-
     @field:JsonProperty("results")
     @field:SerializedName("results")
-    val result: ForgotPasswordDataResponse? = null
+    val result: ArrayList<StudentExamsListResponse>? = null
 )

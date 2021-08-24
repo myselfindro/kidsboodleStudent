@@ -39,4 +39,26 @@ class AccountViewModel(application: Application)  : BaseViewModel<AccountNavigat
 
         compositeDisposable.add(disposable)
     }
+
+    fun getStudentExams(pageSize: String) {
+        val disposable = apiServiceWithGsonFactory.getStudentExams(pageSize)
+            .subscribeOn(_scheduler_io)
+            .observeOn(_scheduler_ui)
+            .subscribe({ response ->
+                if (response != null) {
+                    Log.d("check_response", ": " + Gson().toJson(response))
+                    navigator.successStudentExamResponse(response)
+
+                } else {
+                    Log.d("check_response", ": null response")
+                }
+            }, { throwable ->
+                run {
+                    navigator.errorAccountProfileResponse(throwable)
+                    Log.d("check_response_error", ": " + throwable.message)
+                }
+            })
+
+        compositeDisposable.add(disposable)
+    }
 }

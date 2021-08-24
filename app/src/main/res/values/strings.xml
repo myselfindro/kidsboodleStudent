@@ -70,6 +70,8 @@
     <string name="error_confirm_password">Enter Your Confirm Password</string>
     <string name="error_password_match">Password does not match </string>
     <string name="enter_your_new_password">Enter Your New Password</string>
+    <string name="enter_your_confirm_password">Enter Your Confirm Password</string>
+    <string name="error_invalid_otp">Please Enter Valid OTP!</string>
 
 
 </resources>

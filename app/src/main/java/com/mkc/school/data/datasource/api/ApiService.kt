@@ -7,6 +7,7 @@ import com.mkc.school.data.pojomodel.api.request.LoginRequest
 import com.mkc.school.data.pojomodel.api.response.announcement.AnnouncementListResponse
 import com.mkc.school.data.pojomodel.api.response.attendance.AttendanceResponse
 import com.mkc.school.data.pojomodel.api.response.exam.ExamResponse
+import com.mkc.school.data.pojomodel.api.response.exam.StudentExamsResponse
 import com.mkc.school.data.pojomodel.api.response.forgotpassword.ForgotPasswordResponse
 import com.mkc.school.data.pojomodel.api.response.grade.GradeResponse
 import com.mkc.school.data.pojomodel.api.response.home.HolidayResponse
@@ -38,6 +39,10 @@ interface ApiService {
 
     @GET("student_profile/")
     fun getProfileDetails(): Single<AccountProfileResponse>
+
+    @GET("student_history_exam_list/")
+    fun getStudentExams(@Query("page_size") page_size: String): Single<StudentExamsResponse>
+
 
     @GET("student_class_attendance/")
     fun getAttendance(@Query("page_size") pagesize: String,
@@ -73,10 +78,10 @@ interface ApiService {
                         @Query("date") date: String): Single<HolidayResponse>
 
 
-    @POST("forgot_password/")
+    @POST("email_verify/")
     fun callForgotPasswordWithEmail(@Body forgotPasswordWithEmailRequest: ForgotPasswordWithEmailRequest): Single<ForgotPasswordResponse>
 
-    @POST("forgot_password/")
+    @POST("phone_number_verify/")
     fun callForgotPasswordWithPhone(@Body forgotPasswordWithPhoneRequest: ForgotPasswordWithPhoneRequest): Single<ForgotPasswordResponse>
 
 

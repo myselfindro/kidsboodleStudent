@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/llMainLayout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="@dimen/_9sdp">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvExamName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:textSize="@dimen/text_size"
+        android:textColor="@color/colorText"
+        android:fontFamily="@font/lato"
+        android:text="exam"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvExamMarks"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:textSize="@dimen/text_size"
+        android:textColor="@color/colorText"
+        android:fontFamily="@font/lato"
+        android:text="exam"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvViewResult"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:textSize="@dimen/text_size"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:padding="@dimen/_3sdp"
+        android:background="@drawable/rounded_corner_red"
+        android:fontFamily="@font/lato"
+        android:text="View Result"/>
+
+</LinearLayout>

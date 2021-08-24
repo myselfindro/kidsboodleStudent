@@ -1,5 +1,6 @@
 package com.mkc.school.ui.forgotpassword
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -12,6 +13,7 @@ import com.mkc.school.data.pojomodel.api.response.forgotpassword.ForgotPasswordR
 import com.mkc.school.databinding.ActivityForgotPasswordBinding
 import com.mkc.school.ui.base.BaseActivity
 import com.mkc.school.ui.base.ViewModelFactory
+import com.mkc.school.ui.changepassword.ChangePasswordActivity
 import com.mkc.school.utils.CommonUtils
 import com.mkc.school.utils.CommonUtils.showErrorSnackbar
 import com.mkc.school.utils.CommonUtils.showSuccessSnackbar
@@ -100,9 +102,7 @@ class ForgotPasswordActivity :
                 }
                 else{
                     var forgotPasswordWithEmailRequest = ForgotPasswordWithEmailRequest()
-                    forgotPasswordWithEmailRequest.auth_provider = "student"
-                    forgotPasswordWithEmailRequest.student_fname = "souvik"
-                    forgotPasswordWithEmailRequest.email = "stdnt.test@gmail.com"
+                    forgotPasswordWithEmailRequest.email_id = "stdnt.test@gmail.com"
                     viewModel.callForgotPasswordWithEmail(forgotPasswordWithEmailRequest)
                 }
             } else if (selectedType.equals("PHONE")) {
@@ -112,10 +112,8 @@ class ForgotPasswordActivity :
                 }
                 else{
                     var forgotPasswordWithPhoneRequest = ForgotPasswordWithPhoneRequest()
-                    forgotPasswordWithPhoneRequest.auth_provider = "student"
-                    forgotPasswordWithPhoneRequest.student_fname = "souvik"
                     forgotPasswordWithPhoneRequest.dial_code = "+91"
-                    forgotPasswordWithPhoneRequest.phone = "652295262"
+                    forgotPasswordWithPhoneRequest.phone_no = "652295262"
                     viewModel.callForgotPasswordWithPhone(forgotPasswordWithPhoneRequest)
                 }
             }
@@ -125,10 +123,34 @@ class ForgotPasswordActivity :
 
     override fun successForgotPasswordResponse(forgotPasswordResponse: ForgotPasswordResponse?) {
         if (forgotPasswordResponse?.request_status == 1) {
-            showSuccessSnackbar(this, binding?.mainLayout!!, forgotPasswordResponse?.result?.msg!!)
+            showSuccessSnackbar(this, binding?.mainLayout!!, forgotPasswordResponse?.result?.otp!!)
+
+            var emailId : String =""
+            var phoneNumber : String =""
+            var dialCode : String =""
+            if (forgotPasswordResponse?.result?.email_id!=null){
+                emailId= forgotPasswordResponse?.result?.email_id
+            }
+
+            if (forgotPasswordResponse?.result?.Phone_number!=null){
+                phoneNumber= forgotPasswordResponse?.result?.Phone_number
+            }
+
+            if (forgotPasswordResponse?.result?.dial_code!=null){
+                dialCode= forgotPasswordResponse?.result?.dial_code
+            }
+
+            val i = Intent(this, ChangePasswordActivity::class.java)
+            i.putExtra("PAGE_FROM","FORGOT_CHANGE_PASSWORD")
+            i.putExtra("OTP",forgotPasswordResponse?.result?.otp)
+            i.putExtra("EMAIL_ID",emailId)
+            i.putExtra("PHONE_NO",phoneNumber)
+            i.putExtra("DIAL_CODE",dialCode)
+            startActivity(i)
+            finish()
 
         } else {
-            showErrorSnackbar(this, binding?.mainLayout!!, forgotPasswordResponse?.result?.msg!!)
+            showErrorSnackbar(this, binding?.mainLayout!!, forgotPasswordResponse?.result?.otp!!)
         }
     }
 

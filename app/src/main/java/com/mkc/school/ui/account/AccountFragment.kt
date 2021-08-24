@@ -12,9 +12,12 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.mkc.school.BR
 import com.mkc.school.R
+import com.mkc.school.data.pojomodel.api.response.exam.StudentExamsListResponse
+import com.mkc.school.data.pojomodel.api.response.exam.StudentExamsResponse
 import com.mkc.school.data.pojomodel.api.response.profile.AccountProfileDataResponse
 import com.mkc.school.data.pojomodel.api.response.profile.AccountProfileResponse
 import com.mkc.school.databinding.FragmentAccountBinding
+import com.mkc.school.ui.account.adapter.StudentExamsAdapter
 import com.mkc.school.ui.base.BaseFragment
 import com.mkc.school.ui.base.ViewModelFactory
 import com.mkc.school.utils.CommonUtils
@@ -23,7 +26,7 @@ import java.util.*
 
 
 class AccountFragment : BaseFragment<FragmentAccountBinding, AccountViewModel>(),
-    AccountNavigator {
+    AccountNavigator, StudentExamsAdapter.OnExamsItemClick {
 
     companion object {
         val TAG = AccountFragment::class.java.simpleName
@@ -38,7 +41,10 @@ class AccountFragment : BaseFragment<FragmentAccountBinding, AccountViewModel>()
     private var accountViewModel: AccountViewModel? = null
     private var binding: FragmentAccountBinding? = null
     private var layoutManager: LinearLayoutManager? = null
+    private var studentExamsAdapter: StudentExamsAdapter? = null
     private var hobiesList: ArrayList<String> = ArrayList<String>()
+    private var examsList: ArrayList<StudentExamsListResponse> = ArrayList<StudentExamsListResponse>()
+    private var pageSize: String? = "0"
 
     override val bindingVariable: Int
         get() = BR.viewModel
@@ -68,6 +74,14 @@ class AccountFragment : BaseFragment<FragmentAccountBinding, AccountViewModel>()
     }
 
     private fun initview() {
+
+        binding?.rvExam?.setHasFixedSize(true)
+        layoutManager = LinearLayoutManager(activity)
+        layoutManager!!.setOrientation(LinearLayoutManager.VERTICAL)
+        binding?.rvExam?.setLayoutManager(layoutManager)
+        studentExamsAdapter = StudentExamsAdapter(activity, examsList, this)
+        binding?.rvExam?.setAdapter(studentExamsAdapter)
+
         showLoading()
         viewModel.getProfileDetails()
     }
@@ -76,9 +90,7 @@ class AccountFragment : BaseFragment<FragmentAccountBinding, AccountViewModel>()
 
         if (accountProfileResponse?.request_status == 1) {
             // CommonUtils.showSuccessSnackbar(requireActivity(), binding?.mainLayout!!, accountProfileResponse.msg!!)
-
             setupUI(accountProfileResponse.result)
-
 
         } else {
             CommonUtils.showErrorSnackbar(
@@ -86,6 +98,16 @@ class AccountFragment : BaseFragment<FragmentAccountBinding, AccountViewModel>()
                 binding?.mainLayout!!,
                 accountProfileResponse?.msg!!
             )
+        }
+    }
+
+    override fun successStudentExamResponse(studentExamsResponse: StudentExamsResponse?) {
+        if (studentExamsResponse?.request_status == 1) {
+            if (studentExamsResponse?.result?.size!! >0){
+                examsList.clear()
+                examsList.addAll(studentExamsResponse.result!!)
+                studentExamsAdapter?.notifyDataSetChanged()
+            }
         }
     }
 
@@ -150,6 +172,9 @@ class AccountFragment : BaseFragment<FragmentAccountBinding, AccountViewModel>()
 
         hideLoading()
         binding?.llStudentDetailsLayout?.visibility = View.VISIBLE
+
+
+        viewModel?.getStudentExams(pageSize!!)
     }
 
     private fun setupHobies(hobiesList: ArrayList<String>) {
@@ -167,4 +192,6 @@ class AccountFragment : BaseFragment<FragmentAccountBinding, AccountViewModel>()
             viewGroup.addView(view, i)
         }
     }
+
+    override fun onExamsItemClick(position: Int, action: String?) {}
 }
