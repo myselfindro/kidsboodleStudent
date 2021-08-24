@@ -100,6 +100,10 @@ data class AccountProfileDataResponse(
     @field:SerializedName("local_guardian")
     val local_guardian: String? = null,
 
+    @field:JsonProperty("doj")
+    @field:SerializedName("doj")
+    val doj: String? = null,
+
     @field:JsonProperty("local_guardian_phone")
     @field:SerializedName("local_guardian_phone")
     val local_guardian_phone: String? = null,

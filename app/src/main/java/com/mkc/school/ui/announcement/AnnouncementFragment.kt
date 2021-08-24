@@ -8,11 +8,12 @@ import com.mkc.school.BR
 import com.mkc.school.R
 import com.mkc.school.data.pojomodel.api.response.announcement.AnnouncementDataResponse
 import com.mkc.school.data.pojomodel.api.response.announcement.AnnouncementListResponse
-import com.mkc.school.data.pojomodel.model.AnnouncementModel
 import com.mkc.school.databinding.FragmentAnnouncementBinding
 import com.mkc.school.ui.announcement.adapter.AnnouncementAdapter
+import com.mkc.school.ui.announcementdetails.AnnouncementDetailsFragment
 import com.mkc.school.ui.base.BaseFragment
 import com.mkc.school.ui.base.ViewModelFactory
+import com.mkc.school.ui.dashboard.DashboardActivity
 import com.mkc.school.utils.CommonUtils
 import java.util.*
 
@@ -88,8 +89,6 @@ class AnnouncementFragment : BaseFragment<FragmentAnnouncementBinding, Announcem
     override fun onClick() {}
     override fun successAnnouncementResponse(announcementListResponse: AnnouncementListResponse?) {
         if (announcementListResponse?.request_status == 1) {
-           // CommonUtils.showSuccessSnackbar(requireActivity(), binding?.mainLayout!!, announcementListResponse.msg!!)
-
                hideLoading()
                if (announcementListResponse.result!!.size>0){
                    announcementList.clear()
@@ -126,6 +125,17 @@ class AnnouncementFragment : BaseFragment<FragmentAnnouncementBinding, Announcem
     }
 
     override fun onAnnouncementItemClick(position: Int, action: String?) {
+
+        val bundle = Bundle()
+        bundle.putString("DATE", announcementList.get(position).date)
+        bundle.putString("TITLE", announcementList.get(position).title)
+        bundle.putString("DESCRIPTION", announcementList.get(position).description)
+        val announcementDetailsFragment = AnnouncementDetailsFragment()
+        announcementDetailsFragment.setArguments(bundle)
+
+        (activity as DashboardActivity?)?.ft = activity?.supportFragmentManager?.beginTransaction()
+        (activity as DashboardActivity?)?.ft!!.replace(R.id.fragment_container, announcementDetailsFragment)
+        (activity as DashboardActivity?)?.ft!!.commit()
     }
 
 }

@@ -33,7 +33,7 @@
     <string name="subject">Subject</string>
     <string name="score">Score</string>
     <string name="download_grade_card">Download Grade Card</string>
-    <string name="announcement">Announcement</string>
+    <string name="announcement">Announcements</string>
     <string name="join_live_class">Join Live Class</string>
     <string name="error_userid">Please Enter User Id!</string>
     <string name="error_password">Please Enter Password !</string>
@@ -72,6 +72,7 @@
     <string name="enter_your_new_password">Enter Your New Password</string>
     <string name="enter_your_confirm_password">Enter Your Confirm Password</string>
     <string name="error_invalid_otp">Please Enter Valid OTP!</string>
+    <string name="announcement_details">Announcement Details</string>
 
 
 </resources>

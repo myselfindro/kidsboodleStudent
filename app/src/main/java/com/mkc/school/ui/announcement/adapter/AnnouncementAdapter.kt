@@ -41,6 +41,10 @@ class AnnouncementAdapter(
         } else {
             holder.llMainLayout.setBackgroundColor(activity!!.resources.getColor(R.color.white))
         }
+
+        holder.itemView.setOnClickListener {
+            itemClickListener.onAnnouncementItemClick(position,"DETAILS")
+        }
     }
 
     override fun getItemCount(): Int {

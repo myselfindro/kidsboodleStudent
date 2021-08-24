@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+<RelativeLayout
+  android:id="@+id/mainLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    tools:context=".ui.announcementdetails.AnnouncementDetailsFragment">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvHeader"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_alignParentTop="true"
+        android:text="@string/announcement_details"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size"
+        android:background="@color/colorPrimaryDark"/>
+
+    <RelativeLayout
+        android:layout_margin="@dimen/_13sdp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvHeader">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorText"
+            android:fontFamily="@font/lato"
+            android:text="@string/date"
+            android:padding="@dimen/_6sdp"
+            android:textSize="@dimen/text_size"
+            android:layout_alignParentLeft="true"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvTittle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorText"
+            android:fontFamily="@font/lato_bold"
+            android:text="@string/date"
+            android:padding="@dimen/_3sdp"
+            android:textSize="@dimen/text_size"
+            android:layout_below="@+id/tvDate"
+            android:layout_centerHorizontal="true"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorText"
+            android:fontFamily="@font/lato"
+            android:text="@string/date"
+            android:padding="@dimen/_6sdp"
+            android:textSize="@dimen/text_size"
+            android:layout_below="@+id/tvTittle"
+            android:layout_centerHorizontal="true"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>
+</layout>

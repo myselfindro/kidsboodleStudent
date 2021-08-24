@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.mkc.school.ui.account.AccountViewModel
 import com.mkc.school.ui.announcement.AnnouncementViewModel
+import com.mkc.school.ui.announcementdetails.AnnouncementDetailsViewModel
 import com.mkc.school.ui.attendance.AttendanceViewModel
 import com.mkc.school.ui.changepassword.ChangePasswordViewModel
 import com.mkc.school.ui.dashboard.DashboardViewModel
@@ -78,6 +79,10 @@ class ViewModelFactory(var context: Application) : ViewModelProvider.Factory {
 
             modelClass.isAssignableFrom(AnnouncementViewModel::class.java) -> {
                 AnnouncementViewModel(context) as T
+            }
+
+            modelClass.isAssignableFrom(AnnouncementDetailsViewModel::class.java) -> {
+                AnnouncementDetailsViewModel(context) as T
             }
 
             else -> {
