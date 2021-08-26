@@ -56,6 +56,7 @@
             android:textColor="@color/colorText"
             android:fontFamily="@font/lato"
             android:text="@string/date"
+            android:gravity="left"
             android:padding="@dimen/_6sdp"
             android:textSize="@dimen/text_size"
             android:layout_below="@+id/tvTittle"

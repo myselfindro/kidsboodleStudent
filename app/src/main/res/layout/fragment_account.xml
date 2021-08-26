@@ -531,6 +531,7 @@
                </LinearLayout>
 
                <androidx.appcompat.widget.AppCompatRatingBar
+                   android:id="@+id/rbPerformance"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
                    style="@style/imageRatingBar"
@@ -628,7 +629,7 @@
            <androidx.appcompat.widget.AppCompatTextView
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
-               android:text="@string/achievement"
+               android:text="@string/hobies"
                android:textColor="@color/white"
                android:paddingRight="@dimen/_11sdp"
                android:paddingLeft="@dimen/_11sdp"

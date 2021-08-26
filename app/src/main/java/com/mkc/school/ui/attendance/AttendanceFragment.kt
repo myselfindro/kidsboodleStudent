@@ -44,7 +44,7 @@ class AttendanceFragment : BaseFragment<FragmentAttendanceBinding, AttendanceVie
     private var binding: FragmentAttendanceBinding? = null
     private var layoutManager: LinearLayoutManager? = null
     private var attendanceAdapter: AttendanceAdapter? = null
-    private var attendanceList: ArrayList<AttendanceDetails> = ArrayList<AttendanceDetails>()
+    private var attendanceList: ArrayList<AttendanceListResponse> = ArrayList<AttendanceListResponse>()
     private var balloon: Balloon? = null
     private var closeTooltip: ImageView? = null
     private var tvRemark: TextView? = null
@@ -75,7 +75,7 @@ class AttendanceFragment : BaseFragment<FragmentAttendanceBinding, AttendanceVie
 
         initview()
 
-        showLoading()
+        //showLoading()
         viewModel.getAttendance(pageSize!!,"",currentMonth.toString(),currentYear.toString())
 
     }
@@ -174,12 +174,11 @@ class AttendanceFragment : BaseFragment<FragmentAttendanceBinding, AttendanceVie
     override fun successAttendanceResponse(attendanceResponse: AttendanceResponse?) {
         if (attendanceResponse?.request_status == 1) {
             //showSuccessSnackbar(requireActivity(), binding?.mainLayout!!, attendanceResponse.msg!!)
-
                 hideLoading()
             if (attendanceResponse.result?.size!! >0){
                 if (attendanceResponse.result?.get(0)?.attendence_details?.size!! >0){
                     attendanceList.clear()
-                    attendanceList.addAll(attendanceResponse.result?.get(0).attendence_details!!)
+                    attendanceList.addAll(attendanceResponse.result)
                     attendanceAdapter?.notifyDataSetChanged()
 
                     binding?.ivNoDataFound?.visibility= View.GONE

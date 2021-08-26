@@ -3,6 +3,7 @@ package com.mkc.school.data.pojomodel.api.response.home
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.google.gson.annotations.SerializedName
+import com.mkc.school.data.pojomodel.api.response.profile.PerformanceDetails
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -58,7 +59,10 @@ data class HomeResponseData(
 
     @field:JsonProperty("announcement_list")
     @field:SerializedName("announcement_list")
-    val announcement_list: ArrayList<AnnouncementList>? = null
+    val announcement_list: ArrayList<AnnouncementList>? = null,
 
+    @field:JsonProperty("get_performance_details")
+@field:SerializedName("get_performance_details")
+val performance_details: PerformanceDetails? = null
 
     )

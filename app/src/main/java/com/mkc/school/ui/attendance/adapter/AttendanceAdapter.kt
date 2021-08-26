@@ -20,7 +20,7 @@ import java.util.ArrayList
 
 class AttendanceAdapter(
     var activity: FragmentActivity?,
-    var attendanceList: ArrayList<AttendanceDetails>,
+    var attendanceList: ArrayList<AttendanceListResponse>,
     var itemClickListener: OnAttendanceItemClick
 ) : RecyclerView.Adapter<AttendanceAdapter.MyViewHolder>(){
 

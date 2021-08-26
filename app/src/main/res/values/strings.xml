@@ -73,6 +73,7 @@
     <string name="enter_your_confirm_password">Enter Your Confirm Password</string>
     <string name="error_invalid_otp">Please Enter Valid OTP!</string>
     <string name="announcement_details">Announcement Details</string>
+    <string name="hobies">Hobies</string>
 
 
 </resources>

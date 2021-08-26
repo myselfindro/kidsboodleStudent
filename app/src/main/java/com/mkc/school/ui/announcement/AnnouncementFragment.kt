@@ -58,7 +58,6 @@ class AnnouncementFragment : BaseFragment<FragmentAnnouncementBinding, Announcem
         announcementViewModel!!.navigator = this
         binding = viewDataBinding
 
-        loadDummyData()
         initview()
 
         showLoading()
@@ -66,15 +65,7 @@ class AnnouncementFragment : BaseFragment<FragmentAnnouncementBinding, Announcem
 
     }
 
-    private fun loadDummyData() {
 
-//        announcementList.add(
-//            AnnouncementModel(
-//                "25.06.2021",
-//                "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout."
-//            )
-//        )
-    }
 
     private fun initview() {
 

@@ -437,10 +437,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(), HomeNav
     private fun setupUI(result: HomeResponseData?) {
         (activity as DashboardActivity?)?.tvHeaderSchoolName?.setText(result?.school_details?.get(0)?.school_name)
         binding?.tvSchoolName?.setText(result?.school_details?.get(0)?.school_name)
-        binding?.tvStudentName?.setText("Hey, " + result?.student_details?.get(0)?.student_fname)
+        binding?.tvStudentName?.setText("Hey " + result?.student_details?.get(0)?.student_fname)
         binding?.tvClassName?.setText("Class - " + result?.class_name + "-" + result?.section_name)
         binding?.tvAttendancePercentage?.setText(result?.present_percentage.toString() + "%")
         binding?.pbAttendance?.setProgress(result?.present_percentage!!)
+        binding?.tvAvaragePerfomance?.setText(result?.performance_details?.performance!!)
+        binding?.rbPerformance?.setProgress(result?.performance_details?.star!!)
         myNoticeList.clear()
         myNoticeList.addAll(result?.announcement_list!!)
         noticeAdapter?.notifyDataSetChanged()

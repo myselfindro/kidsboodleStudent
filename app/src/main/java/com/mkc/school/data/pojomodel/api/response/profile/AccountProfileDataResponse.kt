@@ -116,6 +116,10 @@ data class AccountProfileDataResponse(
     @field:SerializedName("class_teacher")
     val class_teacher: String? = null,
 
+    @field:JsonProperty("performance_details")
+    @field:SerializedName("performance_details")
+    val performance_details: PerformanceDetails? = null,
+
     @field:JsonProperty("school")
     @field:SerializedName("school")
     val school: ArrayList<SchoolResponse>? = null,
