@@ -12,6 +12,7 @@ import com.mkc.school.data.pojomodel.api.response.timetable.TimetableListRespons
 import com.mkc.school.data.pojomodel.model.TimetableModel
 import com.mkc.school.utils.CommonUtils.formateServerDateFromstring
 import com.mkc.school.utils.CommonUtils.formateServerDateToTime
+import com.mkc.school.utils.CommonUtils.getFormatedTime
 import java.util.ArrayList
 
 class TimetableAdapter(
@@ -30,8 +31,8 @@ class TimetableAdapter(
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.tvSubject.setText(dayWiseClassList.get(position).subject)
         holder.tvTeacher.setText(dayWiseClassList.get(position).teacher)
-        holder.tvStartTime.setText(dayWiseClassList.get(position).start_time)
-        holder.tvEndTime.setText(dayWiseClassList.get(position).end_time)
+        holder.tvStartTime.setText(getFormatedTime(dayWiseClassList.get(position).start_time!!))
+        holder.tvEndTime.setText(getFormatedTime(dayWiseClassList.get(position).end_time!!))
 
 //        if (dayWiseClassList.get(position).isLiveClass==1){
 //            holder.tvJoinLiveClass.visibility = View.VISIBLE

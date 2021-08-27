@@ -84,7 +84,7 @@ class TeachersFragment : BaseFragment<FragmentTeachersBinding, TeachersViewModel
     override fun successTeachersResponse(teachersResponse: TeachersResponse?) {
         if (teachersResponse?.request_status == 1) {
             hideLoading()
-            showSuccessSnackbar(requireActivity(), binding?.mainLayout!!, teachersResponse.msg!!)
+            //showSuccessSnackbar(requireActivity(), binding?.mainLayout!!, teachersResponse.msg!!)
             if (teachersResponse.result?.size!! >0){
                 teachersList.clear()
                 teachersList.addAll(teachersResponse.result)

@@ -64,7 +64,7 @@ class TimetableFragment : BaseFragment<FragmentTimetableBinding, TimetableViewMo
 
         //loaddummyData()
         initview()
-        showLoading()
+        //showLoading()
         viewModel.getTimetable(pageSize!!,"Mon")
     }
 

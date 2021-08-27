@@ -149,6 +149,18 @@ object CommonUtils {
         return outputDate
     }
 
+    fun getFormatedTime(timeString: String): String {
+
+        var outputDate :String = ""
+        var dateValue : Date? = null
+
+        val input = SimpleDateFormat("HH:mm:ss")
+        val output = SimpleDateFormat("HH:mm aa")
+        dateValue = input.parse(timeString)
+        outputDate = output.format(dateValue)
+        return outputDate
+    }
+
     fun getFormatedDateWithDayName(dateString: String): String {
 
         var outputDate :String = ""

@@ -1,11 +1,11 @@
 package com.mkc.school.data.datasource.api
 
 
-import com.mkc.school.data.pojomodel.api.request.ForgotPasswordWithEmailRequest
-import com.mkc.school.data.pojomodel.api.request.ForgotPasswordWithPhoneRequest
-import com.mkc.school.data.pojomodel.api.request.LoginRequest
+import com.mkc.school.data.pojomodel.api.request.*
+import com.mkc.school.data.pojomodel.api.response.CommonApiResponse
 import com.mkc.school.data.pojomodel.api.response.announcement.AnnouncementListResponse
 import com.mkc.school.data.pojomodel.api.response.attendance.AttendanceResponse
+import com.mkc.school.data.pojomodel.api.response.changepassword.ChangePasswordResponse
 import com.mkc.school.data.pojomodel.api.response.exam.ExamResponse
 import com.mkc.school.data.pojomodel.api.response.exam.StudentExamsResponse
 import com.mkc.school.data.pojomodel.api.response.forgotpassword.ForgotPasswordResponse
@@ -84,5 +84,13 @@ interface ApiService {
     @POST("phone_number_verify/")
     fun callForgotPasswordWithPhone(@Body forgotPasswordWithPhoneRequest: ForgotPasswordWithPhoneRequest): Single<ForgotPasswordResponse>
 
+    @PUT("change_password/")
+    fun callChangePassword (@Body changePasswordRequest: ChangePasswordRequest): Single<ChangePasswordResponse>
+
+    @POST("forgot_password/")
+    fun callChangePasswordWithEmail(@Body changePasswordWithEmailRequest: ChangePasswordWithEmailRequest): Single<ChangePasswordResponse>
+
+    @POST("forgot_password/")
+    fun callChangePasswordWithPhone(@Body changePasswordWithPhoneRequest: ChangePasswordWithPhoneRequest): Single<ChangePasswordResponse>
 
 }

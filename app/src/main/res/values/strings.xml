@@ -66,6 +66,7 @@
     <string name="enter_your_otp">Enter Your OTP</string>
     <string name="enter_your_old_password">Enter Your Old Password</string>
     <string name="error_old_password">Please Enter Your Old Password</string>
+    <string name="error_username">Please Enter Your UserName</string>
     <string name="error_new_password">Enter Your New Password</string>
     <string name="error_confirm_password">Enter Your Confirm Password</string>
     <string name="error_password_match">Password does not match </string>
@@ -74,6 +75,7 @@
     <string name="error_invalid_otp">Please Enter Valid OTP!</string>
     <string name="announcement_details">Announcement Details</string>
     <string name="hobies">Hobies</string>
+    <string name="username">Enter Your Username</string>
 
 
 </resources>

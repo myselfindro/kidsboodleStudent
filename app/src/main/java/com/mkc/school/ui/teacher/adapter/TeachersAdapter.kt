@@ -62,9 +62,11 @@ class TeachersAdapter(
         holder.ivCollapseExpand.setOnClickListener {
             if (holder.llTeachersDetailsLayout.visibility == View.GONE){
                 holder.llTeachersDetailsLayout.visibility= View.VISIBLE
+                holder?.ivCollapseExpand?.setImageResource(R.drawable.ic_arrow_up)
             }
             else{
                 holder.llTeachersDetailsLayout.visibility= View.GONE
+                holder?.ivCollapseExpand?.setImageResource(R.drawable.ic_arrow_down)
             }
         }
         if(position%2 == 0){

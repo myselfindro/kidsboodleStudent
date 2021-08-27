@@ -6,11 +6,11 @@ import com.google.gson.annotations.SerializedName
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class CommonApiResponse (
-        @field:JsonProperty("status")
-        @field:SerializedName("status")
-        val status: Int? = null,
+        @field:JsonProperty("request_status")
+        @field:SerializedName("request_status")
+        val request_status: Int? = null,
 
-        @field:JsonProperty("message")
-        @field:SerializedName("message")
-        val message: String? = null
+        @field:JsonProperty("msg")
+        @field:SerializedName("msg")
+        val msg: String? = null
         )

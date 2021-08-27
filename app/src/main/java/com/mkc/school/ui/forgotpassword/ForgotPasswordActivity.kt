@@ -146,6 +146,7 @@ class ForgotPasswordActivity :
             i.putExtra("EMAIL_ID",emailId)
             i.putExtra("PHONE_NO",phoneNumber)
             i.putExtra("DIAL_CODE",dialCode)
+            i.putExtra("SELECTED_TYPE",selectedType)
             startActivity(i)
             finish()
 
