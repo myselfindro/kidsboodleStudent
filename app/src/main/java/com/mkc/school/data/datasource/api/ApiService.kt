@@ -14,6 +14,7 @@ import com.mkc.school.data.pojomodel.api.response.home.HolidayResponse
 import com.mkc.school.data.pojomodel.api.response.home.HomeResponse
 import com.mkc.school.data.pojomodel.api.response.login.LoginResponse
 import com.mkc.school.data.pojomodel.api.response.profile.AccountProfileResponse
+import com.mkc.school.data.pojomodel.api.response.profile.UpdateHobiesResponse
 import com.mkc.school.data.pojomodel.api.response.teachers.TeachersResponse
 import com.mkc.school.data.pojomodel.api.response.timetable.TimetableResponse
 import io.reactivex.Single
@@ -92,5 +93,14 @@ interface ApiService {
 
     @POST("forgot_password/")
     fun callChangePasswordWithPhone(@Body changePasswordWithPhoneRequest: ChangePasswordWithPhoneRequest): Single<ChangePasswordResponse>
+
+
+    @PUT("student_hobbies/")
+    fun callDeleteHobies (@Query(value = "hobby_id") hobbyId: String,
+                          @Query(value = "method") method: String,
+                          @Body updateHobiesRequest: UpdateHobiesRequest): Single<UpdateHobiesResponse>
+
+    @POST("student_hobbies/")
+    fun callAddHobies (@Body updateHobiesRequest: UpdateHobiesRequest): Single<UpdateHobiesResponse>
 
 }

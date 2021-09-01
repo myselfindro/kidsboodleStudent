@@ -1,6 +1,8 @@
 package com.mkc.school.ui.changepassword
 
+import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
@@ -16,6 +18,7 @@ import com.mkc.school.data.pojomodel.api.response.changepassword.ChangePasswordR
 import com.mkc.school.databinding.ActivityChangePasswordBinding
 import com.mkc.school.ui.base.BaseActivity
 import com.mkc.school.ui.base.ViewModelFactory
+import com.mkc.school.ui.login.LoginActivity
 import com.mkc.school.utils.CommonUtils
 
 
@@ -232,6 +235,12 @@ class ChangePasswordActivity :
                 binding?.mainLayout!!,
                 changePasswordResponse?.result?.msg!!
             )
+
+            Handler().postDelayed(Runnable { //This method will be executed once the timer is over
+                val i = Intent(this, LoginActivity::class.java)
+                startActivity(i)
+                finish()
+            }, 1000)
 
         } else {
             CommonUtils.showErrorSnackbar(

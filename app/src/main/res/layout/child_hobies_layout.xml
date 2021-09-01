@@ -3,13 +3,32 @@
     android:layout_width="wrap_content"
     xmlns:android="http://schemas.android.com/apk/res/android" >
 
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvHobiesSrNo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_size"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="@dimen/_11sdp"
+        android:textColor="@color/colorText"
+        android:fontFamily="@font/lato"
+        android:padding="@dimen/_6sdp"/>
 <androidx.appcompat.widget.AppCompatTextView
     android:id="@+id/tvHobies"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_toRightOf="@+id/tvHobiesSrNo"
+    android:layout_toLeftOf="@+id/ivDeleteHobies"
     android:textSize="@dimen/text_size"
-    android:layout_marginLeft="@dimen/_11sdp"
     android:textColor="@color/colorText"
     android:fontFamily="@font/lato"
     android:padding="@dimen/_6sdp"/>
+
+    <ImageView
+        android:id="@+id/ivDeleteHobies"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_close_red"
+        android:layout_alignParentRight="true"
+        android:padding="@dimen/_6sdp"/>
 </RelativeLayout>

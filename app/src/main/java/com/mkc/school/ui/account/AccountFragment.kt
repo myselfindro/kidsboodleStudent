@@ -1,28 +1,35 @@
 package com.mkc.school.ui.account
 
+import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
+import android.widget.EditText
+import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.mkc.school.BR
 import com.mkc.school.R
+import com.mkc.school.data.pojomodel.api.request.UpdateHobiesRequest
 import com.mkc.school.data.pojomodel.api.response.exam.StudentExamsListResponse
 import com.mkc.school.data.pojomodel.api.response.exam.StudentExamsResponse
 import com.mkc.school.data.pojomodel.api.response.profile.AccountProfileDataResponse
 import com.mkc.school.data.pojomodel.api.response.profile.AccountProfileResponse
+import com.mkc.school.data.pojomodel.api.response.profile.HobbiesResponse
+import com.mkc.school.data.pojomodel.api.response.profile.UpdateHobiesResponse
 import com.mkc.school.databinding.FragmentAccountBinding
 import com.mkc.school.ui.account.adapter.StudentExamsAdapter
 import com.mkc.school.ui.base.BaseFragment
 import com.mkc.school.ui.base.ViewModelFactory
 import com.mkc.school.utils.CommonUtils
 import com.mkc.school.utils.CommonUtils.getFormatedDate
-import java.util.*
 
 
 class AccountFragment : BaseFragment<FragmentAccountBinding, AccountViewModel>(),
@@ -45,6 +52,7 @@ class AccountFragment : BaseFragment<FragmentAccountBinding, AccountViewModel>()
     private var hobiesList: ArrayList<String> = ArrayList<String>()
     private var examsList: ArrayList<StudentExamsListResponse> = ArrayList<StudentExamsListResponse>()
     private var pageSize: String? = "0"
+    private var hobbiesAction: String? = ""
 
     override val bindingVariable: Int
         get() = BR.viewModel
@@ -82,8 +90,42 @@ class AccountFragment : BaseFragment<FragmentAccountBinding, AccountViewModel>()
         studentExamsAdapter = StudentExamsAdapter(activity, examsList, this)
         binding?.rvExam?.setAdapter(studentExamsAdapter)
 
+        binding?.ivAddHobies?.setOnClickListener {
+
+            addHobbyDialog()
+
+        }
         showLoading()
         viewModel.getProfileDetails()
+    }
+
+    private fun addHobbyDialog() {
+        val dialog = Dialog(requireActivity())
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setCancelable(false)
+        dialog.setContentView(R.layout.add_hobby_layout)
+        val etHobby = dialog.findViewById(R.id.etHobby) as EditText
+        val tvAdd = dialog.findViewById(R.id.tvAdd) as TextView
+        val tvCancel = dialog.findViewById(R.id.tvCancel) as TextView
+        tvAdd.setOnClickListener {
+
+            if (etHobby.text.toString().trim().equals("")){
+                etHobby.error = "Please enter your hobby!"
+            }
+            else{
+                hobbiesAction = "ADD"
+                var updateHobiesRequest = UpdateHobiesRequest()
+                updateHobiesRequest.hobby= etHobby.text.toString().trim()
+                viewModel.callAddHobies(updateHobiesRequest)
+                dialog.dismiss()
+            }
+
+        }
+        tvCancel.setOnClickListener { dialog.dismiss() }
+        dialog.show()
+        val window: Window = dialog.getWindow()!!
+        window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+
     }
 
     override fun successAccountProfileResponse(accountProfileResponse: AccountProfileResponse?) {
@@ -108,6 +150,29 @@ class AccountFragment : BaseFragment<FragmentAccountBinding, AccountViewModel>()
                 examsList.addAll(studentExamsResponse.result!!)
                 studentExamsAdapter?.notifyDataSetChanged()
             }
+        }
+    }
+
+    override fun successUpdateHobbiesResponse(updateHobiesResponse: UpdateHobiesResponse?) {
+        if (updateHobiesResponse?.request_status == 1) {
+
+            if (hobbiesAction.equals("ADD")){
+                CommonUtils.showSuccessSnackbar(
+                    requireActivity(),
+                    binding?.mainLayout!!,
+                    "Successfully Added"
+                )
+            }
+            else if (hobbiesAction.equals("DELETE")){
+                CommonUtils.showSuccessSnackbar(
+                    requireActivity(),
+                    binding?.mainLayout!!,
+                    "Successfully Delete"
+                )
+            }
+
+
+            viewModel.getProfileDetails()
         }
     }
 
@@ -166,10 +231,11 @@ class AccountFragment : BaseFragment<FragmentAccountBinding, AccountViewModel>()
 
         for (i in 0 until result?.hobbies!!.size) {
             hobiesList.add(result?.hobbies.get(i).hobby!!)
+            setupHobies(result?.hobbies)
         }
 
         println("hobiesList : " + hobiesList)
-        setupHobies(hobiesList)
+//        setupHobies(hobiesList)
 
         hideLoading()
         binding?.llStudentDetailsLayout?.visibility = View.VISIBLE
@@ -178,20 +244,53 @@ class AccountFragment : BaseFragment<FragmentAccountBinding, AccountViewModel>()
         viewModel?.getStudentExams(pageSize!!)
     }
 
-    private fun setupHobies(hobiesList: ArrayList<String>) {
+    private fun setupHobies(hobiesList: ArrayList<HobbiesResponse>?) {
         val inflater: LayoutInflater =
             activity?.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val viewGroup: ViewGroup = requireView().findViewById(R.id.llHobiesLayout)
         viewGroup!!.removeAllViews()
-        for (i in 0 until hobiesList.size) {
+        for (i in 0 until hobiesList?.size!!) {
             val view: ViewGroup =
                 inflater.inflate(R.layout.child_hobies_layout, viewGroup, false) as ViewGroup
+            val tvHobiesSrNo: TextView = view.findViewById(R.id.tvHobiesSrNo)
             val tvHobies: TextView = view.findViewById(R.id.tvHobies)
+            val ivDeleteHobies: ImageView = view.findViewById(R.id.ivDeleteHobies)
 
-            tvHobies.text = (i + 1).toString() + ". " + hobiesList.get(i)
+            ivDeleteHobies.setOnClickListener {
+
+                for (i in 0 until hobiesList?.size!!){
+                    if (tvHobies.text.toString().trim().equals(hobiesList.get(i).hobby)){
+                        deleteDialog(hobiesList.get(i).id.toString())
+                    }
+                }
+            }
+
+            tvHobiesSrNo.text = (i + 1).toString() + ". "
+            tvHobies.text = hobiesList.get(i).hobby
             view.tag = i
             viewGroup.addView(view, i)
         }
+    }
+
+    private fun deleteDialog(hobiesId: String) {
+        val builder = AlertDialog.Builder(requireActivity())
+        builder.setTitle("Delete Hobby")
+        builder.setMessage("Are you sure you want to delete this hobby?")
+       // builder.setIcon(R.drawable.ic_delete)
+
+        builder.setPositiveButton("Yes") { dialog, which ->
+
+            hobbiesAction = "DELETE"
+            var updateHobiesRequest = UpdateHobiesRequest()
+            updateHobiesRequest.hobby= ""
+            viewModel.callDeleteHobies(hobiesId, "delete", updateHobiesRequest)
+
+            dialog.cancel()
+           // Toast.makeText(activity,hobiesId,Toast.LENGTH_SHORT).show()
+        }
+        builder.setNegativeButton("No") { dialog, which ->
+        }
+        builder.show()
     }
 
     override fun onExamsItemClick(position: Int, action: String?) {}

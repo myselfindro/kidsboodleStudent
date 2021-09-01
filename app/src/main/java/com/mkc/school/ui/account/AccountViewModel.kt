@@ -4,6 +4,7 @@ import android.app.Application
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
+import com.mkc.school.data.pojomodel.api.request.UpdateHobiesRequest
 
 import com.mkc.school.data.pojomodel.api.response.CommonApiResponse
 import com.mkc.school.ui.base.BaseViewModel
@@ -48,6 +49,53 @@ class AccountViewModel(application: Application)  : BaseViewModel<AccountNavigat
                 if (response != null) {
                     Log.d("check_response", ": " + Gson().toJson(response))
                     navigator.successStudentExamResponse(response)
+
+                } else {
+                    Log.d("check_response", ": null response")
+                }
+            }, { throwable ->
+                run {
+                    navigator.errorAccountProfileResponse(throwable)
+                    Log.d("check_response_error", ": " + throwable.message)
+                }
+            })
+
+        compositeDisposable.add(disposable)
+    }
+
+    fun callDeleteHobies (hobbyId: String, method: String, updateHobiesRequest: UpdateHobiesRequest) {
+        val disposable = apiServiceWithGsonFactory.callDeleteHobies(hobbyId,
+                method,updateHobiesRequest)
+            .subscribeOn(_scheduler_io)
+            .observeOn(_scheduler_ui)
+            .subscribe({ response ->
+                if (response != null) {
+                    Log.d("check_response", ": " + Gson().toJson(response))
+                    //appSharedPref?.userType = farmerRegistrationRequest.usertype
+                    navigator.successUpdateHobbiesResponse(response)
+
+                } else {
+                    Log.d("check_response", ": null response")
+                }
+            }, { throwable ->
+                run {
+                    navigator.errorAccountProfileResponse(throwable)
+                    Log.d("check_response_error", ": " + throwable.message)
+                }
+            })
+
+        compositeDisposable.add(disposable)
+    }
+
+    fun callAddHobies (updateHobiesRequest: UpdateHobiesRequest) {
+        val disposable = apiServiceWithGsonFactory.callAddHobies(updateHobiesRequest)
+            .subscribeOn(_scheduler_io)
+            .observeOn(_scheduler_ui)
+            .subscribe({ response ->
+                if (response != null) {
+                    Log.d("check_response", ": " + Gson().toJson(response))
+                    //appSharedPref?.userType = farmerRegistrationRequest.usertype
+                    navigator.successUpdateHobbiesResponse(response)
 
                 } else {
                     Log.d("check_response", ": null response")
