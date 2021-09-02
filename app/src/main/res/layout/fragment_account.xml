@@ -639,16 +639,16 @@
                android:layout_marginLeft="@dimen/_16sdp"
                android:fontFamily="@font/lato"
                android:gravity="center"
-               android:layout_marginTop="@dimen/_11sdp"
+               android:layout_marginTop="@dimen/_16sdp"
                android:background="@drawable/rounded_corner_blue_sml"/>
 
            <ImageView
                android:id="@+id/ivAddHobies"
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
-               android:src="@drawable/ic_arrow_down"
+               android:src="@drawable/ic_add"
                android:layout_toRightOf="@+id/tvTextHobies"
-               android:padding="@dimen/_11sdp"/>
+               android:padding="@dimen/_9sdp"/>
 
        </RelativeLayout>
 

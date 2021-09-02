@@ -75,18 +75,6 @@ class GradeFragment : BaseFragment<FragmentGradeBinding, GradeViewModel>(),
         viewModel.getExamList()
     }
 
-//    private fun loaddummyData() {
-//
-//        gradeList.add(GradeModel("Math", 90, "A+"))
-//        gradeList.add(GradeModel("Eng", 70, "A+"))
-//        gradeList.add(GradeModel("Hindi", 60, "B+"))
-//
-//        examList.add(ExamModel("Half yearly Exam 1", 1))
-//        examList.add(ExamModel("Half yearly Exam 2", 2))
-//        examList.add(ExamModel("Half yearly Exam 3", 3))
-//        examList.add(ExamModel("Half yearly Exam 4", 4))
-//
-//    }
 
     private fun initview() {
 
@@ -146,6 +134,9 @@ class GradeFragment : BaseFragment<FragmentGradeBinding, GradeViewModel>(),
                 examList.clear()
                 examList.addAll(examResponse.result)
                 examSpAdapter?.notifyDataSetChanged()
+
+                binding?.tvSelectExam?.setText(examList.get(0).exam_type)
+                viewModel.getGradeList(pageSize!!, examList.get(0).id.toString())
             }
         } else {
             CommonUtils.showErrorSnackbar(requireActivity(), binding?.mainLayout!!, examResponse?.msg!!)
