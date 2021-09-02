@@ -21,6 +21,7 @@ import com.mkc.school.ui.base.BaseFragment
 import com.mkc.school.ui.grade.adapter.ExamSpinnerAdapter
 import com.mkc.school.ui.grade.adapter.GradeAdapter
 import com.mkc.school.utils.CommonUtils
+import com.mkc.school.utils.CommonUtils.getFormatedDateWithMonthName
 import java.util.ArrayList
 
 
@@ -135,7 +136,9 @@ class GradeFragment : BaseFragment<FragmentGradeBinding, GradeViewModel>(),
                 examList.addAll(examResponse.result)
                 examSpAdapter?.notifyDataSetChanged()
 
-                binding?.tvSelectExam?.setText(examList.get(0).exam_type)
+                binding?.tvSelectExam?.setText((examList.get(0).exam_type)+" - "+
+                        getFormatedDateWithMonthName(examList.get(0).start_date!!)+" to "+
+                        getFormatedDateWithMonthName(examList.get(0).end_date!!))
                 viewModel.getGradeList(pageSize!!, examList.get(0).id.toString())
             }
         } else {

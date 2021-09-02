@@ -10,7 +10,11 @@ import com.mkc.school.R;
 import com.mkc.school.data.pojomodel.api.response.exam.ExamListResponse;
 import com.mkc.school.data.pojomodel.model.ExamModel;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Created by avik on 30/4/19.
@@ -53,7 +57,9 @@ public class ExamSpinnerAdapter extends BaseAdapter {
         view = inflter.inflate(R.layout.custom_spinner_layout, null);
         TextView tvSpItemName = (TextView) view.findViewById(R.id.tvSpItemName);
 
-        tvSpItemName.setText(itemList.get(i).getExam_type());
+        String startDate = getFormatedDate(itemList.get(i).getStart_date());
+        String endDate = getFormatedDate(itemList.get(i).getEnd_date());
+        tvSpItemName.setText(itemList.get(i).getExam_type()+" - "+startDate+" to "+endDate);
 
         tvSpItemName.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,6 +70,22 @@ public class ExamSpinnerAdapter extends BaseAdapter {
             }
         });
         return view;
+    }
+
+    private String getFormatedDate(String dateString) {
+        String outputText = "";
+        DateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd");
+        DateFormat outputFormat = new SimpleDateFormat("dd-MMM");
+
+        Date date = null;
+        try {
+            date = inputFormat.parse(dateString);
+            outputText = outputFormat.format(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return outputText;
     }
 
     public interface OnSpinnerItemSelectListener {

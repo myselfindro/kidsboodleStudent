@@ -64,7 +64,7 @@ interface ApiService {
     fun getGradeList(@Query(value = "page_size") page_size: String,
                      @Query("exam_type") exam_type: String): Single<GradeResponse>
 
-    @GET("exam_type_list/")
+    @GET("exam_schedule_list/")
     fun getExamList(): Single<ExamResponse>
 
     @GET("student_holiday_list/")

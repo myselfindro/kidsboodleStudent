@@ -149,6 +149,18 @@ object CommonUtils {
         return outputDate
     }
 
+    fun getFormatedDateWithMonthName(dateString: String): String {
+
+        var outputDate :String = ""
+        var dateValue : Date? = null
+
+        val input = SimpleDateFormat("yyyy-MM-dd")
+        val output = SimpleDateFormat("dd-MMM")
+        dateValue = input.parse(dateString)
+        outputDate = output.format(dateValue)
+        return outputDate
+    }
+
     fun getFormatedTime(timeString: String): String {
 
         var outputDate :String = ""

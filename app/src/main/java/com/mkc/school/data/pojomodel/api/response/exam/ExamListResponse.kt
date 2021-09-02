@@ -26,4 +26,24 @@ data class ExamListResponse(
     @field:SerializedName("school")
     val school: Int? = null,
 
+    @field:JsonProperty("scl_class")
+    @field:SerializedName("scl_class")
+    val scl_class: Int? = null,
+
+    @field:JsonProperty("cls_section")
+    @field:SerializedName("cls_section")
+    val cls_section: Int? = null,
+
+    @field:JsonProperty("start_date")
+    @field:SerializedName("start_date")
+    val start_date: String? = null,
+
+    @field:JsonProperty("end_date")
+    @field:SerializedName("end_date")
+    val end_date: String? = null,
+
+    @field:JsonProperty("is_result_published")
+    @field:SerializedName("is_result_published")
+    val is_result_published: Boolean? = null
+
     )
