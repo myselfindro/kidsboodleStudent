@@ -4,16 +4,37 @@
     tools:ignore="HardcodedText">
 
     <item
+        android:id="@+id/nav_grade"
+        android:title="@string/grade" />
+
+    <item
+        android:id="@+id/nav_liveclass"
+        android:title="@string/liveclass" />
+
+    <item
+        android:id="@+id/nav_announcement"
+        android:title="@string/announcement" />
+
+    <item
+        android:id="@+id/nav_attendance"
+        android:title="@string/attendance" />
+
+    <item
+        android:id="@+id/nav_teacher"
+        android:title="@string/teacher" />
+
+    <item
+        android:id="@+id/nav_timetable"
+        android:title="@string/timetable" />
+
+    <item
         android:id="@+id/nav_account"
-        android:title="My Account" />
+        android:title="@string/account" />
 
     <item
         android:id="@+id/nav_change_password"
         android:title="Change Password" />
 
-    <item
-        android:id="@+id/nav_settings"
-        android:title="Settings" />
 
     <item
         android:id="@+id/nav_logout"

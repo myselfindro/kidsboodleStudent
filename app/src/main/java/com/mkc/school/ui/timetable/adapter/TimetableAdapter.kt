@@ -34,12 +34,12 @@ class TimetableAdapter(
         holder.tvStartTime.setText(getFormatedTime(dayWiseClassList.get(position).start_time!!))
         holder.tvEndTime.setText(getFormatedTime(dayWiseClassList.get(position).end_time!!))
 
-//        if (dayWiseClassList.get(position).isLiveClass==1){
-//            holder.tvJoinLiveClass.visibility = View.VISIBLE
-//        }
-//        else{
-//            holder.tvJoinLiveClass.visibility = View.INVISIBLE
-//        }
+        if (dayWiseClassList.get(position).is_live==true){
+            holder.tvJoinLiveClass.visibility = View.VISIBLE
+        }
+        else{
+            holder.tvJoinLiveClass.visibility = View.INVISIBLE
+        }
 
         if(position%2 == 0){
             holder.llMainLayout.setBackgroundColor(activity!!.resources.getColor(R.color.colorBlueLite))

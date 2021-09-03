@@ -50,6 +50,10 @@ data class TimetableListResponse(
     @field:SerializedName("is_deleted")
     val is_deleted: Boolean? = null,
 
+    @field:JsonProperty("is_live")
+    @field:SerializedName("is_live")
+    val is_live: Boolean? = null,
+
     @field:JsonProperty("created_at")
     @field:SerializedName("created_at")
     val created_at: String? = null,

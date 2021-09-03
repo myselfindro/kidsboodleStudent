@@ -23,12 +23,15 @@ import com.mkc.school.BR
 import com.mkc.school.R
 import com.mkc.school.databinding.ActivityDashboardBinding
 import com.mkc.school.ui.account.AccountFragment
+import com.mkc.school.ui.announcement.AnnouncementFragment
 import com.mkc.school.ui.attendance.AttendanceFragment
 import com.mkc.school.ui.base.BaseActivity
 import com.mkc.school.ui.changepassword.ChangePasswordActivity
+import com.mkc.school.ui.grade.GradeFragment
 import com.mkc.school.ui.home.HomeFragment
 import com.mkc.school.ui.liveclass.LiveclassFragment
 import com.mkc.school.ui.successscreen.SuccessScreenActivity
+import com.mkc.school.ui.teacher.TeachersFragment
 import com.mkc.school.ui.timetable.TimetableFragment
 import com.mkc.school.utils.CommonUtils
 import com.mkc.school.utils.CommonUtils.showErrorSnackbar
@@ -181,7 +184,101 @@ class  DashboardActivity : BaseActivity<ActivityDashboardBinding, DashboardViewM
                 true
             }
 
+            //////////////////////////////Navigation Drawer////////////////////////////
+            R.id.nav_grade -> {
+                ft = supportFragmentManager.beginTransaction()
+                //ft!!.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right);
+                ft!!.replace(R.id.fragment_container, GradeFragment.newInstance())
+                ft!!.commit()
+
+                isHomeFragmentVisible = false
+                ivBack?.visibility = View.GONE
+                ivNav?.visibility = View.VISIBLE
+                binding?.myDrawerLayout?.closeDrawers()
+                true
+            }
+
+            R.id.nav_liveclass -> {
+                ft = supportFragmentManager.beginTransaction()
+                //ft!!.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right);
+                ft!!.replace(R.id.fragment_container, LiveclassFragment.newInstance())
+                ft!!.commit()
+
+                isHomeFragmentVisible = false
+                ivBack?.visibility = View.GONE
+                ivNav?.visibility = View.VISIBLE
+                binding?.myDrawerLayout?.closeDrawers()
+                true
+            }
+
+            R.id.nav_announcement -> {
+                ft = supportFragmentManager.beginTransaction()
+                //ft!!.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right);
+                ft!!.replace(R.id.fragment_container, AnnouncementFragment.newInstance())
+                ft!!.commit()
+
+                isHomeFragmentVisible = false
+                ivBack?.visibility = View.GONE
+                ivNav?.visibility = View.VISIBLE
+                binding?.myDrawerLayout?.closeDrawers()
+                true
+            }
+
+            R.id.nav_attendance -> {
+                ft = supportFragmentManager.beginTransaction()
+                //ft!!.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right);
+                ft!!.replace(R.id.fragment_container, AttendanceFragment.newInstance())
+                ft!!.commit()
+
+                isHomeFragmentVisible = false
+                ivBack?.visibility = View.GONE
+                ivNav?.visibility = View.VISIBLE
+                binding?.myDrawerLayout?.closeDrawers()
+                true
+            }
+
+            R.id.nav_teacher -> {
+                ft = supportFragmentManager.beginTransaction()
+                //ft!!.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right);
+                ft!!.replace(R.id.fragment_container, TeachersFragment.newInstance())
+                ft!!.commit()
+
+                isHomeFragmentVisible = false
+                ivBack?.visibility = View.GONE
+                ivNav?.visibility = View.VISIBLE
+                binding?.myDrawerLayout?.closeDrawers()
+                true
+            }
+
+            R.id.nav_timetable -> {
+                ft = supportFragmentManager.beginTransaction()
+                //ft!!.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right);
+                ft!!.replace(R.id.fragment_container, TimetableFragment.newInstance())
+                ft!!.commit()
+
+                isHomeFragmentVisible = false
+                ivBack?.visibility = View.GONE
+                ivNav?.visibility = View.VISIBLE
+                binding?.myDrawerLayout?.closeDrawers()
+                true
+            }
+
+            R.id.nav_account -> {
+                ft = supportFragmentManager.beginTransaction()
+                //ft!!.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right);
+                ft!!.replace(R.id.fragment_container, AccountFragment.newInstance())
+                ft!!.commit()
+
+                isHomeFragmentVisible = false
+                ivBack?.visibility = View.GONE
+                ivNav?.visibility = View.VISIBLE
+                binding?.myDrawerLayout?.closeDrawers()
+                true
+            }
+
+
             R.id.nav_change_password -> {
+                binding?.myDrawerLayout?.closeDrawers()
                 //showSuccessSnackbar(this, binding?.activityMain!!, "Success")
                 val i = Intent(this, ChangePasswordActivity::class.java)
                 i.putExtra("PAGE_FROM","SETTENGS_CHANGE_PASSWORD")
@@ -189,6 +286,12 @@ class  DashboardActivity : BaseActivity<ActivityDashboardBinding, DashboardViewM
                 finish()
                 true
             }
+
+            R.id.nav_logout -> {
+
+                true
+            }
+
             else -> false
         }
     }
