@@ -62,7 +62,8 @@ data class HomeResponseData(
     val announcement_list: ArrayList<AnnouncementList>? = null,
 
     @field:JsonProperty("get_performance_details")
-@field:SerializedName("get_performance_details")
-val performance_details: PerformanceDetails? = null
+    @field:SerializedName("get_performance_details")
+//    val performance_details: PerformanceDetails? = null
+    val performance_details: ArrayList<PerformanceDetails>? = null
 
-    )
+)

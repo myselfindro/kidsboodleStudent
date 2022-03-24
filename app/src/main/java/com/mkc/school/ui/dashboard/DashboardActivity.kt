@@ -30,6 +30,7 @@ import com.mkc.school.ui.changepassword.ChangePasswordActivity
 import com.mkc.school.ui.grade.GradeFragment
 import com.mkc.school.ui.home.HomeFragment
 import com.mkc.school.ui.liveclass.LiveclassFragment
+import com.mkc.school.ui.login.LoginActivity
 import com.mkc.school.ui.successscreen.SuccessScreenActivity
 import com.mkc.school.ui.teacher.TeachersFragment
 import com.mkc.school.ui.timetable.TimetableFragment
@@ -61,7 +62,6 @@ class  DashboardActivity : BaseActivity<ActivityDashboardBinding, DashboardViewM
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var locationRequest: LocationRequest
     private lateinit var locationCallback: LocationCallback
-
 
     override val bindingVariable: Int
         get() = BR.viewModel
@@ -288,7 +288,10 @@ class  DashboardActivity : BaseActivity<ActivityDashboardBinding, DashboardViewM
             }
 
             R.id.nav_logout -> {
-
+                binding?.myDrawerLayout?.closeDrawers()
+                val i = Intent(this, LoginActivity::class.java)
+                startActivity(i)
+                finish()
                 true
             }
 

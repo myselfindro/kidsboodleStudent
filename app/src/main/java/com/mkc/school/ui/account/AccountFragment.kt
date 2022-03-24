@@ -224,8 +224,8 @@ class AccountFragment : BaseFragment<FragmentAccountBinding, AccountViewModel>()
             this?.tvDateOfJoining?.setText(getFormatedDate(result?.doj!!))
             this?.tvAttendancePercentage?.setText(result?.attendence.toString() + "%")
             this?.pbAttendance?.setProgress(result?.attendence!!)
-            this?.tvAvaragePerfomance?.setText(result?.performance_details?.performance)
-            this?.rbPerformance?.setProgress(result?.performance_details?.star!!)
+//            this?.tvAvaragePerfomance?.setText(result?.performance_details?.performance)
+//            this?.rbPerformance?.setProgress(result?.performance_details?.star!!)
         }
 
 

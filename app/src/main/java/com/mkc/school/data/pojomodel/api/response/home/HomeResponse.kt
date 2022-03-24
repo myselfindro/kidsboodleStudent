@@ -18,3 +18,5 @@ data class HomeResponse(
     @field:SerializedName("results")
     val result: HomeResponseData? = null
 )
+
+

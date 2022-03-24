@@ -48,7 +48,7 @@ class AttendanceFragment : BaseFragment<FragmentAttendanceBinding, AttendanceVie
     private var balloon: Balloon? = null
     private var closeTooltip: ImageView? = null
     private var tvRemark: TextView? = null
-    private var currentYear: Int ?= 2021
+    private var currentYear: Int ?= 2022
     private var curMon: Int ?= null
     private var currentMonth: Int ?= null
     private var pageSize: String? = "0"

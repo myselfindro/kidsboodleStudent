@@ -2,7 +2,7 @@
     <string name="app_name">MkcSchool</string>
 
     <!--/////////////////Local Server ///////////////-->
-    <string name="api_base" translatable="false">http://148.66.128.232:8002/</string>
+    <string name="api_base" translatable="false">http://3.17.248.213:8002/</string>
 
 
     <string name="nav_open">Open</string>
