@@ -9,7 +9,7 @@ import com.mkc.school.data.pojomodel.api.request.UpdateHobiesRequest
 import com.mkc.school.data.pojomodel.api.response.CommonApiResponse
 import com.mkc.school.ui.base.BaseViewModel
 
-class AccountViewModel(application: Application)  : BaseViewModel<AccountNavigator>(application) {
+class AccountViewModel(application: Application)  : BaseViewModel<AccountNavigator, Any?>(application) {
 
     var isLoading: MutableLiveData<Boolean> = MutableLiveData()
     var dataResponse: MutableLiveData<CommonApiResponse> = MutableLiveData()

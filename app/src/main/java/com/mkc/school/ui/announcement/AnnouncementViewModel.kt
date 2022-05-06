@@ -8,7 +8,7 @@ import com.google.gson.Gson
 import com.mkc.school.ui.base.BaseViewModel
 import com.mkc.school.data.pojomodel.api.response.CommonApiResponse
 
-class AnnouncementViewModel(application: Application)  : BaseViewModel<AnnouncementNavigator>(application) {
+class AnnouncementViewModel(application: Application)  : BaseViewModel<AnnouncementNavigator, Any?>(application) {
 
     var isLoading: MutableLiveData<Boolean> = MutableLiveData()
     var dataResponse: MutableLiveData<CommonApiResponse> = MutableLiveData()

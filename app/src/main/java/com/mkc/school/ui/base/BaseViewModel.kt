@@ -13,7 +13,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 
-abstract class BaseViewModel<N>(application: Application) : AndroidViewModel(application) {
+abstract class BaseViewModel<N,T>(application: Application) : AndroidViewModel(application) {
 
     protected val compositeDisposable: CompositeDisposable = CompositeDisposable()
 
@@ -22,6 +22,7 @@ abstract class BaseViewModel<N>(application: Application) : AndroidViewModel(app
     private var mNavigator: WeakReference<N>? = null
 
     var navigator: N
+
         get() = mNavigator!!.get()!!
         set(navigator) {
             this.mNavigator = WeakReference(navigator)

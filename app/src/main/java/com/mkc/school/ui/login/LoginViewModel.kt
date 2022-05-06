@@ -9,7 +9,7 @@ import com.mkc.school.data.pojomodel.api.request.LoginRequest
 import com.mkc.school.data.pojomodel.api.response.CommonApiResponse
 import com.mkc.school.ui.base.BaseViewModel
 
-class LoginViewModel(application: Application)  : BaseViewModel<LoginNavigator>(application) {
+class LoginViewModel(application: Application)  : BaseViewModel<LoginNavigator, Any?>(application) {
 
     var isLoading: MutableLiveData<Boolean> = MutableLiveData()
     var dataResponse: MutableLiveData<CommonApiResponse> = MutableLiveData()

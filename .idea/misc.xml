@@ -3,8 +3,24 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Android Projects/mkc_school_android/app/src/main/res/layout/activity_examreview.xml" value="0.20416666666666666" />
+        <entry key="..\:/Android Projects/mkc_school_android/app/src/main/res/layout/activity_gradedetails.xml" value="0.22" />
+        <entry key="..\:/Android Projects/mkc_school_android/app/src/main/res/layout/activity_gradedetails2.xml" value="0.20416666666666666" />
         <entry key="..\:/Android Projects/mkc_school_android/app/src/main/res/layout/activity_home.xml" value="0.20416666666666666" />
+        <entry key="..\:/Android Projects/mkc_school_android/app/src/main/res/layout/activity_login.xml" value="0.20416666666666666" />
+        <entry key="..\:/Android Projects/mkc_school_android/app/src/main/res/layout/activity_splash.xml" value="0.22" />
+        <entry key="..\:/Android Projects/mkc_school_android/app/src/main/res/layout/activity_success_screen.xml" value="0.20416666666666666" />
+        <entry key="..\:/Android Projects/mkc_school_android/app/src/main/res/layout/fragment_grade.xml" value="0.2" />
+        <entry key="..\:/Android Projects/mkc_school_android/app/src/main/res/layout/fragment_grade2.xml" value="0.20416666666666666" />
         <entry key="..\:/Android Projects/mkc_school_android/app/src/main/res/layout/fragment_home.xml" value="0.20416666666666666" />
+        <entry key="..\:/Android Projects/mkc_school_android/app/src/main/res/layout/fragment_liveclass.xml" value="0.20416666666666666" />
+        <entry key="..\:/Android Projects/mkc_school_android/app/src/main/res/layout/fragment_upcoming_live.xml" value="0.20416666666666666" />
+        <entry key="..\:/Android Projects/mkc_school_android/app/src/main/res/layout/layout_liveclass.xml" value="0.20416666666666666" />
+        <entry key="..\:/Android Projects/mkc_school_android/app/src/main/res/layout/popup_comment.xml" value="0.20416666666666666" />
+        <entry key="..\:/Android Projects/mkc_school_android/app/src/main/res/layout/rv_examreviewlist.xml" value="0.20416666666666666" />
+        <entry key="..\:/Android Projects/mkc_school_android/app/src/main/res/layout/rv_grade.xml" value="0.20416666666666666" />
+        <entry key="..\:/Android Projects/mkc_school_android/app/src/main/res/layout/rv_gradedetails.xml" value="0.22" />
+        <entry key="..\:/Android Projects/mkc_school_android/app/src/main/res/layout/rv_subjectlist.xml" value="0.20416666666666666" />
         <entry key="..\:/Android Projects/mkc_school_android/app/src/main/res/menu/navigation_menu.xml" value="0.20416666666666666" />
       </map>
     </option>

@@ -13,7 +13,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import com.mkc.school.utils.CommonUtils
 
-abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel<*>> : Fragment() {
+abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel<*, Any?>> : Fragment() {
 
     var baseActivity: BaseActivity<*, *>? = null
         private set

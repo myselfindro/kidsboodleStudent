@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import com.mkc.school.ui.base.BaseViewModel
 import com.mkc.school.data.pojomodel.api.response.CommonApiResponse
 
-class SuccessScreenViewModel(application: Application)  : BaseViewModel<SuccessScreenNavigator>(application) {
+class SuccessScreenViewModel(application: Application)  : BaseViewModel<SuccessScreenNavigator, Any?>(application) {
 
     var isLoading: MutableLiveData<Boolean> = MutableLiveData()
     var dataResponse: MutableLiveData<CommonApiResponse> = MutableLiveData()

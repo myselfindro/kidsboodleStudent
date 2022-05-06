@@ -14,7 +14,7 @@ import androidx.databinding.ViewDataBinding
 import com.mkc.school.utils.CommonUtils
 
 
-abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel<*>> : AppCompatActivity(), BaseFragment.Callback<Any?> {
+abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel<*, Any?>> : AppCompatActivity(), BaseFragment.Callback<Any?> {
 
     private var mProgressDialog: Dialog? = null
     var viewDataBinding: T? = null

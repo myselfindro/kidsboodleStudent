@@ -12,7 +12,7 @@ import com.mkc.school.data.pojomodel.api.request.ForgotPasswordWithPhoneRequest
 import com.mkc.school.ui.base.BaseViewModel
 import com.mkc.school.data.pojomodel.api.response.CommonApiResponse
 
-class ChangePasswordViewModel(application: Application)  : BaseViewModel<ChangePasswordNavigator>(application) {
+class ChangePasswordViewModel(application: Application)  : BaseViewModel<ChangePasswordNavigator, Any?>(application) {
 
     var isLoading: MutableLiveData<Boolean> = MutableLiveData()
     var dataResponse: MutableLiveData<CommonApiResponse> = MutableLiveData()

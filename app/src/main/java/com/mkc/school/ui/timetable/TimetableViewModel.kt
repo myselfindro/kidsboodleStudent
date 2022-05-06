@@ -8,7 +8,7 @@ import com.google.gson.Gson
 import com.mkc.school.ui.base.BaseViewModel
 import com.mkc.school.data.pojomodel.api.response.CommonApiResponse
 
-class TimetableViewModel(application: Application)  : BaseViewModel<TimetableNavigator>(application) {
+class TimetableViewModel(application: Application)  : BaseViewModel<TimetableNavigator, Any?>(application) {
 
     var isLoading: MutableLiveData<Boolean> = MutableLiveData()
     var dataResponse: MutableLiveData<CommonApiResponse> = MutableLiveData()

@@ -15,17 +15,19 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/_30sdp"
         android:layout_alignParentTop="true"
-        android:text="@string/grade"
+        android:background="@color/colorPrimaryDark"
+        android:fontFamily="@font/lato_bold"
         android:gravity="center"
+        android:text="@string/grade"
         android:textColor="@color/white"
-        android:textSize="@dimen/text_size"
-        android:background="@color/colorPrimaryDark"/>
+        android:textSize="@dimen/text_size" />
 
     <RelativeLayout
         android:id="@+id/rlExamSelector"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_35sdp"
         android:layout_margin="@dimen/_13sdp"
+        android:visibility="gone"
         android:layout_below="@+id/tvHeader"
         android:background="@drawable/rounded_corner_blackborder">
         <com.mkc.school.utils.customview.CustomSpinner
@@ -36,18 +38,19 @@
             android:backgroundTint="@color/white"
             android:spinnerMode="dialog"
             android:visibility="gone"/>
+
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvSelectExam"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="@string/select_exam"
-            android:fontFamily="@font/lato_bold"
             android:drawableRight="@drawable/ic_arrow_down"
-            android:paddingRight="@dimen/_9sdp"
+            android:fontFamily="@font/lato_bold"
+            android:gravity="center_vertical"
             android:paddingLeft="@dimen/_11sdp"
+            android:paddingRight="@dimen/_9sdp"
+            android:text="@string/select_exam"
             android:textColor="@color/colorText"
-            android:textSize="@dimen/text_size_plus"
-            android:gravity="center_vertical"/>
+            android:textSize="@dimen/text_size_plus" />
     </RelativeLayout>
 
     <androidx.cardview.widget.CardView
@@ -129,7 +132,7 @@
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
-    <ImageView  android:visibility="visible"
+    <ImageView  android:visibility="gone"
         android:id="@+id/ivNoDataFound"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -140,6 +143,7 @@
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvDwnldGradeCrd"
         android:layout_width="match_parent"
+        android:visibility="gone"
         android:layout_height="@dimen/_35sdp"
         android:text="@string/download_grade_card"
         android:fontFamily="@font/lato_bold"
@@ -149,6 +153,20 @@
         android:layout_margin="@dimen/_23sdp"
         android:textColor="@color/white"
         android:background="@drawable/rounded_corner_orange"/>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_gradelist"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvHeader" />
+
+
+
+
+
+
+
 
 </RelativeLayout>
 </layout>

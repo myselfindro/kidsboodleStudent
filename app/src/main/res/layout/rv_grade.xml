@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/_10sdp"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_45sdp"
+            android:background="@color/black"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/tvTesttitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_15sdp"
+                android:text="Title"
+                android:fontFamily="@font/lato_bold"
+                android:layout_weight="0.9"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_16sdp" />
+
+
+            <Button
+                android:id="@+id/btnDetails"
+                android:layout_width="@dimen/_65sdp"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_margin="@dimen/_10sdp"
+                android:layout_weight="0.1"
+                android:backgroundTint="@android:color/holo_orange_light"
+                android:text="Details"
+                android:fontFamily="@font/lato_bold"
+                android:textColor="@color/white" />
+
+
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_subject"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <!--        <TextView-->
+        <!--            android:id="@+id/tvSubRemarks"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_margin="@dimen/_15sdp"-->
+        <!--            android:text="Math - Very Good"-->
+        <!--            android:textSize="@dimen/_14sdp"/>-->
+
+
+
+
+    </LinearLayout>
+
+</RelativeLayout>

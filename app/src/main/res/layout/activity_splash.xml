@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,5 +8,43 @@
     android:background="@drawable/splashscreen_background"
     tools:context=".ui.splash.SplashActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvtitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/_150sdp"
+        android:gravity="center"
+        android:padding="@dimen/_20sdp"
+        android:text="e-Vidyalaya Management System"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_16sdp"
+        app:fontFamily="@font/lato" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvfuture"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvtitle"
+        android:layout_marginTop="-210dp"
+        android:gravity="center"
+        android:text="Today's kid is Tomorrow's future."
+        android:textColor="@color/white"
+        android:textSize="@dimen/_12sdp"
+        app:fontFamily="@font/lato" />
+
+
+    <com.google.android.material.textview.MaterialTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvfuture"
+        android:layout_marginTop="@dimen/_120sdp"
+        android:gravity="center"
+        android:text="Powered by My Kids Club"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_10sdp"
+        app:fontFamily="@font/lato" />
+
+</RelativeLayout>
 </layout>

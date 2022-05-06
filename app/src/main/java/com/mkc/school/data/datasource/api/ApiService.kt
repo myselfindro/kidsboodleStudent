@@ -12,6 +12,7 @@ import com.mkc.school.data.pojomodel.api.response.forgotpassword.ForgotPasswordR
 import com.mkc.school.data.pojomodel.api.response.grade.GradeResponse
 import com.mkc.school.data.pojomodel.api.response.home.HolidayResponse
 import com.mkc.school.data.pojomodel.api.response.home.HomeResponse
+import com.mkc.school.data.pojomodel.api.response.liveclass.LiveclassResponse
 import com.mkc.school.data.pojomodel.api.response.login.LoginResponse
 import com.mkc.school.data.pojomodel.api.response.profile.AccountProfileResponse
 import com.mkc.school.data.pojomodel.api.response.profile.UpdateHobiesResponse
@@ -102,5 +103,11 @@ interface ApiService {
 
     @POST("student_hobbies/")
     fun callAddHobies (@Body updateHobiesRequest: UpdateHobiesRequest): Single<UpdateHobiesResponse>
+
+    @GET("live_class_list/")
+    fun getLiveClassList(): Single<LiveclassResponse>
+
+    @GET("upcoming_live_class_list/")
+    fun getUpcomingLiveClassList(): Single<LiveclassResponse>
 
 }

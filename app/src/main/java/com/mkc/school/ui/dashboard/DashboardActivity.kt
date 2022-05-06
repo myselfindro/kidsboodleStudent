@@ -22,6 +22,7 @@ import com.google.android.material.navigation.NavigationView
 import com.mkc.school.BR
 import com.mkc.school.R
 import com.mkc.school.databinding.ActivityDashboardBinding
+import com.mkc.school.ui.UpcomingLiveFragment.LiveclassFragment
 import com.mkc.school.ui.account.AccountFragment
 import com.mkc.school.ui.announcement.AnnouncementFragment
 import com.mkc.school.ui.attendance.AttendanceFragment
@@ -29,7 +30,6 @@ import com.mkc.school.ui.base.BaseActivity
 import com.mkc.school.ui.changepassword.ChangePasswordActivity
 import com.mkc.school.ui.grade.GradeFragment
 import com.mkc.school.ui.home.HomeFragment
-import com.mkc.school.ui.liveclass.LiveclassFragment
 import com.mkc.school.ui.login.LoginActivity
 import com.mkc.school.ui.successscreen.SuccessScreenActivity
 import com.mkc.school.ui.teacher.TeachersFragment

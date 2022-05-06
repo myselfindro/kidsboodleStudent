@@ -1,0 +1,30 @@
+package com.mkc.school.data.pojomodel.api.response.liveclass
+
+data class Routine(
+    val class_name: String,
+    val cls_section: Int,
+    val created_at: String,
+    val created_by: Any,
+    val day_name: String,
+    val end_time: String,
+    val id: Int,
+    val is_active: Boolean,
+    val is_deleted: Boolean,
+    val is_live: Boolean,
+    val owned_by: Any,
+    val school: Int,
+    val school_user: Int,
+    val school_user_name: String,
+    val scl_class: Int,
+    val section_name: String,
+    val start_time: String,
+    val subject: Int,
+    val subject_id: Int,
+    val subject_name: String,
+    val time_slot: Int,
+    val time_slot_details: TimeSlotDetails,
+    val updated_at: String,
+    val updated_by: Any,
+    val zoom_link: Any,
+    val zoom_pass: Any
+)

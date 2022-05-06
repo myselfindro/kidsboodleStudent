@@ -18,6 +18,7 @@ import com.mkc.school.R
 import com.mkc.school.data.pojomodel.api.response.home.*
 import com.mkc.school.data.pojomodel.model.HorizontalOptionsModel
 import com.mkc.school.databinding.FragmentHomeBinding
+import com.mkc.school.ui.UpcomingLiveFragment.LiveclassFragment
 import com.mkc.school.ui.announcement.AnnouncementFragment
 import com.mkc.school.ui.attendance.AttendanceFragment
 import com.mkc.school.ui.base.BaseFragment
@@ -27,7 +28,6 @@ import com.mkc.school.ui.grade.GradeFragment
 import com.mkc.school.ui.home.adapter.CallenderEventAdapter
 import com.mkc.school.ui.home.adapter.HorizontalOptionsAdapter
 import com.mkc.school.ui.home.adapter.NoticeAdapter
-import com.mkc.school.ui.liveclass.LiveclassFragment
 import com.mkc.school.ui.teacher.TeachersFragment
 import com.mkc.school.ui.timetable.TimetableFragment
 import com.mkc.school.utils.CommonUtils.getFormatedDate
